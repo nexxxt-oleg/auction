@@ -19,26 +19,24 @@
         "irc": "irc://irc.freenode.net/yii",
         "source": "https://github.com/yiisoft/yii2"
     },
-    "minimum-stability": "dev",
     "require": {
-        "php": ">=5.6.0",
-        "yiisoft/yii2": ">=2.0.5",
-        "yiisoft/yii2-bootstrap": "*",
-        "yiisoft/yii2-swiftmailer": "*",
+        "php": ">=7.2",
+        "yiisoft/yii2": "~2.0.13",
         "FortAwesome/Font-Awesome": "^4.6",
-        "kop/yii2-scroll-pager": "dev-master",
         "omnilight/yii2-shopping-cart": "^1.2",
         "yiisoft/yii2-imagine": "^2.0",
-        "kartik-v/yii2-datecontrol": "dev-master",
-        "kartik-v/yii2-widgets": "@dev",
-        "lavrentiev/yii2-toastr": "dev-master",
+        "lavrentiev/yii2-toastr": "^2.0",
         "kartik-v/yii2-editable": "^1.7",
-        "kartik-v/yii2-grid": "@dev",
-        "kartik-v/yii2-mpdf": "@dev",
-        "kartik-v/yii2-widget-fileinput": "@dev"
+        "kartik-v/yii2-widgets": "^3.4",
+        "kartik-v/yii2-datecontrol": "^1.9",
+        "kop/yii2-scroll-pager": "^2.7",
+        "yiisoft/yii2-swiftmailer": "^2.1",
+        "yiisoft/yii2-bootstrap": "^2.0",
+        "kartik-v/yii2-widget-fileinput": "^1.1",
+        "kartik-v/yii2-grid": "^3.3",
+        "kartik-v/yii2-mpdf": "^1.0"
     },
     "require-dev": {
-        "yiisoft/yii2-codeception": "*",
         "yiisoft/yii2-debug": "*",
         "yiisoft/yii2-gii": "*",
         "yiisoft/yii2-faker": "*"
@@ -63,10 +61,12 @@
             "generateCookieValidationKey": [
                 "config/web.php"
             ]
-        },
-        "asset-installer-paths": {
-            "npm-asset-library": "vendor/npm",
-            "bower-asset-library": "vendor/bower"
         }
-    }
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://asset-packagist.org"
+        }
+    ]
 }

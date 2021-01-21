@@ -7,6 +7,7 @@
 
 namespace app\assets_b;
 
+use lavrentiev\widgets\toastr\ToastrAsset;
 use yii\web\AssetBundle;
 
 /**
@@ -47,6 +48,6 @@ class AppAsset extends AssetBundle
     public $depends = [
         'yii\web\YiiAsset',
         'yii\bootstrap\BootstrapPluginAsset',
-        'lavrentiev\widgets\toastr\assets\ToastrAsset',
+        ToastrAsset::class,
     ];
 }

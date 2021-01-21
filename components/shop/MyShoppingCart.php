@@ -186,7 +186,7 @@ class MyShoppingCart extends ShoppingCart{
     /**
      * @param CartPositionInterface $position
      */
-    public function put($position)
+    public function put($position, $quantity = 1)
     {
         if (!isset($this->_positions[$position->getId()])) {
             $position->setQuantity(1);
