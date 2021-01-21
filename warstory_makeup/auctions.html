@@ -1,0 +1,1110 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Warstory</title>
+	<meta name="description" content="">
+	<meta name="keywords" content="">
+	<meta charset="utf-8">
+	<meta name="author" content="Dmitry Volkov">
+	<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1"><![endif]-->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!--CSS-->
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/jquery.fullPage.css">
+	<link rel="stylesheet" href="css/animate.min.css">
+	<link rel="stylesheet" href="css/magnific-popup.css">
+	<link rel="stylesheet" href="css/ion.rangeSlider.css">
+	<link rel="stylesheet" href="css/ion.rangeSlider.skinFlat.css">
+	<link rel="stylesheet" href="css/MagnifierRentgen.css">
+	<link rel="stylesheet" href="css/owl.carousel.css">
+	<link rel="stylesheet" href="css/owl.theme.css">
+	<link rel="stylesheet" href="css/main.css">
+	<link rel="stylesheet" href="css/media.css">
+
+	<!-- Font -->
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+
+</head>
+<body>
+
+	<header class="header header--relative">
+		<div class="header__topline">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="user-button user-button--second">
+							<button href="#login-modal" class="user-button__login popup-modal">
+								<img src="img/icon/login.svg" alt="">
+								<span>Вход</span>
+							</button>
+							<button href="#registration-modal" class="user-button__signup popup-modal">
+								<img src="img/icon/signup.svg" alt="">
+								<span>Регистрация</span>
+							</button>
+						</div>
+
+						<ul class="contact-line contact-line--second">
+							<span class="contact-line__item">По вопросам проведения аукционов:</span>
+							<li class="contact-line__item">
+								<img src="img/icon/mail.svg" alt="">
+								<a href="mailto:admin@antic-war.com">admin@antic-war.com</a>
+							</li>
+							<li class="contact-line__item">
+								<img src="img/icon/phone.svg" alt="">
+								+7 962 706 6607
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="header__midline">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="logo logo--green">
+							<a class="logo__img" href="#">
+								<img src="img/logo--green.svg" alt="">
+							</a>
+							<div class="logo__tagline">
+								Аукцион военного <br>антиквариаты
+							</div>
+						</div>
+
+						<form action="#" class="search">
+							<input type="text" class="search__input" placeholder="Введите название предмета или аукциона">
+							<button class="search__button">
+								<img src="img/icon/search2.svg" alt="">
+							</button>
+						</form>
+
+						<ul class="action-button action-button--green">
+							<li class="action-button__item">
+								<a class="action-button__link action-button__link--basket" href="#">
+									<img src="img/icon/basket2.svg" alt="">
+									<span>2</span>
+								</a>
+							</li>
+							<!-- измени модификатор на action-button__link--star-true при добавлении товара в избранное -->
+							<li class="action-button__item action-button__link--star">
+								<a class="action-button__link" href="#">
+									<img src="img/icon/star2.svg" alt="">
+									<span>0</span>
+								</a>
+							</li>
+							<li class="action-button__item">
+								<a class="action-button__link action-button__link--view" href="#">
+									<img src="img/icon/eye2.svg" alt="">
+									<span>15</span>
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-xs-12">
+						<ul class="navigation-desktop navigation-desktop--green">
+							<li class="navigation-desktop__item">
+								<a href="#" class="navigation-desktop__link">Ближайший аукцион</a>
+							</li>
+							<li class="navigation-desktop__item">
+								<a href="#" class="navigation-desktop__link navigation-desktop__link--active">Все аукционы</a>
+							</li>
+							<li class="navigation-desktop__item">
+								<a href="#" class="navigation-desktop__link">
+									Антикварное холодное оружие 
+								</a>
+							</li>
+							<li class="navigation-desktop__item">
+								<a href="#" class="navigation-desktop__link">Прочий военный антиквариат</a>
+							</li>
+							<li class="navigation-desktop__item">
+								<a href="#" class="navigation-desktop__link">Статьи</a>
+							</li>
+							<li class="navigation-desktop__item">
+								<a href="#" class="navigation-desktop__link">
+									Контакты
+								</a>
+							</li>
+						</ul>
+
+						<div class="navigation-mobile-wrap">
+							<button type="button" class="navigation-mobile-button navigation-mobile-button--green">
+								<img class="navigation-mobile-button__img navigation-mobile-button__img--burger" src="img/icon/burger2.svg" alt="">
+								<img class="navigation-mobile-button__img navigation-mobile-button__img--close" src="img/icon/close.svg" alt="">
+							</button>
+
+							<ul class="navigation-mobile" id="navigation-mobile">
+								<li class="navigation-mobile__item">
+									<a href="#" class="navigation-mobile__link">Ближайший аукцион</a>
+								</li>
+								<li class="navigation-mobile__item navigation-mobile__item--active">
+									<a href="#" class="navigation-mobile__link">Все аукционы</a>
+								</li>
+								<li class="navigation-mobile__item">
+									<a href="#" class="navigation-mobile__link">
+										Антикварное холодное оружие</a>
+								</li>
+								<li class="navigation-mobile__item">
+									<a href="#" class="navigation-mobile__link">Прочий военный антиквариат</a>
+								</li>
+								<li class="navigation-mobile__item">
+									<a href="#" class="navigation-mobile__link">
+										Контакты</a>
+								</li>
+								<li class="user-button user-button--mobile">
+									<button href="#login-modal" class="user-button__login popup-modal">
+										<img src="img/icon/login.svg" alt="">
+									</button>
+									<button href="#registration-modal" class="user-button__signup popup-modal">
+										<img src="img/icon/signup.svg" alt="">
+									</button>
+									<button class="user-button__search">
+										<img src="img/icon/search.svg" alt="">
+									</button>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+
+	<main>
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-xs-12 col-sm-4 col-md-3">
+					<div class="auction-sort">
+						<div class="auction-sort__slider">
+							<p>цена, руб.:</p>
+							<input class="price-slider" type="text" name="name" value="" />
+						</div>
+
+						<div class="form__group form__group--title">
+							<input type="checkbox" id="test" checked="checked">
+							<label for="test">холодное оружие германии
+							</label>
+						</div>
+
+						<ul class="auction-sort__list">
+							<div class="auction-sort__list-title">
+								Служба
+							</div>
+							<li class="form__group">
+								<input type="checkbox" id="test1">
+								<label for="test1">Люфтваффе</label>
+							</li>
+							<li class="form__group">
+								<input type="checkbox" id="test2">
+								<label for="test2">Пожарная служба</label>
+							</li>
+							<li class="form__group">
+								<input type="checkbox" id="test3">
+								<label for="test3">РАД</label>
+							</li>
+							<li class="form__group">
+								<input type="checkbox" id="test4">
+								<label for="test4">Штык</label>
+							</li>
+							<li class="form__group">
+								<input type="checkbox" id="test5">
+								<label for="test5">СА</label>
+							</li>
+							<li class="form__group">
+								<input type="checkbox" id="test6">
+								<label for="test6">СС</label>
+							</li>
+							<li class="form__group">
+								<input type="checkbox" id="test7">
+								<label for="test7">НСКК</label>
+							</li>
+							<li class="form__group">
+								<input type="checkbox" id="test8">
+								<label for="test8">Общества и союзы</label>
+							</li>
+							<li class="form__group">
+								<input type="checkbox" id="test9">
+								<label for="test9">Полиция</label>
+							</li>
+							<li class="form__group">
+								<input type="checkbox" id="test10">
+								<label for="test10">Боевой нож</label>
+							</li>
+							<li class="form__group">
+								<input type="checkbox" id="test11">
+								<label for="test11">Пехота</label>
+							</li>
+							<div class="clearfix"></div>
+						</ul>
+
+						<ul class="auction-sort__list">
+							<div class="auction-sort__list-title">
+								Служба
+							</div>
+							<li class="form__group">
+								<input type="checkbox" id="test12">
+								<label for="test12">1933-1945 г.</label>
+							</li>
+							<li class="form__group">
+								<input type="checkbox" id="test13">
+								<label for="test13">1897-1933 г.</label>
+							</li>
+							<div class="clearfix"></div>
+						</ul>
+
+						<div class="form__group form__group--title">
+							<input type="checkbox" id="test14">
+							<label for="test14">холодное оружие других стран
+							</label>
+						</div>
+
+						<ul class="auction-sort__list">
+							<div class="auction-sort__list-title">
+								Страна
+							</div>
+							<li class="form__group">
+								<input type="checkbox" id="test15">
+								<label for="test15">СССР</label>
+							</li>
+							<li class="form__group">
+								<input type="checkbox" id="test16">
+								<label for="test16">Россия</label>
+							</li>
+							<li class="form__group">
+								<input type="checkbox" id="test17">
+								<label for="test17">Япония</label>
+							</li>
+							<li class="form__group">
+								<input type="checkbox" id="test18">
+								<label for="test18">Канада</label>
+							</li>
+							<li class="form__group">
+								<input type="checkbox" id="test19">
+								<label for="test19">Австрия</label>
+							</li>
+							<li class="form__group">
+								<input type="checkbox" id="test20">
+								<label for="test20">Франция</label>
+							</li>
+							<div class="clearfix"></div>
+						</ul>
+					</div>
+				</div>
+
+				<div class="col-xs-12 col-sm-8 col-md-9">
+					<div class="row">
+						<div class="auction-list clearfix">
+							<div class="col-xs-12 col-md-6 col-lg-4">
+								<div class="auction-item">
+									<h3 class="auction-item__title">
+										<a href="#">Парадная сабля "Prinz Eugen"</a>
+									</h3>
+									<div class="auction-item__img">
+										<img src="img/items/1.jpg" alt="">
+										<span class="auction-item__img-mask">
+											<span>
+												<a href="#">Сделать ставку</a>
+												<a href="#preview-modal" class="popup-modal">Быстрый просмотр</a>
+											</span>
+										</span>
+									</div>
+									<div class="auction-item__status">
+										<span class="auction-item__countdown"><img src="img/icon/timer.svg" alt="">До конца торгов <time class="timer" datetime="2016-06-18T10:23:00"></time></span>
+									</div>
+									<div class="auction-item__price">
+										<span class="price price--start">
+											<p>Стартовая цена:</p>
+											<span>35 000</span>
+										</span>
+										<span class="price price--current">
+											<p>Текущая цена:</p>
+											<span>58 000</span>
+										</span>
+
+										<ul class="action">
+											<li><a href="#"><img src="img/icon/item-star.svg" alt=""></a></li>
+											<li><a href="#"><img src="img/icon/item-watch.svg" alt=""></a></li>
+										</ul>
+									</div>
+								</div>
+							</div>
+
+							<div class="col-xs-12 col-md-6 col-lg-4">
+								<div class="auction-item">
+									<h3 class="auction-item__title">
+										<a href="#">Кинжал SA, RZM M 7/12, Weyersberg Max Waffenfabrik</a>
+									</h3>
+									<div class="auction-item__img">
+										<img src="img/items/1.jpg" alt="">
+										<span class="auction-item__img-mask">
+											<span>
+												<a href="#">Сделать ставку</a>
+												<a href="#preview-modal" class="popup-modal">Быстрый просмотр</a>
+											</span>
+										</span>
+									</div>
+									<div class="auction-item__status">
+										<span class="auction-item__sales"><img src="img/icon/sales.svg" alt="">Продано</span>
+									</div>
+									<div class="auction-item__price">
+										<span class="price price--start">
+											<p>Стартовая цена:</p>
+											<span>35 000</span>
+										</span>
+										<span class="price price--current">
+											<p>Цена апродажи:</p>
+											<span>48 000</span>
+										</span>
+
+										<ul class="action">
+											<li><a href="#"><img src="img/icon/item-star.svg" alt=""></a></li>
+											<li><a href="#"><img src="img/icon/item-watch.svg" alt=""></a></li>
+										</ul>
+									</div>
+								</div>
+							</div>
+
+							<div class="col-xs-12 col-md-6 col-lg-4">
+								<div class="auction-item">
+									<h3 class="auction-item__title">
+										<a href="#">Кинжал NSKK цепник морской</a>
+									</h3>
+									<div class="auction-item__img">
+										<img src="img/items/1.jpg" alt="">
+										<span class="auction-item__img-mask">
+											<span>
+												<a href="#">Сделать ставку</a>
+												<a href="#preview-modal" class="popup-modal">Быстрый просмотр</a>
+											</span>
+										</span>
+									</div>
+									<div class="auction-item__status">
+										<span class="auction-item__starting"><img src="img/icon/calendar.svg" alt="">Начало торгов: 22.05.16 в 12:00</span>
+									</div>
+									<div class="auction-item__price">
+										<span class="price price--pre">
+											<p>Стартовая цена:</p>
+											<span>35 000</span>
+										</span>
+
+										<ul class="action">
+											<li><a href="#"><img src="img/icon/item-star.svg" alt=""></a></li>
+											<li><a href="#"><img src="img/icon/item-watch.svg" alt=""></a></li>
+										</ul>
+									</div>
+								</div>
+							</div>
+
+							<div class="col-xs-12 col-md-6 col-lg-4">
+								<div class="auction-item">
+									<h3 class="auction-item__title">
+										<a href="#">Парадная сабля "Prinz Eugen"</a>
+									</h3>
+									<div class="auction-item__img">
+										<img src="img/items/1.jpg" alt="">
+										<span class="auction-item__img-mask">
+											<span>
+												<a href="#">Сделать ставку</a>
+												<a href="#preview-modal" class="popup-modal">Быстрый просмотр</a>
+											</span>
+										</span>
+									</div>
+									<div class="auction-item__status">
+										<span class="auction-item__countdown"><img src="img/icon/timer.svg" alt="">До конца торгов <time class="timer" datetime="2016-06-18T10:23:00"></time></span>
+									</div>
+									<div class="auction-item__price">
+										<span class="price price--start">
+											<p>Стартовая цена:</p>
+											<span>35 000</span>
+										</span>
+										<span class="price price--current">
+											<p>Текущая цена:</p>
+											<span>58 000</span>
+										</span>
+
+										<ul class="action">
+											<li><a href="#"><img src="img/icon/item-star.svg" alt=""></a></li>
+											<li><a href="#"><img src="img/icon/item-watch.svg" alt=""></a></li>
+										</ul>
+									</div>
+								</div>
+							</div>
+
+							<div class="col-xs-12 col-md-6 col-lg-4">
+								<div class="auction-item">
+									<h3 class="auction-item__title">
+										<a href="#">Кинжал SA, RZM M 7/12, Weyersberg Max Waffenfabrik</a>
+									</h3>
+									<div class="auction-item__img">
+										<img src="img/items/1.jpg" alt="">
+										<span class="auction-item__img-mask">
+											<span>
+												<a href="#">Сделать ставку</a>
+												<a href="#preview-modal" class="popup-modal">Быстрый просмотр</a>
+											</span>
+										</span>
+									</div>
+									<div class="auction-item__status">
+										<span class="auction-item__sales"><img src="img/icon/sales.svg" alt="">Продано</span>
+									</div>
+									<div class="auction-item__price">
+										<span class="price price--start">
+											<p>Стартовая цена:</p>
+											<span>35 000</span>
+										</span>
+										<span class="price price--current">
+											<p>Цена апродажи:</p>
+											<span>48 000</span>
+										</span>
+
+										<ul class="action">
+											<li><a href="#"><img src="img/icon/item-star.svg" alt=""></a></li>
+											<li><a href="#"><img src="img/icon/item-watch.svg" alt=""></a></li>
+										</ul>
+									</div>
+								</div>
+							</div>
+
+							<div class="col-xs-12 col-md-6 col-lg-4">
+								<div class="auction-item">
+									<h3 class="auction-item__title">
+										<a href="#">Кинжал NSKK цепник морской</a>
+									</h3>
+									<div class="auction-item__img">
+										<img src="img/items/1.jpg" alt="">
+										<span class="auction-item__img-mask">
+											<span>
+												<a href="#">Сделать ставку</a>
+												<a href="#preview-modal" class="popup-modal">Быстрый просмотр</a>
+											</span>
+										</span>
+									</div>
+									<div class="auction-item__status">
+										<span class="auction-item__starting"><img src="img/icon/calendar.svg" alt="">Начало торгов: 22.05.16 в 12:00</span>
+									</div>
+									<div class="auction-item__price">
+										<span class="price price--pre">
+											<p>Стартовая цена:</p>
+											<span>35 000</span>
+										</span>
+
+										<ul class="action">
+											<li><a href="#"><img src="img/icon/item-star.svg" alt=""></a></li>
+											<li><a href="#"><img src="img/icon/item-watch.svg" alt=""></a></li>
+										</ul>
+									</div>
+								</div>
+							</div>
+
+							<div class="col-xs-12 col-md-6 col-lg-4">
+								<div class="auction-item">
+									<h3 class="auction-item__title">
+										<a href="#">Парадная сабля "Prinz Eugen"</a>
+									</h3>
+									<div class="auction-item__img">
+										<img src="img/items/1.jpg" alt="">
+										<span class="auction-item__img-mask">
+											<span>
+												<a href="#">Сделать ставку</a>
+												<a href="#preview-modal" class="popup-modal">Быстрый просмотр</a>
+											</span>
+										</span>
+									</div>
+									<div class="auction-item__status">
+										<span class="auction-item__countdown"><img src="img/icon/timer.svg" alt="">До конца торгов <time class="timer" datetime="2016-06-18T10:23:00"></time></span>
+									</div>
+									<div class="auction-item__price">
+										<span class="price price--start">
+											<p>Стартовая цена:</p>
+											<span>35 000</span>
+										</span>
+										<span class="price price--current">
+											<p>Текущая цена:</p>
+											<span>58 000</span>
+										</span>
+
+										<ul class="action">
+											<li><a href="#"><img src="img/icon/item-star.svg" alt=""></a></li>
+											<li><a href="#"><img src="img/icon/item-watch.svg" alt=""></a></li>
+										</ul>
+									</div>
+								</div>
+							</div>
+
+							<div class="col-xs-12 col-md-6 col-lg-4">
+								<div class="auction-item">
+									<h3 class="auction-item__title">
+										<a href="#">Кинжал SA, RZM M 7/12, Weyersberg Max Waffenfabrik</a>
+									</h3>
+									<div class="auction-item__img">
+										<img src="img/items/1.jpg" alt="">
+										<span class="auction-item__img-mask">
+											<span>
+												<a href="#">Сделать ставку</a>
+												<a href="#preview-modal" class="popup-modal">Быстрый просмотр</a>
+											</span>
+										</span>
+									</div>
+									<div class="auction-item__status">
+										<span class="auction-item__sales"><img src="img/icon/sales.svg" alt="">Продано</span>
+									</div>
+									<div class="auction-item__price">
+										<span class="price price--start">
+											<p>Стартовая цена:</p>
+											<span>35 000</span>
+										</span>
+										<span class="price price--current">
+											<p>Цена апродажи:</p>
+											<span>48 000</span>
+										</span>
+
+										<ul class="action">
+											<li><a href="#"><img src="img/icon/item-star.svg" alt=""></a></li>
+											<li><a href="#"><img src="img/icon/item-watch.svg" alt=""></a></li>
+										</ul>
+									</div>
+								</div>
+							</div>
+
+							<div class="col-xs-12 col-md-6 col-lg-4">
+								<div class="auction-item">
+									<h3 class="auction-item__title">
+										<a href="#">Кинжал NSKK цепник морской</a>
+									</h3>
+									<div class="auction-item__img">
+										<img src="img/items/1.jpg" alt="">
+										<span class="auction-item__img-mask">
+											<span>
+												<a href="#">Сделать ставку</a>
+												<a href="#preview-modal" class="popup-modal">Быстрый просмотр</a>
+											</span>
+										</span>
+									</div>
+									<div class="auction-item__status">
+										<span class="auction-item__starting"><img src="img/icon/calendar.svg" alt="">Начало торгов: 22.05.16 в 12:00</span>
+									</div>
+									<div class="auction-item__price">
+										<span class="price price--pre">
+											<p>Стартовая цена:</p>
+											<span>35 000</span>
+										</span>
+
+										<ul class="action">
+											<li><a href="#"><img src="img/icon/item-star.svg" alt=""></a></li>
+											<li><a href="#"><img src="img/icon/item-watch.svg" alt=""></a></li>
+										</ul>
+									</div>
+								</div>
+							</div>
+
+							<div class="col-xs-12">
+								<button class="auction-list__more">
+									<img src="img/icon/more.svg" alt="">Показать еще</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="subscribe">
+			<div class="subscribe__text">
+				ПОДПИШИСЬ НА НОВОСТИ И <span>ПОЛУЧАЙ АКТУАЛЬНУЮ ИНФОРМАЦИЮ</span>  О НОВЫХ АУКЦИОНАХ
+			</div>
+			<form action="#" class="subscribe__form">
+				<input type="text" class="subscribe__input" placeholder="Email">
+				<button class="subscribe__button">ПОДПИСАТЬСЯ</button>
+			</form>
+		</div>
+
+		<div class="footer-content">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-xs-12 col-md-3">
+						<div class="footer-content__logo">
+							<a href="#">
+								<img src="img/logo--green.svg" alt="">
+							</a>
+						</div>
+
+						<div class="footer-content__phones">
+							<p>+7 (962) <span>706-66-07</span></p>
+							<p>+7 (921) <span>576-57-77</span></p>
+						</div>
+
+						<div class="footer-content__mail">
+							<a href="mailto:admin@antic-war.com">admin@antic-war.com</a>
+							<div class="clearfix"></div>
+							<a href="mailto:sale@antic-war.com">sale@antic-war.com</a>
+						</div>
+					</div>
+
+					<div class="col-xs-12 col-sm-6 col-md-4">
+						<h6 class="footer-content__title">Парадное холодное оружие</h6>
+						<ul class="catalog__list catalog__list--66 catalog__list--footer">
+							<h6 class="catalog__title">
+								Служба:
+							</h6>
+							<li class="catalog__item catalog__item--50">
+								<a href="#">Люфтваффе</a>
+							</li>
+							<li class="catalog__item catalog__item--50">
+								<a href="#">Пожарная служба</a>
+							</li>
+							<li class="catalog__item catalog__item--50">
+								<a href="#">РАД</a>
+							</li>
+							<li class="catalog__item catalog__item--50">
+								<a href="#">Штык</a>
+							</li>
+							<li class="catalog__item catalog__item--50">
+								<a href="#">СА</a>
+							</li>
+							<li class="catalog__item catalog__item--50">
+								<a href="#">СС</a>
+							</li>
+							<li class="catalog__item catalog__item--50">
+								<a href="#">НСКК</a>
+							</li>
+							<li class="catalog__item catalog__item--50">
+								<a href="#">Пехота</a>
+							</li>
+							<li class="catalog__item catalog__item--50">
+								<a href="#">Полиция</a>
+							</li>
+							<li class="catalog__item catalog__item--50">
+								<a href="#">Боевой нож</a>
+							</li>
+							<li class="catalog__item catalog__item--50">
+								<a href="#">Общества и союзы</a>
+							</li>
+						</ul>
+						<ul class="catalog__list catalog__list--33 catalog__list--footer">
+							<h6 class="catalog__title">
+								период:
+							</h6>
+							<li class="catalog__item">
+								<a href="#">1933-1945 г.</a>
+							</li>
+							<li class="catalog__item">
+								<a href="#">1897-1933 г.</a>
+							</li>
+						</ul>
+					</div>
+
+					<div class="col-xs-12 col-sm-2 col-md-2">
+						<h6 class="footer-content__title">Боевые ножи</h6>
+						<ul class="catalog__list catalog__list--footer">
+							<h6 class="catalog__title">
+								страна:
+							</h6>
+							<li class="catalog__item">
+								<a href="#">Канада</a>
+							</li>
+							<li class="catalog__item">
+								<a href="#">Япония</a>
+							</li>
+							<li class="catalog__item">
+								<a href="#">Франция</a>
+							</li>
+							<li class="catalog__item">
+								<a href="#">Россия</a>
+							</li>
+						</ul>
+					</div>
+
+					<div class="col-xs-12 col-sm-4 col-md-3">
+						<h6 class="footer-content__title">Аукцион:</h6>
+						<ul class="catalog__list catalog__list--50 catalog__list--footer">
+							<h6 class="catalog__title">
+								о нас:
+							</h6>
+							<li class="catalog__item">
+								<a href="#">О аукционе</a>
+							</li>
+							<li class="catalog__item">
+								<a href="#">Как участвовать?</a>
+							</li>
+							<li class="catalog__item">
+								<a href="#">Задать вопрос</a>
+							</li>
+							<li class="catalog__item">
+								<a href="#">Контакты</a>
+							</li>
+						</ul>
+						<ul class="catalog__list catalog__list--50 catalog__list--footer">
+							<h6 class="catalog__title">
+								статьи:
+							</h6>
+							<li class="catalog__item">
+								<a href="#">Заголовок статьи</a>
+							</li>
+							<li class="catalog__item">
+								<a href="#">Другая статья о оружие</a>
+							</li>
+							<li class="catalog__item">
+								<a href="#">Еще одна статья</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+
+	<footer class="footer">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-xs-12 col-md-4">
+					<ul class="footer__social">
+						<li class="footer__social-item">
+							<a href="#"><img src="img/social/vk2.svg" alt=""></a>
+						</li>
+						<li class="footer__social-item">
+							<a href="#"><img src="img/social/facebook2.svg" alt=""></a>
+						</li>
+						<li class="footer__social-item">
+							<a href="#"><img src="img/social/twitter2.svg" alt=""></a>
+						</li>
+					</ul>
+				</div>
+				<div class="col-xs-12 col-md-8">
+					<div class="footer__copyright">
+						© 2011-2016 <a href="#">warstoryauction</a> - аукцион военного антиквариата
+					</div>
+				</div>
+			</div>
+		</div>
+	</footer>
+
+	<div class="fixed-search">
+		<button class="fixed-search__close">
+			<img src="img/icon/close.svg" alt="">
+		</button>
+
+		<form action="#" class="fixed-search__form">
+			<input class="fixed-search__input" type="text" placeholder="Поиск по сайту">
+			<button class="fixed-search__button"><img src="img/icon/search.png" alt=""></button>
+		</form>
+
+		<div class="catalog catalog--search">
+			<div class="row">
+				<div class="col-xs-12 col-sm-6">
+					<h2 class="section__title2">Парадное холодное оружие Германии:</h2>
+
+					<ul class="catalog__list catalog__list--66">
+						<h6 class="catalog__title">
+							Служба:
+						</h6>
+						<li class="catalog__item catalog__item--50">
+							<a href="#">Люфтваффе</a>
+						</li>
+						<li class="catalog__item catalog__item--50">
+							<a href="#">Пожарная служба</a>
+						</li>
+						<li class="catalog__item catalog__item--50">
+							<a href="#">РАД</a>
+						</li>
+						<li class="catalog__item catalog__item--50">
+							<a href="#">Штык</a>
+						</li>
+						<li class="catalog__item catalog__item--50">
+							<a href="#">СА</a>
+						</li>
+						<li class="catalog__item catalog__item--50">
+							<a href="#">СС</a>
+						</li>
+						<li class="catalog__item catalog__item--50">
+							<a href="#">НСКК</a>
+						</li>
+						<li class="catalog__item catalog__item--50">
+							<a href="#">Пехота</a>
+						</li>
+						<li class="catalog__item catalog__item--50">
+							<a href="#">Полиция</a>
+						</li>
+						<li class="catalog__item catalog__item--50">
+							<a href="#">Боевой нож</a>
+						</li>
+						<li class="catalog__item catalog__item--50">
+							<a href="#">Общества и союзы</a>
+						</li>
+					</ul>
+					<ul class="catalog__list catalog__list--33">
+						<h6 class="catalog__title">
+							период:
+						</h6>
+						<li class="catalog__item">
+							<a href="#">1933-1945 г.</a>
+						</li>
+						<li class="catalog__item">
+							<a href="#">1897-1933 г.</a>
+						</li>
+					</ul>
+				</div>
+				<div class="col-xs-12 col-sm-6">
+					<h2 class="section__title2">Холодное оружие других стран:</h2>
+					<ul class="catalog__list">
+						<h6 class="catalog__title">
+							страна:
+						</h6>
+						<li class="catalog__item">
+							<a href="#">Канада</a>
+						</li>
+						<li class="catalog__item">
+							<a href="#">Япония</a>
+						</li>
+						<li class="catalog__item">
+							<a href="#">Франция</a>
+						</li>
+						<li class="catalog__item">
+							<a href="#">Россия</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div id="registration-modal" class="mfp-hide basic-modal basic-modal--registration">
+		<a class="basic-modal__dismiss" href="#"><img src="img/icon/close-modal.png" alt=""></a>
+		<div class="col-xs-12">
+			<h5 class="basic-modal__title">Регистрация</h5>
+		</div>
+		<div class="col-xs-12 col-sm-6">
+			<h6 class="basic-modal__title basic-modal__title--second">Заполните пожалуйста поля!</h6>
+
+			<form class="form" action="#">
+				<div class="form__group">
+					<label class="form__label" for="">ФИО:</label>
+					<input class="form__input" type="text">
+				</div>
+				<div class="form__group">
+					<label class="form__label" for="">Телефон:</label>
+					<input class="form__input" type="text">
+				</div>
+				<div class="form__group">
+					<label class="form__label" for="">Email:</label>
+					<input class="form__input" type="text">
+				</div>
+				<div class="form__group">
+					<input type="checkbox" id="test1" checked="checked">
+					<label for="test1">Я ознакомлен <br>
+						<a href="#">с условиями предоставляемых цуслуг</a>
+					</label>
+				</div>
+			</form>
+		</div>
+		<div class="col-xs-12 col-sm-6">
+			<h6 class="basic-modal__title basic-modal__title--second">Войти через социальные сети:</h6>
+			<p class="basic-modal__text">Вы можете войти, используя свою учётную запись в социальных сетях.</p>
+
+			<ul class="basic-modal__social">
+				<li class="basic-modal__social-item">
+					<a href="#"><img src="img/social/vk.svg" alt="">Вконтакте</a>
+				</li>
+				<li class="basic-modal__social-item">
+					<a href="#"><img src="img/social/facebook.svg" alt="">Facebook</a>
+				</li>
+				<li class="basic-modal__social-item">
+					<a href="#"><img src="img/social/twitter.svg" alt="">Twitter</a>
+				</li>
+				<li class="basic-modal__social-item">
+					<a href="#"><img src="img/social/odnoc.svg" alt="">Однокласники</a>
+				</li>
+				<li class="basic-modal__social-item">
+					<a href="#"><img src="img/social/googleplus.svg" alt="">Google</a>
+				</li>
+			</ul>
+		</div>
+		<div class="col-xs-12">
+			<button class="default-button">начать покупки</button>
+		</div>
+		<div class="clearfix"></div>
+	</div>
+
+	<div id="login-modal" class="mfp-hide basic-modal basic-modal--login">
+		<a class="basic-modal__dismiss" href="#"><img src="img/icon/close-modal.png" alt=""></a>
+		<div class="col-xs-12">
+			<h5 class="basic-modal__title">вход</h5>
+		</div>
+		<div class="col-xs-12 col-sm-6">
+			<h6 class="basic-modal__title basic-modal__title--second">Введите пароль и логин:</h6>
+
+			<form class="form" action="#">
+				<div class="form__group">
+					<label class="form__label" for="">Логин:</label>
+					<input class="form__input" type="text">
+				</div>
+				<div class="form__group">
+					<label class="form__label" for="">Пароль:</label>
+					<input class="form__input" type="password">
+				</div>
+				<button class="default-button default-button--login">вход</button>
+			</form>
+		</div>
+		<div class="col-xs-12 col-sm-6">
+			<h6 class="basic-modal__title basic-modal__title--second">Войти через социальные сети:</h6>
+			<p class="basic-modal__text">Вы можете войти, используя свою учётную запись в социальных сетях.</p>
+
+			<ul class="basic-modal__social">
+				<li class="basic-modal__social-item">
+					<a href="#"><img src="img/social/vk.svg" alt="">Вконтакте</a>
+				</li>
+				<li class="basic-modal__social-item">
+					<a href="#"><img src="img/social/facebook.svg" alt="">Facebook</a>
+				</li>
+				<li class="basic-modal__social-item">
+					<a href="#"><img src="img/social/twitter.svg" alt="">Twitter</a>
+				</li>
+				<li class="basic-modal__social-item">
+					<a href="#"><img src="img/social/odnoc.svg" alt="">Однокласники</a>
+				</li>
+				<li class="basic-modal__social-item">
+					<a href="#"><img src="img/social/googleplus.svg" alt="">Google</a>
+				</li>
+			</ul>
+		</div>
+		<div class="clearfix"></div>
+	</div>
+
+	<div id="preview-modal" class="mfp-hide basic-modal basic-modal--preview">
+		<a class="basic-modal__dismiss" href="#"><img src="img/icon/close-modal.png" alt=""></a>
+		<div class="row">
+			<div class="col-xs-12 col-md-7">
+
+				<div id="sync1" class="owl-carousel lot-slider popup-gallery">
+					<div class="item">
+						<a class="item--magnifier" href="http://farm9.staticflickr.com/8242/8558295633_f34a55c1c6_b.jpg" data-image-zoom="img/slider/1.jpg" data-size="100">
+							<img src="img/slider/1.jpg" alt="">
+						</a>
+						
+					</div>
+					<div class="item">
+						<iframe src="https://www.youtube.com/embed/at_sW5lO-H0" frameborder="0"></iframe>
+					</div>
+					<div class="item">
+						<a class="item--magnifier" href="http://farm9.staticflickr.com/8242/8558295633_f34a55c1c6_b.jpg" data-image-zoom="img/slider/1.jpg" data-size="100">
+							<img src="img/slider/1.jpg" alt="">
+						</a>
+						
+					</div>
+					<div class="item">
+						<a class="item--magnifier" href="http://farm9.staticflickr.com/8242/8558295633_f34a55c1c6_b.jpg" data-image-zoom="img/slider/1.jpg" data-size="100">
+							<img src="img/slider/1.jpg" alt="">
+						</a>
+						
+					</div>
+					<div class="item">
+						<iframe src="https://www.youtube.com/embed/at_sW5lO-H0" frameborder="0"></iframe>
+					</div>
+					<div class="item">
+						<a class="item--magnifier" href="http://farm9.staticflickr.com/8242/8558295633_f34a55c1c6_b.jpg" data-image-zoom="img/slider/1.jpg" data-size="100">
+							<img src="img/slider/1.jpg" alt="">
+						</a>
+						
+					</div>
+				</div>
+
+				<div class="thumbnail-wrap">
+					<div id="sync2" class="owl-carousel thumbnail-slider">
+						<div class="item">
+							<img src="img/slider/1.jpg" alt="">
+						</div>
+						<div class="item item--video">
+							<img src="img/slider/2.jpg" alt="">
+						</div>
+						<div class="item">
+							<img src="img/slider/3.jpg" alt="">
+						</div>
+						<div class="item">
+							<img src="img/slider/1.jpg" alt="">
+						</div>
+						<div class="item item--video">
+							<img src="img/slider/2.jpg" alt="">
+						</div>
+						<div class="item">
+							<img src="img/slider/3.jpg" alt="">
+						</div>
+					</div>
+
+					<div class="lot-navigation">
+						<span class="prev"><img src="img/icon/arrow-left.png" alt=""></span>
+						<span class="next"><img src="img/icon/arrow-right.png" alt=""></span>
+					</div>
+				</div>	
+			</div>
+			<div class="col-xs-12 col-md-5">
+				<div class="lot-content lot-content--popup">
+					<h2 class="lot-content__title"><a href="#">Полицейский штык с темляком и подвесом, Lüneschloss</a></h2>
+					<time class="timer" datetime="2016-06-21T13:43:00"></time>
+
+					<form action="#" class="lot-content__form clearfix">
+						<div class="lot-content__price">
+							<p>Текущая цена:</p>
+							<span>58 000</span>
+						</div>
+						<div class="form-group">
+							<input class="lot-content__form-input" type="text" placeholder="Введите сумму ставки">
+							<button class="lot-content__form-button">СДЕЛАТЬ СТАВКУ</button>
+						</div>
+					</form>
+
+					<div class="feedback feedback--popup">
+						<h6 class="feedback__title">Если вы хотите купить <span>военный антиквариант прямо сейчас?</span></h6>
+						<div class="feedback__phone">
+							Позвоните нам <span>+7 (962) 706-66-07</span>
+						</div>
+						<div class="feedback__call">
+							или закажите <button href="#call-modal" class="popup-modal">обратный звонок</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>	
+		<div class="clearfix"></div>
+	</div>
+
+	<div id="call-modal" class="mfp-hide basic-modal basic-modal--call">
+		<a class="basic-modal__dismiss" href="#"><img src="img/icon/close-modal.png" alt=""></a>
+		<div class="col-xs-12">
+			<h5 class="basic-modal__title">Заказать обратный звонок</h5>
+			<p class="basic-modal__text">Закажите бесплатный звонок и наш специалист свяжется с Вами в ближайшее время!</p>
+		</div>
+		<div class="col-xs-12">
+			<form class="form" action="#">
+				<div class="form__group">
+					<label class="form__label" for="">Имя:</label>
+					<input class="form__input" type="text">
+				</div>
+				<div class="form__group">
+					<label class="form__label" for="">Телефон:</label>
+					<input class="form__input" type="text">
+				</div>
+				<button class="default-button default-button--call">заказать звонок</button>
+			</form>
+		</div>
+		<div class="clearfix"></div>
+	</div>
+
+
+
+	<script src="js/jquery-1.12.4.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/jquery.fullPage.min.js"></script>
+	<script src="js/jquery.countdown.js"></script>
+	<script src="js/jquery.inputmask.bundle.min.js"></script>
+	<script src="js/wow.min.js"></script>
+	<script src="js/jquery.magnific-popup.min.js"></script>
+	<script src="js/ion.rangeSlider.min.js"></script>
+	<script src="js/svgeezy.min.js"></script>
+	<script src="js/MagnifierRentgen.js"></script>
+	<script src="js/owl.carousel.min.js"></script>
+	<script src="js/jquery.sticky-kit.min.js"></script>
+	<script src="js/main.js"></script>
+</body>
+</html>

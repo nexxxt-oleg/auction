@@ -1,0 +1,85 @@
+/* Ion.RangeSlider, Flat UI Skin
+// css version 2.0.3
+// © Denis Ineshin, 2014    https://github.com/IonDen
+// ===================================================================================================================*/
+
+/* =====================================================================================================================
+// Skin details */
+
+.irs-line-mid,
+.irs-line-left,
+.irs-line-right,
+.irs-bar,
+.irs-bar-edge,
+.irs-slider {
+	background: url(../img/sprite-skin-flat.png) repeat-x;
+}
+.irs {
+	height: 7px;
+	margin: 30px 0;
+}
+.irs-line {
+	height: 7px; 
+	top: 0;
+}
+.irs-line-left {
+	height: 7px;
+	background-position: 0 -30px;
+	border-radius: 4px 0 0 4px;
+}
+.irs-line-mid {
+	height: 7px;
+	background-position: 0 0;
+}
+.irs-line-right {
+	height: 7px;
+	background-position: 100% -30px;
+	border-radius: 0 4px 4px 0;
+}
+.irs-bar {
+	height: 7px;
+	top: 0;
+	background-position: 0 -60px;
+	border-radius: 4px;
+}
+.irs-bar-edge {
+	top: 0;
+	height: 7px; 
+	width: 9px;
+	background-position: 0 -90px;
+}
+.irs-slider {
+	width: 2;
+	height: 7px;
+	top: 0;
+	background-position: 0 -120px;
+	opacity: 0;
+}
+.irs-slider.state_hover, .irs-slider:hover {
+	background-position: 0 -150px;
+}
+.irs-from, .irs-to, .irs-single {
+	color: #a1a785;
+	width: 64px;
+	text-align: center;
+	border: 1px solid #a4a988;
+	font-size: 14px;
+	line-height: 24px;
+	text-shadow: none;
+	background: #fff;
+	border-radius: 20px;
+	cursor: pointer;
+	margin-top: -10px;
+	z-index: 90;
+}
+.irs-from {
+	margin-left: 32px;
+}
+.irs-to {
+	margin-left: -32px;
+}
+.irs-single {
+	width: 150px;
+}
+.irs-disabled {
+}

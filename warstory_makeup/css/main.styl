@@ -1,0 +1,2048 @@
+vendorize(property, value)
+	-webkit-{property} value
+	-moz-{property} value
+	{property} value
+
+white = #fff
+black = #000
+greentext = #2e4520
+greentext2 = #678450
+greenbg = #62804a
+
+@font-face
+	font-family 'Constantia'
+	src url("../fonts/Constantia.eot")
+	src url("../fonts/Constantia.eot?#iefix")format("embedded-opentype"),
+		url("../fonts/Constantia.woff2") format("woff2"),
+		url("../fonts/Constantia.woff") format("woff"),
+		url("../fonts/Constantia.ttf") format("truetype"),
+		url("../fonts/Constantia.svg#Constantia") format('svg')
+	font-style normal
+	font-weight normal
+
+@font-face
+	font-family 'ConstantiaBold'
+	src url("../fonts/ConstantiaBold.eot")
+	src url("../fonts/ConstantiaBold.eot?#iefix")format("embedded-opentype"),
+		url("../fonts/ConstantiaBold.woff2") format("woff2"),
+		url("../fonts/ConstantiaBold.woff") format("woff"),
+		url("../fonts/ConstantiaBold.ttf") format("truetype"),
+		url("../fonts/ConstantiaBold.svg#ConstantiaBold") format('svg')
+	font-style normal
+	font-weight normal
+
+
+/*==============================
+	Common styles
+==============================*/
+html
+body
+	height 100%
+body
+	font-family 'Open Sans', sans-serif
+	background-color white
+	-webkit-font-smoothing antialiased
+	&.promo-page
+		margin 0
+		padding 0
+		background-color black
+	&.cabinet-page
+		background-color #f6f6f6
+		
+button
+	padding 0
+	border none
+	background-color transparent
+	&:focus
+		outline none
+a
+	vendorize(transition,.4s ease)
+	&:hover
+	&:active
+	&:focus
+		outline none
+		text-decoration none
+
+input[type="text"]
+input[type="password"]
+select
+textarea
+	&:focus
+		outline none
+
+::-moz-selection
+	background white
+	color black
+	text-shadow none
+::-webkit-selection
+	background white
+	color black
+	text-shadow none
+::selection
+	background white
+	color black
+	text-shadow none
+
+::-webkit-input-placeholder
+	color white
+	opacity 1
+::-moz-placeholder
+	color white
+	opacity 1
+:-moz-placeholder
+	color white
+	opacity 1
+:-ms-input-placeholder
+	color white
+	opacity 1
+
+[type="checkbox"]
+	&:not(:checked)
+	&:checked
+		position absolute
+		left -9999px
+[type="checkbox"]:not(:checked) + label
+[type="checkbox"]:checked + label
+	position relative
+	padding-left 40px
+	cursor pointer
+	font-size 14px
+	color greentext
+	margin-bottom 0
+	font-weight 400
+	a
+		color greentext2
+		text-decoration underline
+		&:hover
+			text-decoration none
+[type="checkbox"]:not(:checked) + label:before
+[type="checkbox"]:checked + label:before
+	content ''
+	position absolute
+	left 0
+	top 2px
+	width 20px
+	height 20px
+	background #ddd
+	border-radius 4px
+[type="checkbox"]:not(:checked) + label:after
+[type="checkbox"]:checked + label:after
+	font-family 'Glyphicons Halflings'
+	content '\e013'
+	position absolute
+	left 0
+	top 2px
+	width 20px
+	height 20px
+	font-size 14px
+	line-height 20px
+	color white
+	text-align center
+	vendorize(transition,.2s)
+	background-color greenbg
+	border-radius 4px
+[type="checkbox"]:not(:checked) + label:after
+	opacity 0
+	transform scale(0)
+[type="checkbox"]:checked + label:after
+	opacity 1
+	transform scale(1)
+
+.breadcrumb
+	margin-top 30px
+	margin-bottom 30px
+	background-color transparent
+	padding 0
+	li
+		a
+			color #999
+			text-decoration underline
+			font-size 14px
+.breadcrumb > .active
+	color #8e8b8b
+.breadcrumb > li + li::before
+	padding 0 5px
+	content '»'
+	color #999
+
+.default-button
+	display block
+	font-family 'Constantia'
+	height 48px
+	line-height 48px
+	background-color greenbg
+	color white
+	text-transform uppercase
+	font-size 18px
+	margin 15px auto 20px
+	padding 0 30px
+	border-radius 25px
+	&--login
+		padding 0 50px
+		display inline-block
+		margin 15px 0 20px
+	&--contacts
+		margin 35px auto 0
+	&--call
+		margin 50px auto 35px
+	&--contents
+		padding 0 40px
+		margin 30px auto 0
+.wow
+	visibility hidden
+
+.fp-enabled
+	margin-right 0 !important
+
+.mfp-iframe-holder
+	.mfp-content
+		max-width 100%
+		height 100%
+	.mfp-close
+		color transparent
+		background url('../img/icon/close-modal.png') no-repeat center right 8px
+.mfp-image-holder
+	.mfp-close
+		top 40px
+		color transparent
+		background url('../img/icon/close-modal2.png') no-repeat center right 18px
+.mfp-zoom-out-cur
+	.mfp-image-holder
+		.mfp-close
+			cursor pointer
+.mfp-figure
+	&:after
+		-webkit-box-shadow none
+		box-shadow none
+.mfp-arrow
+	opacity .8
+	&:before
+	&:after
+		display none
+button.mfp-arrow-left
+	background url('../img/icon/arrow-left.png') no-repeat center center
+button.mfp-arrow-right
+	background url('../img/icon/arrow-right.png') no-repeat center center
+
+.container-fluid
+	padding-left 50px
+	padding-right 50px
+
+/*==============================
+	Header
+==============================*/
+.header
+	width 100%
+	&--fixed
+		position fixed
+		padding 20px 50px 0
+		z-index 10
+	&--relative
+		position relative
+		z-index 3
+	&__topline
+		background-color #1a4318
+		height 60px
+		line-height 60px
+	&__midline
+		-webkit-box-shadow 0 2px 4px rgba(0,0,0,.15)
+		box-shadow 0 2px 4px rgba(0,0,0,.15)
+		background url('../img/midline-bg.jpg') no-repeat center top
+
+.user-button
+	display inline-block
+	float left
+	&__login
+	&__signup
+	&__search
+		position relative
+		display inline-block
+		float left
+		height 20px
+		line-height 20px
+		font-size 15px
+		color white
+		img
+			margin-right 8px
+			margin-top -2px
+	&__login
+		margin-right 12px
+		img
+			width 19px
+		&:before
+			content ''
+			position absolute
+			width 1px
+			height 100%
+			background-color rgba(white,.24)
+			right -13px
+	&__signup
+		margin-left 12px
+		img
+			width 12px
+	&__search
+		margin-left 40px
+		img
+			width 20px
+			height 20px
+	&--mobile
+		display none
+		width 100%
+		text-align center
+		margin-top 10px
+		margin-bottom 10px
+		button
+			float none
+	&--second
+		background-color #214e1f
+		padding 0 20px
+		button
+			height 60px
+			img
+				opacity .5
+			&:hover
+				img
+					opacity 1
+		.user-button__login
+			&:before
+				height 22px
+
+.contact-line
+	display inline-block
+	float left
+	list-style none
+	padding 0
+	margin 0 0 0 40px
+	line-height 20px
+	color white
+	font-size 15px
+	&__item
+		display inline-block
+		margin-left 10px
+		img
+			margin-right 5px
+			width 13px
+		a
+			color white
+			&:hover
+				text-decoration underline
+	span
+		margin-left 0
+	&--second
+		float right
+		line-height 60px
+		margin 0
+		.contact-line__item
+			img
+				opacity .5
+
+.action-button
+	display inline-block
+	float right
+	list-style none
+	padding 0
+	margin 0
+	&__item
+		display inline-block
+		float right
+		margin-left 20px
+	&__link
+		color white
+		font-size 20px
+		line-height 20px
+		font-weight 600
+		position relative
+		&:hover
+			color white
+		span
+			display inline-block
+			height 20px
+			line-height 20px
+		&--view
+			img
+				margin-top -4px
+				width 31px
+		&--star
+			opacity .5
+			img
+				margin-top -8px
+				width 34px
+		&--star-true
+			opacity 1
+			img
+				margin-top -8px
+		&--basket
+			img
+				margin-top -8px
+				width 31px
+	&--green
+		margin-top 47px
+		.action-button__link
+			color #518145
+			&--basket
+				color #293f1b
+
+.logo
+	margin-top 35px
+	display inline-block
+	float left
+	&__img
+		display inline-block
+		float left
+		img
+			width 230px
+	&__tagline
+		position relative
+		display inline-block
+		float left
+		font-size 16px
+		color white
+		font-weight 700
+		line-height 22px
+		margin-left 36px
+		padding-left 36px
+		&:before
+			content ''
+			position absolute
+			width 1px
+			height 100%
+			top 0
+			left 0
+			background-color rgba(white,.24)
+	&--green
+		.logo__tagline
+			color #1a4318
+			font-weight 400
+			&:before
+				background rgba(#a1a785, .4)
+		img
+			width 230px
+
+.navigation-desktop
+	display inline-block
+	float left
+	list-style none
+	padding 0
+	margin 35px 0 0 90px
+	&__item
+		display inline-block
+		float left
+		margin-right 90px
+		&:last-child
+			margin-right 0
+	&__link
+		line-height 22px
+		color white
+		font-size 16px
+		text-decoration underline
+		&:hover
+			text-decoration none
+			color white
+	&--green
+		width 100%
+		margin 50px 0 30px
+		text-align center
+		.navigation-desktop__link
+			color #1a4318
+			text-decoration none
+			font-size 14px
+			text-transform uppercase
+			&:hover
+				text-decoration underline
+			&--active
+				font-weight 700
+				&:hover
+					text-decoration none
+					cursor default
+		.navigation-desktop__item
+			margin 0 5%
+			float none
+			&:last-child
+				margin 0
+				float right
+			&:first-child
+				margin 0
+				float left
+
+.navigation-mobile-wrap
+	display none
+.navigation-mobile-button
+	position fixed
+	display block
+	right 50px
+	color white
+	font-size 24px
+	top 77px
+	z-index 100
+	&__img
+		width 30px
+		height 30px
+		&--close
+			display none
+		&--burger
+			display block
+	&--open
+		.navigation-mobile-button__img--burger
+			display none
+		.navigation-mobile-button__img--close
+			display block
+	&--green
+		top -65px
+		right 15px
+		position absolute
+
+.navigation-mobile
+	position fixed
+	display none
+	min-height 100%
+	width 100%
+	top 0
+	bottom 0
+	left 0
+	right 0
+	z-index 99
+	margin 0
+	padding 0
+	text-align center
+	list-style none
+	background-color rgba(0,0,0,.9)
+	vendorize(transition,0s)
+	padding-top 110px
+	overflow-y scroll
+	&__item
+		display block
+		&--active
+			background-color rgba(white, .08)
+	&__link
+		color white
+		font-size 15px
+		text-transform uppercase
+		font-weight 600
+		line-height 60px
+		&:hover
+			color white
+	&--open
+		display block
+
+/*==============================
+	Section
+==============================*/
+.fp-tableCell
+	height 100vh // fix chrome reloaded
+.section
+	padding 0 50px
+	background-size cover
+	height 100vh // fix chrom reloaded
+	&--bg1
+		background-image url('../img/main-bg/bg1.jpg')
+	&--bg2
+		background-image url('../img/main-bg/bg2.jpg')
+	&--bg3
+		background-image url('../img/main-bg/bg3.jpg')
+	&--bg4
+		background-image url('../img/main-bg/bg4.jpg')
+	&__title
+		font-size 53px
+		color white
+		font-family 'Constantia'
+		margin-bottom 15px
+		margin-top 60px
+		a
+			color white
+			position relative
+			&:before
+				content ''
+				position absolute
+				height 2px
+				width 100%
+				background-color white
+				bottom 5px
+				left 0
+				vendorize(transition, opacity .2s)
+			&:hover
+				&:before
+					opacity 0
+		&--bold
+			font-family 'ConstantiaBold'
+			font-size 44px
+	&__title2
+		font-size 28px
+		color white
+		margin 0 0 35px
+		font-family 'Constantia'
+	&__countdown
+		.timer
+			display inline-block
+			float left
+			font-size 27px
+			font-weight 700
+			color white
+			margin-right 6px
+		.text
+			display inline-block
+			float left
+			font-size 14px
+			color white
+			line-height 39px
+			letter-spacing 1px
+		.label-hh
+		.label-mm
+		.label-ss
+			display none
+		.label-dd
+			padding 0 1px 0 3px
+		.separator
+			padding 0 4px
+	&__video
+		position relative
+		margin-top 90px
+		a
+			position absolute
+			top 50%
+			margin-top -30px
+			img
+				width 60px
+				height 60px
+			&:before
+				position absolute
+				top -10px
+				left -10px
+				content ''
+				display block
+				width 80px
+				height 80px
+				background url('../img/icon/play-before.svg') no-repeat
+				vendorize(transition, 1s)
+			&:hover
+				&:before
+					-webkit-transform rotate(180deg)
+					transform rotate(180deg)
+		span
+			display block
+			font-size 20px
+			color white
+			font-weight 700
+			padding-left 100px
+			text-transform uppercase
+	&__view-item
+		position absolute
+		bottom 15%
+		right 20%
+		a
+			position absolute
+			top 50%
+			margin-top -27.5px
+			&:hover
+				opacity .66
+		span
+			display block
+			font-size 16px
+			color white
+			font-weight 700
+			padding-left 75px
+	&__form
+		&--2
+			margin-top 40px
+	&__form-title
+		font-size 29px
+		color white
+		font-weight 300
+		line-height 40px
+		margin 0 0 15px
+		letter-spacing .4px
+		span
+			font-weight 700
+		&--2
+			font-size 24px
+			font-weight 700
+			line-height 30px
+	&__form-input-phone
+		display inline-block
+		float left
+		background-color transparent
+		width 320px
+		border 2px solid white
+		border-radius 25px
+		height 50px
+		text-indent 20px
+		color white
+		font-size 22px
+		font-weight 300
+		margin-right 10px
+	&__form-button
+		display inline-block
+		float left
+		height 50px
+		line-height 46px
+		background-color white
+		color #a3a4a6
+		border-radius 25px
+		padding 0 34px
+		font-size 15px
+		font-weight 700
+		text-transform uppercase
+		border 2px solid white
+		&--2
+			background-color transparent
+			color white
+			&:hover
+				background-color white
+				color #a3a4a6
+	&__form-link
+		line-height 50px
+		display inline-block
+		float left
+		font-size 18px
+		color white
+		text-decoration underline
+		margin-left 25px
+		&:hover
+			text-decoration none
+			color white
+
+.catalog
+	&--mobile
+		display none
+	&__list
+		display inline-block
+		float left
+		list-style none
+		padding 0
+		margin 0
+		&--66
+			width 66.5%
+		&--50
+			width 50%
+		&--33
+			width 33.3%
+		&--footer
+			.catalog__title
+				color #888
+				font-size 14px
+			.catalog__item
+				a
+					font-size 14px
+					color #888
+	&__title
+		font-size 17px
+		font-weight 700
+		color white
+		text-transform uppercase
+		margin 0 0 8px
+	&__item
+		font-size 16px
+		font-weight 300
+		color white
+		margin-bottom 5px
+		padding-right 10px
+		a
+			color white
+			text-decoration underline
+			&:hover
+				text-decoration none
+		&--50
+			display inline-block
+			width 50%
+			float left
+		&--mobile
+			margin-top 10px
+
+/*==============================
+	Section navigation
+==============================*/
+.section-navigation
+	position fixed
+	z-index 8
+	top 50%
+	right 86px
+	list-style none
+	padding 0
+	margin -83px 0 0
+	text-align right
+	&__item
+		margin-bottom 25px
+		&.active
+			a
+				color white
+				&:before
+					width 15px
+					height 15px
+					margin -7.5px 0 0 0
+					background-color #c30001
+		&:last-child
+			margin-bottom 0
+	&__link
+		position relative
+		font-weight 700
+		font-size 16px
+		text-transform uppercase
+		color rgba(white, .24)
+		letter-spacing .8px
+		&:hover
+			color white
+		&:before
+			content ''
+			position absolute
+			display block
+			width 0
+			height 0
+			border-radius 50%
+			background-color transparent
+			right -35px
+			top 50%
+			margin 0 7.5px 0 0
+			vendorize(transition, .4s ease)
+
+/*==============================
+	Search
+==============================*/
+.fixed-search
+	position fixed
+	display none
+	height 100%
+	width 100%
+	top 0
+	bottom 0
+	left 0
+	right 0
+	z-index 101
+	padding 0 50px
+	background-color rgba(0,0,0,.9)
+	overflow-y scroll
+	&__form
+		position relative
+		margin-top 100px
+		width 500px
+		height 50px
+		margin-bottom 70px
+	&__input
+		width 100%
+		height 50px
+		border 2px solid white
+		border-radius 25px
+		background-color rgba(0, 0, 0, .5)
+		font-size 16px
+		color white
+		padding-right 60px
+		padding-left 20px
+	&__button
+		position absolute
+		top 0
+		right 0
+		height 50px
+		width 60px
+		border-radius 25px
+	&__close
+		position absolute
+		top 20px
+		right 20px
+		img
+			width 30px
+			height 30px
+	&--open
+		display block
+
+.search
+	display inline-block
+	position relative
+	float left
+	margin-top 36px
+	margin-left 40px
+	height 42px
+	width 600px
+	border-radius 25px
+	overflow hidden
+	&__input
+		height 100%
+		width 100%
+		border none
+		background-color #e4e4e4
+		padding 0 50px 0 15px
+		color #aeaeae
+		font-size 14px
+		font-weight 300
+		letter-spacing .4px
+	&__button
+		position absolute
+		top 0
+		right 0
+		height 100%
+		width 50px
+		opacity .7
+		img
+			width 20px
+			height 20px
+		&:hover
+			opacity 1
+	::-webkit-input-placeholder
+		color #aeaeae
+		opacity 1
+	::-moz-placeholder
+		color #aeaeae
+		opacity 1
+	:-moz-placeholder
+		color #aeaeae
+		opacity 1
+	:-ms-input-placeholder
+		color #aeaeae
+		opacity 1
+
+/*==============================
+	Modal
+==============================*/
+.basic-modal
+	position relative
+	background-color white
+	padding 12px 15px
+	margin 0 auto
+	width 100%
+	&--registration
+	&--login
+		max-width 810px
+	&--call
+		max-width 480px
+		padding 12px 40px
+		.basic-modal__title
+			margin-top 30px
+			text-align center
+		.basic-modal__text
+			text-align center
+	&--preview
+		max-width 1000px
+		padding 30px 15px
+		.thumbnail-slider
+			margin-bottom 0
+		.lot-slider
+			margin-bottom 15px
+		.lot-slider .item iframe
+			height 370px
+	&__dismiss
+		position absolute
+		top 12px
+		right 15px
+		z-index 2
+	&__title
+		font-family 'ConstantiaBold'
+		color greentext
+		font-size 22px
+		text-transform uppercase
+		letter-spacing .4px
+		margin-bottom 25px
+		&--second
+			font-family 'Open Sans', sans-serif
+			font-weight 300
+			font-size 19px
+			text-transform none
+			letter-spacing .2px
+	&__text
+		color greentext
+		font-size 14px
+		line-height 20px
+		margin-bottom 20px
+	&__social
+		list-style none
+		padding 0
+		margin 30px 0
+	&__social-item
+		font-family 'Constantia'
+		color greentext
+		font-size 16px
+		line-height 24px
+		margin-bottom 15px
+		a
+			color greentext
+			&:hover
+				text-decoration underline
+		img
+			width 36px
+			height 36px
+			margin-right 20px
+		&:last-child
+			margin-bottom 0
+
+/*==============================
+	Content
+==============================*/
+.content-title
+	font-size 27px
+	font-family 'ConstantiaBold'
+	color #1a4318
+	margin-top 0
+	margin-bottom 45px
+
+.content-text
+	font-size 16px
+	color #1a4318
+	line-height 28px
+	letter-spacing .3px
+	margin-bottom 30px
+	&:last-child
+		margin-bottom 70px
+
+.content-img
+	width 100%
+	margin-bottom 30px
+
+.contacts-page
+	margin-bottom 150px
+	&__text
+		display block
+		font-size 18px
+		font-weight 700
+		color #518145
+		margin-bottom 30px
+	&__box
+		position relative
+		margin 40px 0
+		padding-bottom 40px
+		border-bottom 1px solid #e9e9e9
+		img
+			position absolute
+			top 4px
+			left 0
+			width 30px
+		&:last-child
+			margin 40px 0 0
+		&--phone
+			img
+				height 30px
+		&--mail
+			img
+				width 26px
+		&--basket
+			img
+				width 30px
+	&__box-title
+		font-size 18px
+		color #1a4318
+		font-weight 700
+		padding-left 40px
+		margin-bottom 5px
+		margin-top 0
+	&__box-text
+		color #1a4318
+		font-size 18px
+		font-weight 300
+		padding-left 40px
+		line-height 24px
+		margin-bottom 0
+		a
+			color #1a4318
+			&:hover
+				text-decoration underline
+
+.subscribe
+	display block
+	position relative
+	padding 34px 0
+	text-align center
+	background url('../img/subsribe-bg.jpg') no-repeat center center
+	&__text
+		display inline-block
+		color white
+		line-height 40px
+		height 40px
+		font-size 16px
+		text-transform uppercase
+		font-weight 300
+		span
+			font-weight 600
+	&__form
+		display inline-block
+		position relative
+		width 420px
+		margin-left 60px
+		border-radius 20px
+	&__input
+		height 40px
+		border none
+		color #2e3d31
+		font-size 16px
+		font-family 'Constantia'
+		width 100%
+		padding 0 160px 0 30px
+		border-radius 20px
+	&__button
+		position absolute
+		background-color #24491b
+		top 0
+		right -10px
+		width 160px
+		color white
+		font-size 14px
+		font-family 'Constantia'
+		text-transform uppercase
+		border-radius 0 20px 20px 0
+		height 40px
+	::-webkit-input-placeholder
+		color #2e3d31
+		opacity 1
+	::-moz-placeholder
+		color #2e3d31
+		opacity 1
+	:-moz-placeholder
+		color #2e3d31
+		opacity 1
+	:-ms-input-placeholder
+		color #2e3d31
+		opacity 1
+
+.footer-content
+	padding 50px 0 30px
+	background-color #f0f0f0
+	&__logo
+		margin-bottom 40px
+	&__phones
+		margin-bottom 30px
+		p
+			margin 0
+			font-size 19px
+			color #528145
+			span
+				color #133d11
+	&__mail
+		a
+			font-size 16px
+			color #133d11
+			&:hover
+				text-decoration underline
+	&__title
+		color #518145
+		font-size 14px
+		font-weight 700
+		text-transform uppercase
+		margin-top 0
+		margin-bottom 25px
+
+.footer
+	background-color #e4e4e4
+	line-height 80px
+	&__copyright
+		text-align right
+		font-size 14px
+		color #989898
+		letter-spacing .4px
+		a
+			color #989898
+			&:hover
+				text-decoration underline
+	&__social
+		list-style none
+		padding 0
+		margin 0
+	&__social-item
+		display inline-block
+		float left
+		margin-right 15px
+		img
+			width 36px
+			height 36px
+
+.auction-sort
+	margin-top 70px
+	z-index 1
+	position relative
+	&__slider
+		p
+			font-size 16px
+			color #518145
+			font-weight 700
+			text-transform uppercase
+			line-height 100%
+	.form__group
+		label
+			line-height 24px
+			color #000
+			padding-left 35px
+		&--title
+			border-bottom 1px solid #c0c0c0
+			padding-bottom 15px
+			label
+				font-size 16px
+				font-weight 700
+				text-transform uppercase
+				color #518145
+				line-height normal
+	&__list
+		list-style none
+		padding 0
+		margin 0 0 30px
+		.form__group
+			display inline-block
+			width 50%
+			float left
+			margin-bottom 6px
+	&__list-title
+		font-size 14px
+		color #888
+		font-weight 700
+		text-transform uppercase
+		margin-bottom 25px
+
+.auction-list
+	margin-top 97px
+	margin-bottom 70px
+	&__more
+		font-family 'Constantia'
+		display block
+		margin 0 auto
+		height 48px
+		background-color #e3e3e1
+		border-radius 25px
+		text-transform uppercase
+		font-size 18px
+		color #1a4318
+		letter-spacing .2px
+		padding 0 20px
+		img
+			width 30px
+			margin-right 10px
+
+.auction-item
+	border-bottom 1px solid #c0c0c0
+	margin-bottom 100px
+	position relative
+	&__title
+		position absolute
+		display block
+		bottom 100%
+		text-align center
+		color #1a4318
+		font-family 'Constantia'
+		font-size 16px
+		width 100%
+		letter-spacing .4px
+		a
+			color #1a4318
+			text-decoration underline
+			&:hover
+				text-decoration none
+	&__img
+		position relative
+		overflow hidden
+		margin-bottom 10px
+		img
+			width 100%
+		&:hover
+			.auction-item__img-mask
+				opacity 1
+	&__img-mask
+		position absolute
+		z-index 1
+		top 0
+		bottom 0
+		right 0
+		left 0
+		background-color rgba(#133d11, .89)
+		opacity 0
+		vendorize(transition,opacity .4s)
+		span
+			position absolute
+			width 180px
+			height 95px
+			top 50%
+			left 50%
+			margin -47.5px 0 0 -90px
+		a
+			display block
+			width 180px
+			color white
+			font-size 13px
+			font-weight 600
+			text-transform uppercase
+			margin 0 auto
+			text-align center
+			border 2px solid white
+			border-radius 40px
+			line-height 36px
+			&:hover
+				background-color white
+				color #1a4318
+			&:first-child
+				margin-bottom 15px
+	&__status
+		display block
+		width 100%
+		height 36px
+		background-color #ededed
+		text-align center
+		line-height 36px
+		font-size 13px
+		font-weight 700
+	&__countdown
+		color #c30001
+		img
+			margin-right 8px
+			width 18px
+			height 20px
+		.timer
+			.label-hh
+			.label-mm
+			.label-ss
+				display none
+			.label-dd
+				color #c30001
+				padding 0 1px 0 3px
+			.separator
+				padding 0 2px
+	&__sales
+		color #c30001
+		img
+			margin-right 5px
+			width 16px
+			height 13px
+	&__starting
+		color #518145
+		img
+			margin-right 5px
+			width 17px
+			height 13px
+	&__price
+		display block
+		height 70px
+		.price
+			display inline-block
+			float left
+			width 33.33%
+			margin-top 19px
+			font-size 11px
+			p
+				margin 0
+				display block
+			span
+				display inline-block
+				position relative
+				font-size 16px
+				font-weight 700
+				line-height 100%
+				&:after
+					content ''
+					position absolute
+					right -15px
+					top 3px
+					width 11px
+					height 11px
+			&--start
+				color #909c8f
+				span
+					&:after
+						background url('../img/icon/rub1.png')
+			&--current
+				color #1a4318
+				span
+					&:after
+						background url('../img/icon/rub2.png')
+			&--pre
+				width 66.33%
+				margin-top 0
+				line-height 70px
+				color #1a4318
+				font-size 12px
+				p
+					display inline-block
+				span
+					font-size 20px
+					&:after
+						width 14px
+						height 15px
+						background url('../img/icon/rub3.png')
+		.action
+			display inline-block
+			float left
+			width 33.33%
+			list-style none
+			padding 0
+			margin 15px 0 0
+			text-align right
+			li
+				display inline-block
+				img
+					width 40px
+					height 40px
+				&:last-child
+					margin-left 10px
+
+.feedback
+	margin-top 45px
+	margin-bottom 60px
+	&__title
+		font-family 'Constantia'
+		margin-top 0
+		margin-bottom 30px
+		color #518145
+		font-size 27px
+		font-weight 700
+		text-transform uppercase
+		span
+			display block
+			text-transform none
+			font-weight 400
+	&__phone
+		font-size 17px
+		font-weight 400
+		text-transform uppercase
+		letter-spacing .4px
+		color #1a4318
+		margin-bottom 20px
+		span
+			font-weight 700
+			font-size 22px
+			text-transform none
+			margin-left 5px
+	&__call
+		font-size 17px
+		font-weight 400
+		text-transform uppercase
+		letter-spacing .4px
+		color #1a4318
+		button
+			display inline-block
+			height 46px
+			color white
+			background-color #518145
+			text-transform uppercase
+			font-size 17px
+			padding 0 20px
+			border-radius 25px
+			margin-left 20px
+	&--popup
+		margin-bottom 0
+		margin-top 30px
+		.feedback__title
+			font-size 18px
+			margin-bottom 10px
+		.feedback__phone
+			font-size 13px
+			margin-bottom 15px
+			span
+				font-size 14px
+		.feedback__call
+			font-size 14px
+			button
+				font-size 14px
+				height 38px
+				padding 0 15px
+
+.faq-tabs
+	list-style none
+	margin-top 75px
+	margin-bottom 40px
+	padding 0
+	&__item
+		display block
+		a
+			display block
+			font-family 'Constantia'
+			border-top 1px solid #dad7d7
+			font-size 20px
+			color #1a4318
+			padding 14px 0 14px 25px
+		&:last-child
+			a
+				border-bottom 1px solid #dad7d7
+		&.active
+			a
+				background-color #ededed
+				color #a2a6a2
+			
+
+/*==============================
+	Form
+==============================*/
+.form
+	&__title
+		font-family 'ConstantiaBold'
+		color #57854c
+		font-size 22px
+		text-transform uppercase
+		letter-spacing .4px
+		margin-bottom 45px
+		margin-top 0
+	&__group
+		margin-bottom 20px
+	&__label
+		display block
+		width 100%
+		font-weight 400
+		font-size 14px
+		color greentext2
+	&__input
+		width 100%
+		height 44px
+		border-radius 5px
+		border 1px solid #d8d6d6
+		text-indent 15px
+		color greentext2
+	&__textarea
+		width 100%
+		border-radius 5px
+		border 1px solid #d8d6d6
+		color greentext2
+		resize none
+		padding 10px 15px
+		height 222px
+	&__select
+		width 100%
+		height 44px
+		border-radius 5px
+		border 1px solid #d8d6d6
+		-webkit-appearance none
+		-moz-appearance none
+		appearance none
+		padding-left 15px
+		color greentext2
+		background url('../img/icon/select.png') no-repeat center right #fff
+		background-position right 15px bottom 50%
+		cursor pointer
+	&--contacts
+		padding 35px 50px
+		background-color #f7f7f7
+		border 1px solid #d9d7d7
+		-webkit-box-shadow 0 0 7px rgba(0,0,0,.08)
+		box-shadow 0 0 7px rgba(0,0,0,.08)
+
+/*==============================
+	Lot
+==============================*/
+.thumbnail-wrap
+	position relative
+	margin-left -15px
+	margin-right -15px
+	z-index 1
+
+.lot-navigation
+	span
+		position absolute
+		z-index 9
+		top 50%
+		margin-top -25px
+		cursor pointer
+		opacity .8
+		&:hover
+			opacity 1
+	.next
+		right 25px
+	.prev
+		left 25px
+
+.lot-slider
+	margin-bottom 30px
+	.item
+		position relative
+		height 100%
+		overflow hidden
+		width 100%
+		img
+			width 100%
+			z-index 2
+		iframe
+			width 100%
+			height 500px
+		.data-image
+			position absolute
+			top 0
+			opacity 0
+			cursor none
+		a
+			display block
+			height 100%
+			width 100%
+
+.thumbnail-slider
+	position relative
+	margin-bottom 50px
+	z-index 4
+	.item
+		position relative
+		border 2px solid transparent
+		cursor pointer
+		margin 0 15px
+		img
+			width 100%
+		&--video
+			&:before
+				content ''
+				position absolute
+				display block
+				height 56px
+				width 56px
+				left 50%
+				top 50%
+				margin -27px 0 0 -27px
+				background url('../img/icon/thumbnail-play.png') no-repeat
+	.synced
+		.item
+			border-color #518145
+
+.lot-content
+	&__title
+		font-family 'ConstantiaBold'
+		font-size 27px
+		color #1a4318
+		margin-top 0
+		margin-bottom 30px
+		text-decoration underline
+		a
+			color #1a4318
+	.timer
+		margin-bottom 40px
+		position relative
+		z-index 1
+		.item
+			display inline-block
+			vertical-align bottom
+			position relative
+			font-size 43px
+			line-height 70px
+			text-align center
+			color #518145
+			font-weight 600
+			border-radius 5px
+			margin-right 40px
+			padding 0 10px
+			background-color white
+			border 1px solid #bfbfbf
+			-webkit-box-shadow 0 4px 1px rgba(0,0,0,.09)
+			box-shadow 0 4px 1px rgba(0,0,0,.09)
+			z-index 2
+			&:last-child
+				margin 0
+			&:before
+				content ''
+				position absolute
+				height 1px
+				left 0
+				right 0
+				background-color #bfbfbf
+				z-index 1
+				top 50%
+		.label-hh
+		.label-mm
+		.label-ss
+		.label-dd
+			position absolute
+			color #518145
+			padding 0
+			font-size 12px
+			color #a7a7a7
+			font-weight 400
+			left 0
+			right 0
+			width 100%
+			text-align center
+			bottom -25px
+			text-transform uppercase
+		.separator
+			display none
+	&__form
+		margin-top 70px
+		.form-group
+			display inline-block
+			float right
+			width 370px
+			background-color #e7e7e7
+			border-radius 5px
+			position relative
+			overflow hidden
+			height 44px
+	&__form-input
+		border none
+		height 44px
+		width 100%
+		background-color transparent
+		padding 0 160px 0 20px
+		color #518145
+	&__form-button
+		position absolute
+		height 44px
+		top 0
+		right 0
+		width 160px
+		background-color #1a4318
+		color white
+		font-weight 700
+		font-size 14px
+		text-transform uppercase
+		border-radius 0 5px 5px 0
+	&__price
+		position relative
+		display inline-block
+		float left
+		color #1a4318
+		p
+			margin 0
+			display block
+			font-size 15px
+			line-height 110%
+		span
+			display inline-block
+			position relative
+			font-size 24px
+			font-weight 700
+			line-height 100%
+			&:after
+				content ''
+				position absolute
+				right -17px
+				top 5px
+				width 14px
+				height 15px
+				background url('../img/icon/rub3.png')
+	::-webkit-input-placeholder
+		color #518145
+		opacity 1
+	::-moz-placeholder
+		color #518145
+		opacity 1
+	:-moz-placeholder
+		color #518145
+		opacity 1
+	:-ms-input-placeholder
+		color #518145
+		opacity 1
+	&__description
+		margin-top 50px
+		padding-bottom 40px
+		border-bottom 1px solid #c0c0c0
+		color #1a4318
+	&__description-title
+		font-weight 700
+		font-size 16px
+		font-weight 700
+		text-transform uppercase
+		margin-top 0
+		margin-bottom 15px
+	&__description-text
+		font-size 16px
+		line-height 28px
+		letter-spacing .4px
+		margin 0
+	&--popup
+		.lot-content__form
+			margin-top 50px
+			.form-group
+				float none
+				width 100%
+				max-width 370px
+				margin 0
+		.lot-content__price
+			margin-bottom 10px
+			p
+				display inline-block
+				margin-left 5px
+			span
+				margin-left 5px
+	
+.lot-title
+	font-family 'ConstantiaBold'
+	font-size 27px
+	color #1a4318
+	padding-bottom 30px
+	border-bottom 1px solid #c0c0c0
+	margin-bottom 50px
+	margin-top 0
+	text-transform uppercase
+	letter-spacing .2px
+
+.lot-text
+	color #1a4318
+	margin-bottom 50px
+	img
+		float left
+		max-width 55%
+		margin 0 30px 15px 0
+	&__title
+		font-size 27px
+		font-weight 700
+		margin-top 0
+		margin-bottom 30px
+		letter-spacing .4px
+	&__text
+		font-size 16px
+		line-height 28px
+		letter-spacing .4px
+		margin-bottom 15px
+
+/*==============================
+	Cabinet
+==============================*/
+.cabinet-navigation-wrap
+	position absolute
+	display block
+	right 0
+	width 25%
+	padding-left 16px
+	padding-right 16px
+	border-left 1px solid #dad7d7
+	background-color white
+	height 100vh
+	z-index 2
+
+.cabinet-navigation
+	display block
+	position relative
+	list-style none
+	margin 0
+	padding 0
+	top 0
+	width 100%
+	&__item
+		height 70px
+		position relative
+		a
+			position relative
+			font-family 'Constantia'
+			line-height 70px
+			font-size 20px
+			color #1a4318
+			height 70px
+			display block
+			vendorize(transition, 0s)
+			&:before
+			&:after
+				content ''
+				position absolute
+				height 69px
+				width 16px
+				top 0
+				display block
+				background-color transparent
+			&:before
+				left -16px
+			&:after
+				right -16px
+		img
+			width 30px
+			margin-right 15px
+			margin-top -4px
+		.active-img
+			display none
+		.default-img
+			display inline-block
+		&--user
+			color #57854c
+			font-size 14px
+			line-height 70px
+			margin-top 10px
+			margin-bottom 
+			text-decoration underline
+			img
+				width 25px
+		&:before
+			position absolute
+			content ''
+			bottom 0
+			height 1px
+			left -16px
+			right -16px
+			background-color #dad7d7
+	.active
+		background-color #1A4318
+		a
+			color white
+			&:before
+			&:after
+				background-color #1A4318
+		.active-img
+			display inline-block
+		.default-img
+			display none
+
+.cabinet
+	position relative
+	.content-title
+		margin-bottom 0
+	.auction-list
+		margin-top 50px
+	&__section
+		position relative
+		padding-top 70px
+		&--liked
+			background-color white
+			margin-bottom 0
+			.auction-list
+				margin-bottom 0
+		&--viewed
+			padding-top 0
+			background-color white
+		&--delivery
+			margin-bottom 55px
+		&--settings
+			margin-bottom 60px
+		&--before
+			&:before
+			&:after
+				content ''
+				position absolute
+				height 100%
+				top 0
+				background-color white
+				display block
+			&:before
+				width 50px
+				left -50px
+			&:after
+				width 32px
+				right -32px
+	&__title
+		font-size 16px
+		color #1a4318
+		font-weight 700
+		margin-top 0
+		margin-bottom 35px
+		text-transform uppercase
+	&__table
+		background-color white
+		margin 0
+		thead
+			background-color #f6f6f6
+			tr
+				th
+					font-size 15px
+					color #1a4318
+					font-weight 400
+					border-bottom 0
+					padding 8px 20px
+		tbody
+			position relative
+			tr
+				th
+					position relative
+					vertical-align middle
+					padding 20px
+					border-top 1px solid #dad7d7
+					img
+						width 180px
+					a
+						font-size 16px
+						font-weight 600
+						color #1a4318
+						text-decoration underline
+						display block
+						max-width 300px
+						&:hover
+							text-decoration none
+					.quantity
+						background-color #e4e4e4
+						font-size 16px
+						font-weight 600
+						color #1a4318
+						padding 4px 11px
+						border-radius 4px
+					.price
+						position relative
+						font-size 20px
+						font-weight 700
+						color #1a4318
+						&:after
+							content ''
+							position absolute
+							right -20px
+							top 7px
+							width 11px
+							height 11px
+							width 14px
+							height 15px
+							background url('../img/icon/rub3.png')
+					.delete
+						width 26px
+						height 26px
+						img
+							width 100%
+	&__table-mobile
+		display none
+		border 1px solid #dad7d7
+		background-color white
+		list-style none
+		padding 0
+		margin 0
+	&__table-mobile-item
+		padding 20px
+		border-bottom 1px solid #dad7d7
+		&:last-child
+			border-bottom 0
+		img
+			width 100%
+			max-width 300px
+		a
+			display block
+			font-size 16px
+			font-weight 600
+			color #1a4318
+			text-decoration underline
+			margin-top 10px
+			&:hover
+				text-decoration none
+		.box-wrap
+			display block
+			font-size 15px
+			color #1a4318
+			margin-top 15px
+			span
+				display inline-block
+		.quantity
+			background-color #e4e4e4
+			font-size 16px
+			font-weight 600
+			color #1a4318
+			padding 4px 11px
+			border-radius 4px
+			margin-left 10px
+		.price
+			position relative
+			font-size 20px
+			font-weight 700
+			color #1a4318
+			margin-left 10px
+			&:after
+				content ''
+				position absolute
+				right -20px
+				top 7px
+				width 11px
+				height 11px
+				width 14px
+				height 15px
+				background url('../img/icon/rub3.png')
+		.delete
+			margin-top 15px
+			text-decoration underline
+			font-size 15px
+			color #1a4318
+			&:hover
+				text-decoration none
+	&__result
+		background-color #57854c
+		color white
+		font-size 20px
+		text-transform uppercase
+		text-align right
+		font-weight 700
+		padding 30px 40px
+		.price
+			margin-left 10px
+			position relative
+			&:after
+				content ''
+				position absolute
+				right -20px
+				top 7px
+				width 11px
+				height 11px
+				width 14px
+				height 15px
+				background url('../img/icon/rub4.png')
+	&__form
+		background-color white
+		padding 40px 50px
+		border 1px solid #dad7d7
+		.form__textarea
+			height 133px
+		.change-password
+			display block
+			color #57854c
+			font-size 14px
+			text-decoration underline
+			margin-top 35px
+			&:hover
+				text-decoration none
