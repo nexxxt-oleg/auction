@@ -5,10 +5,10 @@ env | while read -r LINE; do
     IFS="=" read VAR VAL <<< ${LINE}
     if [[ "$VAR" = "env" ]]; then
         cp ./environments/$VAL/nginx.conf /etc/nginx/nginx.conf
-        /app/init --env=$VAL --overwrite=y
+#        /app/init --env=$VAL --overwrite=y
       if [[ "$VAL" = "dev" ]]; then
-        composer install --ignore-platform-reqs --no-interaction --no-scripts --prefer-dist
-#      echo "composer skip"
+#        composer install --ignore-platform-reqs --no-interaction --no-scripts --prefer-dist
+      echo "composer skip"
       fi
         chown -R www-data:www-data /app
     fi

@@ -9,10 +9,10 @@
 namespace app\components\shop;
 
 
-use yii\base\Object;
+use yii\base\BaseObject;
 use yz\shoppingcart\CartPositionInterface;
 
-class PositionContainer extends Object
+class PositionContainer extends BaseObject
 {
     /** @var CartPositionInterface[] */
     public $positions;

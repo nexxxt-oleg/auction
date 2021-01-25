@@ -97,9 +97,13 @@ $bc[] = $this->title;
                     <?php if($model->canDoBid()): ?>
                         <?php if(!$model->blitz_price || ($model->blitz_price && $model->curr_price < $model->blitz_price)):?>
                         <div class="form-group">
-                            <input class="lot-content__form-input" type="text" placeholder="Введите сумму ставки">
+
                             <?= \yii\helpers\Html::hiddenInput('good_id', $model->id, ['id' => 'good_id'])?>
                             <button class="lot-content__form-button">СДЕЛАТЬ СТАВКУ</button>
+                            <button class="lot-content__form-button">Предложить цену</button>
+                            <div class="lot-user-price--cont">
+                              <?= \yii\helpers\Html::hiddenInput('bid_value', $model->step, ['class' => 'lot-content__form-input'])?>
+                            </div>
                         </div>
                         <?php endif?>
                     <?php endif?>

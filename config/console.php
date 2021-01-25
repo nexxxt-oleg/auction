@@ -12,6 +12,11 @@ $config = [
     'language' => 'ru-RU',
     'sourceLanguage' => 'en-US',
     'controllerNamespace' => 'app\commands',
+    'controllerMap' => [
+        'migration' => [
+            'class' => 'bizley\migration\controllers\MigrationController',
+        ],
+    ],
     'components' => [
         'cache' => [
             'class' => 'yii\caching\FileCache',
@@ -27,7 +32,7 @@ $config = [
         'db' => $db,
         'authManager' => [
             'class' => 'yii\rbac\PhpManager',
-            'defaultRoles' => ['user','moder','admin'],
+            'defaultRoles' => ['user', 'moder', 'admin'],
             'itemFile' => '@app/components/rbac/items.php',
             'assignmentFile' => '@app/components/rbac/assignments.php',
             'ruleFile' => '@app/components/rbac/rules.php',

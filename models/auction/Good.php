@@ -30,13 +30,13 @@ use yz\shoppingcart\CartPositionInterface;
  * @property integer $type
  * @property integer $sell_rule
  * @property integer $add_time
+ * @property integer $step
  *
  * @property Bid[] $bids
  * @property Filter[] $filters
  * @property Bid $win_bid
  * @property Bid $max_bid
  * @property string $max_bid_user
- * @property integer $step
  * @property integer $curr_price
  * @property integer $user_bid
  * @property string $img_path
@@ -75,6 +75,32 @@ class Good extends \yii\db\ActiveRecord implements CartPositionInterface
 
     use MyCartPositionTrait;
 
+    /**
+     * @inheritdoc
+     */
+    public static function tableName()
+    {
+        return '{{%good}}';
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function rules()
+    {
+        return [
+            [['name', 'description', 'auction_id', 'category_id', 'start_price', 'accept_price', 'status'], 'required'],
+            [['auction_id', 'category_id', 'start_price', 'accept_price', 'end_price', 'curr_bid_id', 'win_bid_id', 'status', 'type',
+                'sell_rule', 'filter', 'mpc_price', 'blitz_price', 'step'], 'integer'],
+            [['step'], 'default', 'value' => $this->getDefaultStep()],
+            [['name',], 'string', 'max' => 255],
+            [['mainImage', 'extraImages', 'add_time'], 'safe'],
+            [['mainImage'], 'file', 'extensions' => ['png', 'jpg', 'gif']],
+            [['extraImages'], 'file', 'extensions' => ['png', 'jpg', 'gif'], 'maxFiles' => 0],
+            ['sell_rule', 'default', 'value' => static::SELL_RULE_ANY],
+        ];
+    }
+
     public function getPrice()
     {
         return (!Yii::$app->user->isGuest) ? $this->user_bid : $this->curr_price;
@@ -97,30 +123,37 @@ class Good extends \yii\db\ActiveRecord implements CartPositionInterface
         ];
     }
 
-    public static function arSellRule() {
+    public static function arSellRule()
+    {
         return [
             static::SELL_RULE_ANY => 'За любую цену',
             static::SELL_RULE_MIN => 'За минимальную цену',
             static::SELL_RULE_NO => 'Не продается',
         ];
     }
-    public static function printSellRule($i) {
+
+    public static function printSellRule($i)
+    {
         $arSellRule = static::arSellRule();
         return isset($arSellRule[$i]) ? $arSellRule[$i] : "Неизвестное правило ($i)";
     }
 
-    public static function arType() {
+    public static function arType()
+    {
         return [
             static::TYPE_COMMON => 'Обычный товар',
             static::TYPE_INDEX => 'Товар показывается на главной',
         ];
     }
-    public static function printType($i) {
+
+    public static function printType($i)
+    {
         $arType = static::arType();
         return isset($arType[$i]) ? $arType[$i] : "Неизвестный тип ($i)";
     }
 
-    public static function arStatus() {
+    public static function arStatus()
+    {
         return [
             static::STATUS_INIT => 'Не учавствовал в аукционе',
             static::STATUS_SOLD => 'Продано',
@@ -128,7 +161,9 @@ class Good extends \yii\db\ActiveRecord implements CartPositionInterface
             static::STATUS_SOLD_TO_ADMIN => 'Продано администратору',
         ];
     }
-    public static function printStatus($i) {
+
+    public static function printStatus($i)
+    {
         $arStatus = static::arStatus();
         return isset($arStatus[$i]) ? $arStatus[$i] : "Неизвестный статус ($i)";
     }
@@ -150,12 +185,13 @@ class Good extends \yii\db\ActiveRecord implements CartPositionInterface
         return $maxBid->user ? "{$maxBid->user->name} ({$maxBid->user->id})" : 'Не найден';
     }
 
-    public function getStep()
+    public function getDefaultStep()
     {
-        return intval($this->start_price*0.05);
+        return intval($this->start_price * 0.05);
     }
 
-    public function getCurr_price() {
+    public function getCurr_price()
+    {
         return $this->max_bid ? $this->max_bid->value : $this->start_price;
     }
 
@@ -180,11 +216,13 @@ class Good extends \yii\db\ActiveRecord implements CartPositionInterface
         return $this->hasOne(Bid::className(), ['id' => 'win_bid_id']);
     }
 
-    public function getUser_bid() {
+    public function getUser_bid()
+    {
         return $this->getBids()->where(['user_id' => Yii::$app->user->getId()])->max('value');
     }
 
-    public function getImg_path() {
+    public function getImg_path()
+    {
         if (file_exists(Yii::getAlias("@app/assets_b/img/lot/$this->id.jpg"))) {
             $path = "/assets_b/img/lot/$this->id.jpg";
         } elseif (file_exists(Yii::getAlias("@app/assets_b/img/lot/$this->id.JPG"))) {
@@ -195,52 +233,33 @@ class Good extends \yii\db\ActiveRecord implements CartPositionInterface
         return $path;
     }
 
-    public function getExtra_img_paths() {
+    public function getExtra_img_paths()
+    {
         $arFiles = [];
         if (is_dir(Yii::getAlias("@app/assets_b/img/lot/$this->id"))) {
             $arFiles = \yii\helpers\FileHelper::findFiles(Yii::getAlias("@app/assets_b/img/lot/$this->id"), ['only' => ['*.jpg', '*.JPG']]);
             foreach ($arFiles as &$file) {
-                $file = "/assets_b/img/lot/$this->id/".basename($file);
+                $file = "/assets_b/img/lot/$this->id/" . basename($file);
             }
         }
         return $arFiles;
     }
 
-    public function canDoBid() {
-        return $this->auction && $this->auction->active == \app\models\auction\Auction::ACTIVE_FLAG && !$this->win_bid_id &&
-        (!Yii::$app->user->isGuest && Yii::$app->user->identity->active == User::STATUS_ACTIVE);
+    public function canDoBid()
+    {
+        return $this->auction && $this->auction->active == \app\models\auction\Auction::ACTIVE_FLAG
+            && !$this->win_bid_id &&
+            (!Yii::$app->user->isGuest && Yii::$app->user->identity->active == User::STATUS_ACTIVE);
     }
 
-    public function getGood_viewed() {
+    public function getGood_viewed()
+    {
         return $this->hasMany(GoodViewed::className(), ['good_id' => 'id']);
     }
 
-    public function getGood_favorite() {
+    public function getGood_favorite()
+    {
         return $this->hasMany(GoodFavorite::className(), ['good_id' => 'id']);
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public static function tableName()
-    {
-        return '{{%good}}';
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function rules()
-    {
-        return [
-            [['name', 'description', 'auction_id', 'category_id', 'start_price', 'accept_price', 'status'], 'required'],
-            [['auction_id', 'category_id', 'start_price', 'accept_price', 'end_price', 'curr_bid_id', 'win_bid_id', 'status', 'type', 'sell_rule', 'filter', 'mpc_price', 'blitz_price', ], 'integer'],
-            [['name', ], 'string', 'max' => 255],
-            [['mainImage', 'extraImages', 'add_time'], 'safe'],
-            [['mainImage'], 'file', 'extensions' => ['png', 'jpg', 'gif']],
-            [['extraImages'], 'file', 'extensions' => ['png', 'jpg', 'gif'], 'maxFiles' => 0],
-            ['sell_rule', 'default', 'value' => static::SELL_RULE_ANY],
-        ];
     }
 
     /**
@@ -275,15 +294,16 @@ class Good extends \yii\db\ActiveRecord implements CartPositionInterface
         ];
     }
 
-    public function uploadImages() {
+    public function uploadImages()
+    {
         if (!is_dir(Yii::getAlias("@app/assets_b/img/lot/$this->id"))) {
             mkdir(Yii::getAlias("@app/assets_b/img/lot/$this->id"));
         }
-        if($this->mainImage) {
+        if ($this->mainImage) {
             $this->mainImage->saveAs(Yii::getAlias("@app/assets_b/img/lot/$this->id.{$this->mainImage->extension}"));
         }
         foreach ($this->extraImages as $file) {
-            $path = Yii::getAlias("@app/assets_b/img/lot/$this->id")."/$file->name";
+            $path = Yii::getAlias("@app/assets_b/img/lot/$this->id") . "/$file->name";
             $file->saveAs($path);
         }
 

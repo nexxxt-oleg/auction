@@ -17,6 +17,7 @@ use app\modules\admin\models\RobotInterval;
 use app\models\auction\Bid;
 use app\models\auction\Good;
 use app\models\auction\GoodFavorite;
+use Yii;
 use yii\filters\AccessControl;
 use yii\helpers\Html;
 use yii\web\Controller;
@@ -46,33 +47,36 @@ class BasketController extends Controller {
     }
 
     public function actionBid() {
-        \Yii::$app->response->format = Response::FORMAT_JSON;
+        Yii::$app->response->format = Response::FORMAT_JSON;
         $out = new MessageStatus();
-        if (\Yii::$app->request->post('bidValue') && \Yii::$app->request->post('goodId')) {
+        if (Yii::$app->request->post('goodId')) {
             /** @var Good $goodModel */
-            $goodModel = Good::findOne(\Yii::$app->request->post('goodId'));
+            $goodModel = Good::findOne(Yii::$app->request->post('goodId'));
             if (!$goodModel) {
-                $out->setFalse('Не найден лот '.\Yii::$app->request->post('goodId'));
+                $out->setFalse('Не найден лот '. Yii::$app->request->post('goodId'));
                 return $out;
             }
-            if (\Yii::$app->request->post('bidValue') < ($goodModel->start_price + $goodModel->step)) {
+            $goodModel->validate();
+            $goodPrice = $goodModel->curr_price ?: $goodModel->start_price;
+            $bidVal = $goodPrice + $goodModel->step;
+            if ($bidVal < ($goodModel->start_price + $goodModel->step)) {
                 $out->setFalse('Минимальная ставка должна быть равна '.($goodModel->start_price + $goodModel->step).' или больше');
                 return $out;
             }
             $maxBid = $goodModel->curr_price;
-            if ($maxBid && !(\Yii::$app->request->post('bidValue') >= $maxBid + $goodModel->step)) {
+            if ($maxBid && !($bidVal >= $maxBid + $goodModel->step)) {
                 $out->setFalse('Минимальная ставка должна быть равна '.($maxBid + $goodModel->step).' или больше');
                 return $out;
             }
 
             $bidModel = new Bid();
-            $bidModel->value = \Yii::$app->request->post('bidValue');
-            $bidModel->user_id = \Yii::$app->user->identity->getId();
-            $bidModel->good_id = \Yii::$app->request->post('goodId');
+            $bidModel->value = $bidVal;
+            $bidModel->user_id = Yii::$app->user->identity->getId();
+            $bidModel->good_id = Yii::$app->request->post('goodId');
             if ($bidModel->save()) {
                 $cart = new MyShoppingCart();
                 $cart->put($goodModel);
-                $out->data = ['countCart' => $cart->getCount()];
+                $out->data = ['countCart' => $cart->getCount(), 'bidVal' => $bidVal];
 
                 if(!$goodRobot = GoodRobot::findOne(['good_id' => $bidModel->good_id])) {
                     $goodRobot = new GoodRobot();
@@ -91,7 +95,7 @@ class BasketController extends Controller {
                 $out->setFalse(Html::errorSummary($bidModel));
             }
         } else {
-            $out->setFalse('Не найдены обязательные параметры bidValue и goodId');
+            $out->setFalse('Не найден обязательный параметр goodId');
         }
 
         return $out;
@@ -99,15 +103,15 @@ class BasketController extends Controller {
 
     public function actionFavorite() {
         $out = new MessageStatus();
-        \Yii::$app->response->format = Response::FORMAT_JSON;
-        if(\Yii::$app->request->post('goodId')) {
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        if(Yii::$app->request->post('goodId')) {
             /** @var Good $good */
-            if (!$good = Good::findOne(\Yii::$app->request->post('goodId'))) {
-                $out->setFalse("В бд не найден good ".\Yii::$app->request->post('goodId'));
+            if (!$good = Good::findOne(Yii::$app->request->post('goodId'))) {
+                $out->setFalse("В бд не найден good ". Yii::$app->request->post('goodId'));
                 return $out;
             }
             $cart = new MyShoppingCart();
-            if (\Yii::$app->request->post('action') == 'remove') {
+            if (Yii::$app->request->post('action') == 'remove') {
                 $cart->removeFavorite($good);
                 $out->setTrue("$good->name изъят из избранного");
             } else {

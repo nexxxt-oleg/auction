@@ -69,7 +69,7 @@ use \app\models\auction\Auction;
                     </div>
                     <?php if($model->canDoBid() && false ): // todo: !!!!!!?>
                     <div class="form-group">
-                        <input class="lot-content__form-input" type="text" placeholder="Введите сумму ставки">
+                        <?= \yii\helpers\Html::hiddenInput('bid_value', $model->step, ['class' => 'lot-content__form-input'])?>
                         <?= \yii\helpers\Html::hiddenInput('good_id', $model->id, ['id' => 'good_id'])?>
                         <button  type="button" class="lot-content__form-button">СДЕЛАТЬ СТАВКУ</button>
                     </div>
