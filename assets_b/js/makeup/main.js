@@ -240,33 +240,6 @@ $(document).ready(function () {
 
 	// good list actions
 	var body = $('body');
-	body.on('click', '.lot-content__form-button', function() {
-		var bidValue = $('.lot-content__form-input').val();
-		var btn = $(this);
-		$.ajax({
-			url: '/basket/bid',
-			type: 'post',
-			data: {
-				bidValue: bidValue,
-				goodId: $('#good_id').val()
-			},
-			beforeSend: function() {btn.prop('disabled', true);},
-			success: function(outMsg){
-				if (outMsg.status == true) {
-					$('#curr_price').text(bidValue);
-					$('.action-button__link--basket span').text(outMsg.data.countCart);
-					toastr.success(data.msg);
-				} else {
-					toastr.error(data.msgError);
-				}
-
-			},
-			error: function (xhr, textStatus, e) {
-				alert(textStatus);
-			}
-			,complete: function() {btn.prop('disabled', false);}
-		});
-	});
 
 	body.on('click', '.to-favorite a', function(ev) {
 		var btn = $(this);

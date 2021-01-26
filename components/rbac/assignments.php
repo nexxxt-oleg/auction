@@ -1,4 +1,5 @@
 <?php
+
 return [
     1 => [
         'admin',
@@ -163,6 +164,9 @@ return [
         'user',
     ],
     68 => [
+        'user',
+    ],
+    134 => [
         'user',
     ],
 ];

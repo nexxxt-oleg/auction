@@ -52,7 +52,7 @@ use \app\models\auction\Auction;
                 <h2 class="lot-content__title"><a href="<?= Yii::$app->urlManager->createAbsoluteUrl(['/good', 'id' => $model->id]) ?>"><?= $model->name ?></a></h2>
                 <time class="timer" datetime="<?= Yii::$app->formatter->asDate($model->auction->start_date, 'php:Y-m-d')."T".Yii::$app->formatter->asDate($model->auction->start_date, 'php:H:i:s')?>+0300"></time>
 
-                <form action="#" class="lot-content__form clearfix">
+                <div class="lot-content__form clearfix">
                     <div class="lot-content__price">
                         <?php if ($model->auction->active == Auction::PAST_FLAG):?>
                             <?php if($model->win_bid_id):?>
@@ -71,10 +71,10 @@ use \app\models\auction\Auction;
                     <div class="form-group">
                         <?= \yii\helpers\Html::hiddenInput('bid_value', $model->step, ['class' => 'lot-content__form-input'])?>
                         <?= \yii\helpers\Html::hiddenInput('good_id', $model->id, ['id' => 'good_id'])?>
-                        <button  type="button" class="lot-content__form-button">СДЕЛАТЬ СТАВКУ</button>
+                        <button type="button" id="make-bid" class="lot-content__form-button">СДЕЛАТЬ СТАВКУ</button>
                     </div>
                     <?php endif?>
-                </form>
+                </div>
 
                 <div class="feedback feedback--popup">
                     <h6 class="feedback__title">Если вы хотите купить <span>подобный лот?</span></h6>

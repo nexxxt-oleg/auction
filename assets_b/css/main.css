@@ -1953,10 +1953,10 @@ button.mfp-arrow-right {
   text-transform: uppercase;
   border-radius: 0 5px 5px 0;
 }
-.lot-user-price--cont {
-  display: none;
+.offer-price {
+  display: flex;
+  justify-content:start;
 }
-
 .lot-content__price {
   position: relative;
   display: inline-block;

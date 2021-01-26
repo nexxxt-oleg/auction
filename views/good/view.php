@@ -71,7 +71,7 @@ $bc[] = $this->title;
                     <?php endif?>
                 <?php endif?>
 
-                <form action="#" class="lot-content__form clearfix">
+                <div class="lot-content__form clearfix">
                     <div class="lot-content__price">
                         <div>
                             <p id="price-name"><?= $model->win_bid_id ? 'Цена покупки' : ($model->max_bid ? 'Последняя ставка' : 'Стартовая цена')?>:</p>
@@ -97,17 +97,13 @@ $bc[] = $this->title;
                     <?php if($model->canDoBid()): ?>
                         <?php if(!$model->blitz_price || ($model->blitz_price && $model->curr_price < $model->blitz_price)):?>
                         <div class="form-group">
-
                             <?= \yii\helpers\Html::hiddenInput('good_id', $model->id, ['id' => 'good_id'])?>
-                            <button class="lot-content__form-button">СДЕЛАТЬ СТАВКУ</button>
-                            <button class="lot-content__form-button">Предложить цену</button>
-                            <div class="lot-user-price--cont">
-                              <?= \yii\helpers\Html::hiddenInput('bid_value', $model->step, ['class' => 'lot-content__form-input'])?>
-                            </div>
+                            <button id="make-bid" class="lot-content__form-button">СДЕЛАТЬ СТАВКУ</button>
                         </div>
                         <?php endif?>
+
                     <?php endif?>
-                </form>
+                </div>
                 <?php if ($model->blitz_price && $model->auction->active == \app\models\auction\Auction::ACTIVE_FLAG):?>
                     <?php if($model->curr_price >= $model->blitz_price):?>
                     <div class="feedback__call" style="margin-top: 20px;">
@@ -119,6 +115,13 @@ $bc[] = $this->title;
                     </div>
                     <?php endif?>
                 <?php endif?>
+
+                <?php if($model->canDoBid()): ?>
+                <div class="offer-price">
+                <?= \yii\helpers\Html::textInput('bid_value', $model->step, ['class' => 'lot-content__form-input', 'id' => 'bid-value'])?>
+                    <button id="offer-price" class="lot-content__form-button">Предложить цену</button>
+                </div>
+                <?php endif;?>
 
                 <div class="lot-content__description">
                     <h5 class="lot-content__description-title">

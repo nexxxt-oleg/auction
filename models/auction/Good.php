@@ -252,6 +252,13 @@ class Good extends \yii\db\ActiveRecord implements CartPositionInterface
             (!Yii::$app->user->isGuest && Yii::$app->user->identity->active == User::STATUS_ACTIVE);
     }
 
+    public function getNextBidVal()
+    {
+        $goodPrice = $this->curr_price ?: $this->start_price;
+        $step = $this->step ?: $this->getDefaultStep();
+        return round($goodPrice + $step, -2);
+    }
+
     public function getGood_viewed()
     {
         return $this->hasMany(GoodViewed::className(), ['good_id' => 'id']);
