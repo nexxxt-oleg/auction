@@ -1,12 +1,12 @@
 <?php
 
-use yii\helpers\FileHelper;
-use \yii\helpers\Url;
-use \app\models\auction\Auction;
+use app\assets_b\GoodViewAsset;use app\models\auction\Good;use yii\helpers\ArrayHelper;use yii\helpers\FileHelper;
+use yii\helpers\Html;use \yii\helpers\Url;
+use \app\models\auction\Auction;use yii\widgets\Breadcrumbs;
 
 /* @var $this yii\web\View */
-/** @var  $model \app\models\auction\Good */
-\app\assets_b\GoodViewAsset::register($this);
+/** @var  $model Good */
+GoodViewAsset::register($this);
 $this->title = $model->name;
 $auLink = ['label' => 'Аукционы', 'url' => Url::previous()];
 $auLink['url'] = ($auLink['url'] == "/" ?  Url::to(['good/index']) : $auLink['url']);
@@ -16,7 +16,7 @@ $bc[] = $this->title;
 <div class="container-fluid">
     <div class="row">
         <div class="col-xs-12">
-            <?= \yii\widgets\Breadcrumbs::widget(['links' => $bc]);?>
+            <?= Breadcrumbs::widget(['links' => $bc]);?>
         </div>
     </div>
 
@@ -74,6 +74,19 @@ $bc[] = $this->title;
                 <div class="lot-content__form clearfix">
                     <div class="lot-content__price">
                         <div>
+                        <?php if ($model->auction->active == Auction::ACTIVE_FLAG):?>
+                            <?php if ($model->max_bid->user_id == Yii::$app->user->id):?>
+                              <p>Ваша ставка является максимальной</p>
+                            <?php elseif (in_array(Yii::$app->user->id, ArrayHelper::getColumn($model->bids, 'user_id'))):?>
+                              <p>Ваша ставка не является максимальной</p>
+                            <?php endif;?>
+                        <?php elseif ($model->auction->active == Auction::PAST_FLAG):?>
+                            <?php if ($model->win_bid->user_id == Yii::$app->user->id):?>
+                                <p>Ваша ставка победила</p>
+                            <?php else:?>
+                                <p>Вашу ставку перебили</p>
+                            <?php endif;?>
+                        <?php endif;?>
                             <p id="price-name"><?= $model->win_bid_id ? 'Цена покупки' : ($model->max_bid ? 'Последняя ставка' : 'Стартовая цена')?>:</p>
                             <span id="curr_price"><?= $model->win_bid_id ? Yii::$app->formatter->asDecimal($model->win_bid->value) : Yii::$app->formatter->asDecimal($model->curr_price) ?></span>
                         </div>
@@ -97,14 +110,14 @@ $bc[] = $this->title;
                     <?php if($model->canDoBid()): ?>
                         <?php if(!$model->blitz_price || ($model->blitz_price && $model->curr_price < $model->blitz_price)):?>
                         <div class="form-group">
-                            <?= \yii\helpers\Html::hiddenInput('good_id', $model->id, ['id' => 'good_id'])?>
+                            <?= Html::hiddenInput('good_id', $model->id, ['id' => 'good_id'])?>
                             <button id="make-bid" class="lot-content__form-button">СДЕЛАТЬ СТАВКУ</button>
                         </div>
                         <?php endif?>
 
                     <?php endif?>
                 </div>
-                <?php if ($model->blitz_price && $model->auction->active == \app\models\auction\Auction::ACTIVE_FLAG):?>
+                <?php if ($model->blitz_price && $model->auction->active == Auction::ACTIVE_FLAG):?>
                     <?php if($model->curr_price >= $model->blitz_price):?>
                     <div class="feedback__call" style="margin-top: 20px;">
                         <p>Предложена блитц цена</p>
@@ -118,7 +131,7 @@ $bc[] = $this->title;
 
                 <?php if($model->canDoBid()): ?>
                 <div class="offer-price">
-                <?= \yii\helpers\Html::textInput('bid_value', $model->step, ['class' => 'lot-content__form-input', 'id' => 'bid-value'])?>
+                <?= Html::textInput('bid_value', null, ['class' => 'lot-content__form-input', 'id' => 'bid-value'])?>
                     <button id="offer-price" class="lot-content__form-button">Предложить цену</button>
                 </div>
                 <?php endif;?>

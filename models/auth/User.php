@@ -5,6 +5,7 @@ namespace app\models\auth;
 use app\components\CommonHelper;
 use app\models\auction\Bid;
 use app\models\Mail;
+use app\models\MailForm;
 use Yii;
 use yii\base\NotSupportedException;
 use yii\db\ActiveRecord;
@@ -245,13 +246,16 @@ class User extends ActiveRecord implements IdentityInterface
                 ->setSubject($subject )
                 ->send();
 
-            $mailModel = new Mail();
-            $mailModel->type = Mail::TYPE_NEW_USER;
-            $mailModel->user_id = $this->getId();
-            $mailModel->user_name = $this->name;
-            $mailModel->subject = $subject;
-            $mailModel->body =  \Yii::$app->mailer->render('newUserWarstory', ['user' => $this, 'password' => $password]);
-            if (!$mailModel->save()) {return false;}
+            $mailForm = new MailForm([
+                'mailType' => Mail::TYPE_NEW_USER,
+                'userId' => $this->getId(),
+                'subject' => $subject,
+                'body' => \Yii::$app->mailer->render('newUserWarstory', ['user' => $this, 'password' => $password]),
+            ]);
+            if ($mailForm->validate()) {
+                return $mailForm->run();
+            }
+
             return $message;
         }
         return false;

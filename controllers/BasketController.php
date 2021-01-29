@@ -37,7 +37,7 @@ class BasketController extends Controller {
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions'=>['addToCart', 'bid', 'favorite'],
+                        'actions'=>['addToCart', 'bid', 'favorite', 'offer'],
                         'roles' => ['user'],
                     ],
                     [
@@ -87,7 +87,7 @@ class BasketController extends Controller {
     public function actionOffer()
     {
         Yii::$app->response->format = Response::FORMAT_JSON;
-        $form = new OfferPriceForm();
+        $form = new OfferPriceForm(['userId' => Yii::$app->user->identity->getId()]);
         $form->load(Yii::$app->request->post(), '');
         if ($form->validate()) {
             $out = $form->run();

@@ -86,10 +86,10 @@ class ContactForm extends Model
 
     /**
      * Sends an email to the specified email address using the information collected by this model.
-     * @param  string $toEmail the target email address
+     * @param  string $fromEmail the target email address
      * @return boolean whether the model passes validation
      */
-    public function contact($toEmail)
+    public function contact($fromEmail)
     {
         if (!$this->type) {
             $this->type = self::TYPE_COMMON;
@@ -119,7 +119,7 @@ class ContactForm extends Model
                     $this->body .= "Текст отзыва: \n---$this->body\n---\n";
                     break;
                 case self::TYPE_CALLBACK:
-                    $this->email = $toEmail;
+                    $this->email = $fromEmail;
                     $this->subject = "Заявка на обратный звонок от $this->phone";
                     $this->body = "Поступила заявка на обратный звонок от $this->phone.\n";
                     $this->body .= "Телефон: $this->phone.\n";
@@ -129,23 +129,21 @@ class ContactForm extends Model
 
             Yii::$app->mailer->compose()
                 ->setTo($this->email)
-                ->setFrom([$toEmail => Yii::$app->name])
+                ->setFrom([$fromEmail => Yii::$app->name])
                 ->setSubject($this->subject)
                 ->setTextBody($this->body)
                 ->send();
 
-            $mailModel = new Mail();
-            $mailModel->type = Mail::TYPE_CONTACT_FORM;
-            /** @var User $user */
-            if($user = Yii::$app->user->identity) {
-                $mailModel->user_id = $user->getId();
-                $mailModel->user_name = $user->name;
+            $mailForm = new MailForm([
+                'mailType' => Mail::TYPE_CONTACT_FORM,
+                'userId' => Yii::$app->user->identity->getId(),
+                'subject' => $this->subject,
+                'body' => $this->body,
+            ]);
+            if ($mailForm->validate()) {
+                return $mailForm->run();
             }
 
-            $mailModel->subject = $this->subject;
-            $mailModel->body = $this->body;
-            if (!$mailModel->save()) {return false;}
-            return true;
         }
 
         return false;

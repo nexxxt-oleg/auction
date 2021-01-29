@@ -26,6 +26,9 @@ class Mail extends \yii\db\ActiveRecord
     const TYPE_OTHER = 5;
     const TYPE_SUBSCRIBE = 6;
     const TYPE_SYSTEM_LOG = 7;
+    const TYPE_OUTBID = 8;
+    const TYPE_MAXBID = 9;
+    const TYPE_WINBID = 10;
 
     public static function arType() {
         return [
@@ -36,6 +39,9 @@ class Mail extends \yii\db\ActiveRecord
             static::TYPE_OTHER => 'Другое',
             static::TYPE_SUBSCRIBE => 'Подписка',
             static::TYPE_SYSTEM_LOG => 'Системные сообщения',
+            static::TYPE_OUTBID => 'Ставка перебита',
+            static::TYPE_MAXBID => 'Ставка является максимальной',
+            static::TYPE_WINBID => 'Ставка победила в аукционе',
         ];
     }
     public static function printType($i) {

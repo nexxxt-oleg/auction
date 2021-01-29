@@ -8,6 +8,8 @@ use app\models\auction\Bid;
 use app\models\auction\Good;
 use app\models\auction\GoodCart;
 use app\models\Mail;
+use app\models\MailForm;
+use app\models\WinbidMailForm;
 use Yii;
 use yii\console\Controller;
 
@@ -100,14 +102,20 @@ class AuctionController extends Controller {
                                 ->setTextBody($body)
                                 ->send();
 
-                            $mailModel = new Mail();
-                            $mailModel->user_id = 1;
-                            $mailModel->user_name = 'admin';
-                            $mailModel->type = Mail::TYPE_GOOD_SOLD;
+                            $mailForm = new MailForm([
+                                'mailType' => Mail::TYPE_GOOD_SOLD,
+                                'userId' => 1,
+                                'subject' => $subject,
+                                'body' => $body,
+                            ]);
+                            if ($mailForm->validate()) {
+                                $mailForm->run();
+                            }
 
-                            $mailModel->subject = $subject;
-                            $mailModel->body = $body;
-                            $mailModel->save();
+                            $winBidMailForm = new WinbidMailForm(['bidId' => $good->win_bid_id]);
+                            if ($winBidMailForm->validate()) {
+                                $winBidMailForm->run();
+                            }
                         }
 
 

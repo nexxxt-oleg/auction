@@ -6,6 +6,7 @@
  */
 
 namespace app\components;
+use app\models\MailForm;
 use Yii;
 use app\models\Mail;
 use yii\db\ActiveRecord;
@@ -43,11 +44,14 @@ class CommonHelper
     }
 
     public static function mail_log ($subj, $body) {
-        $mail = new Mail();
-        $mail->type = Mail::TYPE_SYSTEM_LOG;
-        $mail->subject = $subj;
-        $mail->body = $body;
-        $mail->save();
+        $mailForm = new MailForm([
+            'mailType' => Mail::TYPE_SYSTEM_LOG,
+            'subject' => $subj,
+            'body' => $body,
+        ]);
+        if ($mailForm->validate()) {
+            $mailForm->run();
+        }
     }
 
     /**

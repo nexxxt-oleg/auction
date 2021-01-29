@@ -18,7 +18,7 @@ $(function() {
                     $('#curr_price').text(outMsg.bidVal);
                     $('#price-name').text('Текущая цена:');
                     $('.action-button__link--basket span').text(outMsg.data.countCart);
-                    toastr.success(outMsg.msg);
+                    toastr.success(outMsg.msg, null, { onHidden: () => { window.location.reload() }});
                 } else {
                     toastr.error(outMsg.msgError);
                 }
@@ -47,14 +47,13 @@ $(function() {
                     $('#curr_price').text(outMsg.bidVal);
                     $('#price-name').text('Текущая цена:');
                     $('.action-button__link--basket span').text(outMsg.data.countCart);
-                    toastr.success(outMsg.msg);
+                    toastr.success(outMsg.msg, null, { onHidden: () => { window.location.reload() }});
                 } else {
                     toastr.error(outMsg.msgError);
                 }
 
             },
             error: function (xhr, textStatus, e) {
-                debugger
                 toastr.error(textStatus);
             },
             complete: function() {btn.prop('disabled', false);}

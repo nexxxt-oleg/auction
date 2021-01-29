@@ -166,6 +166,7 @@ $positionsCont = $cart->getPositions();
 
             <div class="cabinet__section cabinet__section--delivery">
                 <h3 class="cabinet__title">оформить доставку ваших лотов</h3>
+                <span>Доставка осуществляется только после окончания аукциона при условии Вашей победы в нем</span>
 
                 <?php $form = \yii\bootstrap\ActiveForm::begin([
                     'options' => ['class' => 'form cabinet__form'],

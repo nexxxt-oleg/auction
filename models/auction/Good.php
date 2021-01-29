@@ -7,7 +7,6 @@ use app\models\auth\User;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\db\Expression;
-use yii\helpers\FileHelper;
 use yii\web\UploadedFile;
 use yz\shoppingcart\CartPositionInterface;
 
@@ -256,7 +255,7 @@ class Good extends \yii\db\ActiveRecord implements CartPositionInterface
     {
         $goodPrice = $this->curr_price ?: $this->start_price;
         $step = $this->step ?: $this->getDefaultStep();
-        return round($goodPrice + $step, -2);
+        return round($goodPrice + $step + 5, -1);
     }
 
     public function getGood_viewed()

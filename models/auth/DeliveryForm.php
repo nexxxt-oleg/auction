@@ -1,6 +1,7 @@
 <?php
 namespace app\models\auth;
 use app\models\Mail;
+use app\models\MailForm;
 use yii\base\Model;
 use Yii;
 use yii\bootstrap\Html;
@@ -67,17 +68,17 @@ class DeliveryForm extends Model
                 ->setTextBody("Оформлена доставка. Параметры:\n".$attributesStr)
                 ->send();
 
-            $mailModel = new Mail();
-            $mailModel->type = Mail::TYPE_DELIVERY;
-            /** @var User $user */
-            if($user = Yii::$app->user->identity) {
-                $mailModel->user_id = $user->getId();
-                $mailModel->user_name = $user->name;
+            $mailForm = new MailForm([
+                'mailType' => Mail::TYPE_DELIVERY,
+                'userId' => Yii::$app->user->identity->getId(),
+                'subject' => $subject,
+                'body' => $body,
+            ]);
+            if ($mailForm->validate()) {
+                return $mailForm->run();
             }
-            $mailModel->subject = $subject;
-            $mailModel->body = $body;
-            if (!$mailModel->save()) {return false;}
-            return true;
-        } else {return false;}
+
+        }
+        return false;
     }
 }
