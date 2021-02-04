@@ -254,8 +254,24 @@ class Good extends \yii\db\ActiveRecord implements CartPositionInterface
     public function getNextBidVal()
     {
         $goodPrice = $this->curr_price ?: $this->start_price;
-        $step = $this->step ?: $this->getDefaultStep();
-        return round($goodPrice + $step + 5, -1);
+        return round($goodPrice + $this->calculateStep() + 5, -1);
+    }
+
+    public function calculateStep()
+    {
+        return $this->step ?: $this->getDefaultStep();
+    }
+
+    public function getAvaibleBidVals($count = 1)
+    {
+        $out = [];
+        $goodPrice = $this->curr_price ?: $this->start_price;
+
+        for ($i = 0; $i < $count; $i++) {
+            $goodPrice = round($goodPrice + $this->calculateStep() + 5, -1);
+            $out[$goodPrice] = $goodPrice;
+        }
+        return $out;
     }
 
     public function getGood_viewed()

@@ -1,12 +1,13 @@
 <?php
 
-use app\assets_b\GoodViewAsset;use app\models\auction\Good;use yii\helpers\ArrayHelper;use yii\helpers\FileHelper;
+use app\assets_b\GoodViewAsset;use app\models\auction\Good;use kartik\widgets\Select2;use yii\helpers\ArrayHelper;use yii\helpers\FileHelper;
 use yii\helpers\Html;use \yii\helpers\Url;
 use \app\models\auction\Auction;use yii\widgets\Breadcrumbs;
 
 /* @var $this yii\web\View */
 /** @var  $model Good */
 GoodViewAsset::register($this);
+\kartik\select2\Select2Asset::register($this);
 $this->title = $model->name;
 $auLink = ['label' => 'Аукционы', 'url' => Url::previous()];
 $auLink['url'] = ($auLink['url'] == "/" ?  Url::to(['good/index']) : $auLink['url']);
@@ -109,9 +110,22 @@ $bc[] = $this->title;
 
                     <?php if($model->canDoBid()): ?>
                         <?php if(!$model->blitz_price || ($model->blitz_price && $model->curr_price < $model->blitz_price)):?>
-                        <div class="form-group">
-                            <?= Html::hiddenInput('good_id', $model->id, ['id' => 'good_id'])?>
-                            <button id="make-bid" class="lot-content__form-button">СДЕЛАТЬ СТАВКУ</button>
+                        <?= Html::hiddenInput('good_id', $model->id, ['id' => 'good_id'])?>
+                        <?= Html::hiddenInput('step', $model->calculateStep(), ['id' => 'bid-step'])?>
+                        <div class="offer-price">
+                            <?= Html::dropDownList('bid_value', $model->getNextBidVal(), $model->getAvaibleBidVals(), [
+                              'class' => '',
+                              'id' => 'bid-value',
+                            ])?>
+                            <div class="btn-group-vertical" role="group" aria-label="...">
+                              <button type="button" class="btn btn-default btn-xs" id="bid-up">
+                                <span class="glyphicon glyphicon-menu-up" aria-hidden="true"></span>
+                              </button>
+                              <button type="button" class="btn btn-default btn-xs" id="bid-down">
+                                <span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span>
+                              </button>
+                            </div>
+                            <button id="offer-price" class="lot-content__form-button">СДЕЛАТЬ СТАВКУ</button>
                         </div>
                         <?php endif?>
 
@@ -130,10 +144,7 @@ $bc[] = $this->title;
                 <?php endif?>
 
                 <?php if($model->canDoBid()): ?>
-                <div class="offer-price">
-                <?= Html::textInput('bid_value', null, ['class' => 'lot-content__form-input', 'id' => 'bid-value'])?>
-                    <button id="offer-price" class="lot-content__form-button">Предложить цену</button>
-                </div>
+
                 <?php endif;?>
 
                 <div class="lot-content__description">

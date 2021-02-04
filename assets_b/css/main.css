@@ -1955,8 +1955,22 @@ button.mfp-arrow-right {
 }
 .offer-price {
   display: flex;
-  justify-content:start;
+  /*justify-content:start;*/
 }
+.offer-price .btn-group-vertical button {
+  height: 22px;
+}
+
+.select2-selection__rendered {
+  line-height: 41px !important;
+}
+.select2-container .select2-selection--single {
+  height: 44px !important;
+}
+.select2-selection__arrow {
+  height: 43px !important;
+}
+
 .lot-content__price {
   position: relative;
   display: inline-block;
