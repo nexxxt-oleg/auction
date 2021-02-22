@@ -183,7 +183,7 @@ if (Yii::$app->session->getFlash('success')) {
                 </h1>
 
                 <?php  /*$f = new \yii\i18n\Formatter();
-                    $f->timeZone = 'GMT+3';
+                    $f->timeZone = 'Europe/Moscow';
                     echo "<p>".$f->asDate(time(), 'php:H:i:s')."</p>";
                     echo "<p>".Yii::$app->getFormatter()->asDate($nextAuction->start_date, 'php:H:i:s')."</p>";
                     echo "<p>".\app\components\CommonHelper::getUnixEpoch()."</p>";

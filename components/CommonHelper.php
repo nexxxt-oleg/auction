@@ -89,7 +89,7 @@ class CommonHelper
         }
         if ($getNowFlag) {
             $f = new \yii\i18n\Formatter();
-            $f->timeZone = 'GMT+3';
+            $f->timeZone = 'Europe/Moscow';
             $strTime = $f->asDate(time(), 'php:Y-m-d H:i:s');
         }
         $timestamp = strtotime ($strTime);

@@ -16,7 +16,7 @@ use yii\console\Controller;
 class AuctionController extends Controller {
     public function actionProcess() {
         $f = new \yii\i18n\Formatter();
-        $f->timeZone = 'GMT+3';
+        $f->timeZone = 'Europe/Moscow';
         $arNearestAuction = Auction::find()->where(['active' => Auction::NEAREST_FLAG])->all();
         /** @var Auction $nearestAuction */
         foreach ($arNearestAuction as $nearestAuction) {
@@ -88,7 +88,7 @@ class AuctionController extends Controller {
                                 $goodAttr .= "$name: $value\n";
                             }
                             $userAttr = '';
-                            foreach ($maxBid->user as $name => $value) {
+                            foreach ($maxBid->user->attributes as $name => $value) {
                                 $userAttr .= "$name: $value\n";
                             }
                             $body .= $arSellRule[$good->sell_rule]."\n";

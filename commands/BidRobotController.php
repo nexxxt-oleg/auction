@@ -25,7 +25,7 @@ class BidRobotController extends Controller {
 
     public function actionProcess() {
         $this->f = new \yii\i18n\Formatter();
-        $this->f->timeZone = 'GMT+3';
+        $this->f->timeZone = 'Europe/Moscow';
 
         $this->arDummyUser = GoodRobot::arDummyUser();
         $this->arInterval = RobotInterval::find()->indexBy('value')->all();//GoodRobot::arInterval();
