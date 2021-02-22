@@ -208,7 +208,12 @@
 
 	/*lot*/
 	.lot-content .timer .item {
-		margin-right: 20px;
+		padding-right: 10px;
+		flex-basis: 90px;
+	}
+	.lot-content .timer .item.item-ss {
+		padding-right: 0;
+		flex-basis: 80px;
 	}
 	.feedback__call button {
 		display: block;
@@ -859,6 +864,17 @@
 @media only screen and (max-width: 470px) {
 	.auction-item {
 		width: 100%;
+	}
+	.offer-price__col-value {
+		flex-basis: 100%;
+		padding-right: 0;
+		margin-bottom: 10px;
+	}
+	.offer-price {
+		flex-wrap: wrap;
+	}
+	.offer-price__col-value .btn-group-vertical {
+		right: 0;
 	}
 }
 

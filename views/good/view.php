@@ -59,38 +59,71 @@ $bc[] = $this->title;
         </div>
         <div class="col-xs-12 col-md-5">
             <div class="lot-content">
-                <h2 class="lot-content__title"><?= $model->name?></h2>
+                <h1 class="lot-content__title"><?= $model->name?></h1>
+                <div class="lot-content__articule">
+                    Артикул: <span><?= $model->id ?></span>
+                </div>
+
                 <?php if ($model->auction->active == Auction::ACTIVE_FLAG):?>
-                    <time class="timer" datetime="<?= Yii::$app->formatter->asDate($model->auction->end_date, 'php:Y-m-d')."T".Yii::$app->formatter->asDate($model->auction->end_date, 'php:H:i:s')?>+0300"></time>
+                    <div class="lot-content__timer">
+                        <div class="lot-content__timer__label">Онлайн-торги заканчиваются:</div>
+                        <time class="timer" datetime="<?= Yii::$app->formatter->asDate($model->auction->end_date, 'php:Y-m-d')."T".Yii::$app->formatter->asDate($model->auction->end_date, 'php:H:i:s')?>+0300"></time>
+                    </div>
                 <?php elseif ($model->auction->active == Auction::NEAREST_FLAG):?>
                     <!--<time class="timer" datetime="<?= Yii::$app->formatter->asDate($model->auction->start_date, 'php:Y-m-d\TH:i:s')?>"></time>-->
                 <?php elseif ($model->auction->active == Auction::PAST_FLAG):?>
                     <?php if($model->win_bid_id):?>
-                        <h5 class="lot-content__description-title">Аукцион завершен - продано</h5>
+                        <h5 class="lot-content__description-title">Аукцион завершен - <span>продано</span></h5>
                     <?php else:?>
-                        <h5 class="lot-content__description-title">Аукцион завершен - лот не продан</h5>
+                        <h5 class="lot-content__description-title">Аукцион завершен - <span>лот не продан</span></h5>
                     <?php endif?>
                 <?php endif?>
 
-                <div class="lot-content__form clearfix">
+                <?php $class = ''; ?>
+                <?php if ($model->auction->active == Auction::ACTIVE_FLAG):?>
+                    <?php if ($model->max_bid->user_id == Yii::$app->user->id):?>
+                      <?php $class = 'max-price'; ?>
+                    <?php elseif (in_array(Yii::$app->user->id, ArrayHelper::getColumn($model->bids, 'user_id'))):?>
+
+                    <?php endif;?>
+                <?php elseif ($model->auction->active == Auction::PAST_FLAG):?>
+                    <?php if ($model->win_bid->user_id == Yii::$app->user->id):?>
+                        <?php $class = 'min-price'; ?>
+                    <?php else:?>
+
+                    <?php endif;?>
+                <?php endif;?>
+
+                <div class="lot-content__form clearfix <?php echo $class; ?>">
                     <div class="lot-content__price">
-                        <div>
+
                         <?php if ($model->auction->active == Auction::ACTIVE_FLAG):?>
                             <?php if ($model->max_bid->user_id == Yii::$app->user->id):?>
-                              <p>Ваша ставка является максимальной</p>
+                              <div class="max-price-info"><i class="fa fa-check-circle-o" aria-hidden="true"></i> Ваша ставка является максимальной</div>
                             <?php elseif (in_array(Yii::$app->user->id, ArrayHelper::getColumn($model->bids, 'user_id'))):?>
-                              <p>Ваша ставка не является максимальной</p>
+                              <div class="min-price-info">
+                              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M3.051 3.051L12.949 12.949M15 8C15 11.866 11.866 15 8 15C4.13401 15 1 11.866 1 8C1 4.13401 4.13401 1 8 1C11.866 1 15 4.13401 15 8Z" stroke="#E63030" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg> Ваша ставка не является максимальной</div>
                             <?php endif;?>
                         <?php elseif ($model->auction->active == Auction::PAST_FLAG):?>
                             <?php if ($model->win_bid->user_id == Yii::$app->user->id):?>
-                                <p>Ваша ставка победила</p>
+                                <div class="min-price-info">
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M3.051 3.051L12.949 12.949M15 8C15 11.866 11.866 15 8 15C4.13401 15 1 11.866 1 8C1 4.13401 4.13401 1 8 1C11.866 1 15 4.13401 15 8Z" stroke="#E63030" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg> Ваша ставка победила</div>
                             <?php else:?>
-                                <p>Вашу ставку перебили</p>
+                                <div class="min-price-info">
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M3.051 3.051L12.949 12.949M15 8C15 11.866 11.866 15 8 15C4.13401 15 1 11.866 1 8C1 4.13401 4.13401 1 8 1C11.866 1 15 4.13401 15 8Z" stroke="#E63030" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg> Вашу ставку перебили
+                                </div>
                             <?php endif;?>
                         <?php endif;?>
-                            <p id="price-name"><?= $model->win_bid_id ? 'Цена покупки' : ($model->max_bid ? 'Последняя ставка' : 'Стартовая цена')?>:</p>
-                            <span id="curr_price"><?= $model->win_bid_id ? Yii::$app->formatter->asDecimal($model->win_bid->value) : Yii::$app->formatter->asDecimal($model->curr_price) ?></span>
-                        </div>
+                            <div class="lot-content__price__row <?= $model->win_bid_id ? 'start' : ($model->max_bid ? '' : 'start')?>">
+                                <p id="price-name"><?= $model->win_bid_id ? 'Цена покупки' : ($model->max_bid ? 'Последняя ставка' : 'Стартовая цена')?>:</p>
+                                <span id="curr_price">$ <?= $model->win_bid_id ? Yii::$app->formatter->asDecimal($model->win_bid->value) : Yii::$app->formatter->asDecimal($model->curr_price) ?></span>
+                            </div>
                         <?php if ($model->mpc_price):?>
                         <div style="margin-top: 10px;">
                             <p id="price-name">МПЦ цена:</p>
@@ -103,9 +136,7 @@ $bc[] = $this->title;
                             <span><?= Yii::$app->formatter->asDecimal($model->blitz_price) ?></span>
                         </div>
                         <?php endif?>
-                        <div style="margin-top: 10px;">
-                            <p id="price-name">Артикул: <?= $model->id ?></p>
-                        </div>
+
                     </div>
 
                     <?php if($model->canDoBid()): ?>
@@ -113,23 +144,32 @@ $bc[] = $this->title;
                         <?= Html::hiddenInput('good_id', $model->id, ['id' => 'good_id'])?>
                         <?= Html::hiddenInput('step', $model->calculateStep(), ['id' => 'bid-step'])?>
                         <div class="offer-price">
-                            <?= Html::dropDownList('bid_value', $model->getNextBidVal(), $model->getAvaibleBidVals(), [
-                              'class' => '',
-                              'id' => 'bid-value',
-                            ])?>
-                            <div class="btn-group-vertical" role="group" aria-label="...">
-                              <button type="button" class="btn btn-default btn-xs" id="bid-up">
-                                <span class="glyphicon glyphicon-menu-up" aria-hidden="true"></span>
-                              </button>
-                              <button type="button" class="btn btn-default btn-xs" id="bid-down">
-                                <span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span>
-                              </button>
+                            <div class="offer-price__col-value">
+                                <?= Html::dropDownList('bid_value', $model->getNextBidVal(), $model->getAvaibleBidVals(), [
+                                  'class' => '',
+                                  'id' => 'bid-value',
+                                ])?>
+                                <div class="btn-group-vertical" role="group" aria-label="...">
+                                  <button type="button" class="btn btn-default btn-xs" id="bid-up">
+                                    <span class="glyphicon glyphicon-menu-up" aria-hidden="true"></span>
+                                  </button>
+                                  <button type="button" class="btn btn-default btn-xs" id="bid-down">
+                                    <span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span>
+                                  </button>
+                                </div>
                             </div>
                             <button id="offer-price" class="lot-content__form-button">СДЕЛАТЬ СТАВКУ</button>
                         </div>
                         <?php endif?>
 
+
                     <?php endif?>
+                    <?php if ($model->auction->active == Auction::PAST_FLAG): ?>
+                            <div class="offer-price offer-price--block">
+                                <button type="button" class="btn-big btn-final">Торги окончены</button>
+                                <button type="button" class="btn-big btn-green">Выкупить лот</button>
+                            </div>
+                        <?php endif?>
                 </div>
                 <?php if ($model->blitz_price && $model->auction->active == Auction::ACTIVE_FLAG):?>
                     <?php if($model->curr_price >= $model->blitz_price):?>

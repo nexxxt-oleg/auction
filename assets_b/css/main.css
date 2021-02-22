@@ -12,6 +12,9 @@
   font-style: normal;
   font-weight: normal;
 }
+
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+
 /*==============================
 	Common styles
 ==============================*/
@@ -1854,15 +1857,29 @@ button.mfp-arrow-right {
 }
 .lot-content__title {
   font-family: 'ConstantiaBold';
-  font-size: 27px;
+  font-size: 30px;
+  line-height: 38px;
   color: #1a4318;
   margin-top: 0;
-  margin-bottom: 30px;
-  text-decoration: underline;
+  margin-bottom: 10px;
+  /*text-decoration: underline;*/
+}
+.lot-content__articule {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 19px;
+  color: #8E8B8B;
+}
+.lot-content__articule span {
+  color: #62804A;
 }
 .lot-content__title a {
   color: #1a4318;
 }
+
+/*
 .lot-content .timer {
   margin-bottom: 40px;
   position: relative;
@@ -1919,8 +1936,125 @@ button.mfp-arrow-right {
 .lot-content .timer .separator {
   display: none;
 }
+*/
+.lot-content .timer {
+  display: flex;
+  padding-bottom: 23px;
+}
+.lot-content .timer .separator {
+  display: none;
+}
+.lot-content .timer .item {
+  display: flex;
+  align-items: center;
+  padding-right: 18px;
+  flex-wrap: wrap;
+  flex-basis: 100px;
+}
+.lot-content .timer .item span:not(.label) {
+  flex-basis: 37px;
+  width: 37px;
+  height: 61px;
+  background: #FDFDFD;
+  border: 1px solid #DBDBDB;
+  box-sizing: border-box;
+  border-radius: 5px;
+  margin-right: 2px;
+  display: flex;
+  position: relative;
+  z-index: 10;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: normal;
+  font-size: 24px;
+  line-height: 33px;
+  color: #000;
+}
+.lot-content .timer .item .label {
+  flex-basis: 100%;
+  text-align: center;
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 11px;
+  padding: 10px 3px 0 0;
+  letter-spacing: 0.05em;
+  color: #9F9F9F !important;
+}
+
 .lot-content__form {
-  margin-top: 70px;
+  padding: 22px 25px 25px;
+  width: 100%;
+  max-width: 543px;
+  border: 1px solid rgba(239,239,239, 0.75);
+  background: rgba(239,239,239, 0.75);
+  margin-bottom: 40px;
+}
+.lot-content__form.max-price {
+  border-color: rgba(156, 182, 135, 0.75);
+  background: rgba(242,249,236, 0.75);
+}
+.lot-content__form.min-price {
+  border-color: rgba(238, 178, 178, 0.75);
+  background: #FFF3F3;
+}
+.lot-content__price {
+  display: flex;
+  flex-wrap: wrap;
+}
+.lot-content__form .max-price-info {
+  flex-basis: 100%;
+  text-align: right;
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 19px;
+  padding-bottom: 10px;
+  color: #57854C;
+}
+.lot-content__form  .min-price-info {
+  flex-basis: 100%;
+  text-align: right;
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 19px;
+  padding-bottom: 10px;
+  color: #E53030;
+}
+.lot-content__form  .min-price-info svg {
+  display: inline-block;
+  vertical-align: middle;
+}
+.lot-content__price__row {
+  flex-basis: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 20px;
+  align-items: center;
+}
+.lot-content__price__row p {
+  margin: 0;
+  font-family: 'Open Sans';
+  font-style: italic;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 12px;
+  color: #8E8B8B;
+}
+.lot-content__price__row span {
+  font-family: Open Sans;
+  font-style: italic;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 19px;
+  text-align: right;
+  color: #293F1B;
 }
 .lot-content__form .form-group {
   display: inline-block;
@@ -1956,22 +2090,98 @@ button.mfp-arrow-right {
 .offer-price {
   display: flex;
   /*justify-content:start;*/
+  padding-top: 25px;
+  border-top: 1px solid #DEDEDE;
 }
+.lot-content__form.max-price .offer-price {
+  border-top-color: rgba(181,200,165,0.25);
+}
+.offer-price .btn-group-vertical > .btn {
+  border-radius: 0 !important;
+  background: #DEDEDE !important;
+  border: none !important;
+  color: #fff;
+  width: 20px;
+  height: 24px;
+}
+
 .offer-price .btn-group-vertical button {
   height: 22px;
 }
-
+.offer-price__col-value{
+  flex-basis: 230px;
+  padding-right: 20px;
+  position: relative;
+}
+.offer-price__col-value .btn-group-vertical {
+  position: absolute;
+  top: 0;
+  z-index: 10;
+  right: 20px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.offer-price__col-value .select2-container--default .select2-selection--single {
+  border-radius: 0 !important;
+  height: 50px !important;
+  border-color: #DEDEDE !important;
+}
+.select2-container--default .select2-selection--single .select2-selection__arrow b {
+  display: none !important;
+}
 .select2-selection__rendered {
-  line-height: 41px !important;
+  line-height: 47px !important;
+  padding-right: 30px !important;
+  padding-left: 30px !important;
+  text-align: right;
+  position: relative;
+  font-size: 24px;
+  color: #D7D7D7 !important;
+}
+.select2-selection__rendered::after {
+  content: "$";
+  font-size: 24px;
+  color: #D7D7D7 !important;
+  line-height: 48px !important;
+  display: block;
+  position: absolute;
+  height: 480px;
+  left: 10px;
+  top: 0;
+
 }
 .select2-container .select2-selection--single {
   height: 44px !important;
 }
 .select2-selection__arrow {
   height: 43px !important;
+
+}
+.lot-content__price__row.start p {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 27px;
+  color: #000;
+}
+.lot-content__price__row.start span {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 24px;
+  color: #62804A;
+}
+.offer-price .lot-content__form-button {
+  flex-grow: 1;
+  flex-basis: 200px;
+  background: #558248;
+  height: 50px;
+  border-radius: 0;
 }
 
-.lot-content__price {
+/*.lot-content__price {
   position: relative;
   display: inline-block;
   float: left;
@@ -2020,14 +2230,21 @@ button.mfp-arrow-right {
   padding-bottom: 40px;
   border-bottom: 1px solid #c0c0c0;
   color: #1a4318;
-}
+}*/
 .lot-content__description-title {
-  font-weight: 700;
-  font-size: 16px;
-  font-weight: 700;
-  text-transform: uppercase;
-  margin-top: 0;
-  margin-bottom: 15px;
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 19px;
+  display: block;
+  color: #232323;
+  padding-top: 50px;
+  padding-bottom: 30px;
+  margin: 0 !important;
+}
+.lot-content__description-title span {
+  color: #558248;
 }
 .lot-content__description-text {
   font-size: 16px;
@@ -2053,6 +2270,29 @@ button.mfp-arrow-right {
 }
 .lot-content--popup .lot-content__price span {
   margin-left: 5px;
+}
+.btn-big {
+  display: block;
+  border: none;
+  width: 100%;
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 50px;
+  text-align: center;
+  text-transform: uppercase;
+  color: #FFFFFF;
+  height: 50px;
+}
+.btn-final {
+  background: #949494;
+}
+.btn-green {
+  background: #558248;
+}
+.offer-price.offer-price--block {
+  display: block !important;
 }
 .lot-title {
   font-family: 'ConstantiaBold';
@@ -2434,4 +2674,17 @@ margin-bottom
 
 div.empty {
   padding-left: 20px;
+}
+
+.lot-content__timer {
+  padding-top: 50px;
+}
+.lot-content__timer__label {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 19px;
+  padding-bottom: 12px;
+  color: #232323;
 }
