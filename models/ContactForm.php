@@ -23,6 +23,7 @@ class ContactForm extends Model
     const TYPE_COMMENT = 2;
     const TYPE_CALLBACK = 3;
     const TYPE_COMMON = 4;
+    const TYPE_REQUEST = 5;
 
     public static function getTypes()
     {
@@ -30,7 +31,8 @@ class ContactForm extends Model
             'Задать вопрос' => self::TYPE_QUESTION,
             'Оставить отзыв' => self::TYPE_COMMENT,
             'Заявка на обратный звонок' => self::TYPE_CALLBACK,
-            'Задать вопрос /Оставить предложение' => self::TYPE_COMMON
+            'Задать вопрос /Оставить предложение' => self::TYPE_COMMON,
+            'Выкуп лота' => self::TYPE_REQUEST,
         ];
     }
 
@@ -54,7 +56,8 @@ class ContactForm extends Model
     /**
      * @return array customized attribute labels
      */
-    public function attributeLabels() {
+    public function attributeLabels()
+    {
         return [
             'verifyCode' => 'Проверочный код',
             'name' => 'ФИО:',
@@ -66,7 +69,8 @@ class ContactForm extends Model
         ];
     }
 
-    public function printBodyLabel() {
+    public function printBodyLabel()
+    {
         switch ($this->type) {
             case self::TYPE_COMMON:
             default:
@@ -81,12 +85,15 @@ class ContactForm extends Model
             case self::TYPE_CALLBACK:
                 return 'Обратный звонок:'; // не используется
                 break;
+            case self::TYPE_REQUEST:
+                return 'Заявка на выкуп лота:';
+                break;
         }
     }
 
     /**
      * Sends an email to the specified email address using the information collected by this model.
-     * @param  string $fromEmail the target email address
+     * @param string $fromEmail the target email address
      * @return boolean whether the model passes validation
      */
     public function contact($fromEmail)
@@ -95,37 +102,45 @@ class ContactForm extends Model
             $this->type = self::TYPE_COMMON;
         }
         if ($this->validate()) {
+            $body = '';
             switch ($this->type) {
                 case self::TYPE_COMMON:
                 default:
                     $this->subject = "Обращение от $this->email";
-                    $this->body = "Поступило обращение от $this->name.\n";
-                    $this->body .= $this->phone ? "Телефон: $this->phone.\n" : '';
-                    $this->body .= "Email: $this->email.\n";
-                    $this->body .= "Текст обращения: \n---$this->body\n---\n";
+                    $body = "Поступило обращение от $this->name.\n";
+                    $body .= $this->phone ? "Телефон: $this->phone.\n" : '';
+                    $body .= "Email: $this->email.\n";
+                    $body .= "Текст обращения: \n---$this->body\n---\n";
                     break;
                 case self::TYPE_QUESTION:
                     $this->subject = "Вопрос от $this->email";
-                    $this->body = "Поступил вопрос от $this->name.\n";
-                    $this->body .= $this->phone ? "Телефон: $this->phone.\n" : '';
-                    $this->body .= "Email: $this->email.\n";
-                    $this->body .= "Текст вопроса: \n---$this->body\n---\n";
+                    $body = "Поступил вопрос от $this->name.\n";
+                    $body .= $this->phone ? "Телефон: $this->phone.\n" : '';
+                    $body .= "Email: $this->email.\n";
+                    $body .= "Текст вопроса: \n---$this->body\n---\n";
                     break;
                 case self::TYPE_COMMENT:
                     $this->subject = "Отзыв от $this->email";
-                    $this->body = "Поступил отзыв от $this->name.\n";
-                    $this->body .= $this->phone ? "Телефон: $this->phone.\n" : '';
-                    $this->body .= "Email: $this->email.\n";
-                    $this->body .= "Текст отзыва: \n---$this->body\n---\n";
+                    $body = "Поступил отзыв от $this->name.\n";
+                    $body .= $this->phone ? "Телефон: $this->phone.\n" : '';
+                    $body .= "Email: $this->email.\n";
+                    $body .= "Текст отзыва: \n---$this->body\n---\n";
                     break;
                 case self::TYPE_CALLBACK:
                     $this->email = $fromEmail;
                     $this->subject = "Заявка на обратный звонок от $this->phone";
-                    $this->body = "Поступила заявка на обратный звонок от $this->phone.\n";
-                    $this->body .= "Телефон: $this->phone.\n";
+                    $body = "Поступила заявка на обратный звонок от $this->phone.\n";
+                    $body .= "Телефон: $this->phone.\n";
                     break;
-
+                case self::TYPE_REQUEST:
+                    $this->subject = "Заявка на выкуп от $this->email";
+                    $body = "Поступила заявка на выкуп лота $this->name.\n";
+                    $body .= $this->phone ? "Телефон: $this->phone.\n" : '';
+                    $body .= "Email: $this->email.\n";
+                    $body .= "Текст обращения: \n---$this->body\n---\n";
+                    break;
             }
+            $this->body = $body;
 
             Yii::$app->mailer->compose()
                 ->setTo($this->email)

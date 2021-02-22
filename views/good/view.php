@@ -1,13 +1,16 @@
 <?php
 
-use app\assets_b\GoodViewAsset;use app\models\auction\Good;use kartik\widgets\Select2;use yii\helpers\ArrayHelper;use yii\helpers\FileHelper;
+use app\assets_b\GoodViewAsset;use app\models\auction\Good;
+use app\models\ContactForm;
+use kartik\select2\Select2Asset;
+use kartik\widgets\Select2;use yii\helpers\ArrayHelper;use yii\helpers\FileHelper;
 use yii\helpers\Html;use \yii\helpers\Url;
 use \app\models\auction\Auction;use yii\widgets\Breadcrumbs;
 
 /* @var $this yii\web\View */
 /** @var  $model Good */
 GoodViewAsset::register($this);
-\kartik\select2\Select2Asset::register($this);
+Select2Asset::register($this);
 $this->title = $model->name;
 $auLink = ['label' => 'Аукционы', 'url' => Url::previous()];
 $auLink['url'] = ($auLink['url'] == "/" ?  Url::to(['good/index']) : $auLink['url']);
@@ -166,8 +169,8 @@ $bc[] = $this->title;
                     <?php endif?>
                     <?php if ($model->auction->active == Auction::PAST_FLAG): ?>
                             <div class="offer-price offer-price--block">
-                                <button type="button" class="btn-big btn-final">Торги окончены</button>
-                                <button type="button" class="btn-big btn-green">Выкупить лот</button>
+                                <span class="btn-big btn-final">Торги окончены</span>
+                                <a href="#request-modal" class="btn-big btn-green popup-modal">Выкупить лот</a>
                             </div>
                         <?php endif?>
                 </div>
@@ -239,3 +242,19 @@ $bc[] = $this->title;
         </div>
     </div>
     <?php endif?>
+
+  <div id="request-modal" class="mfp-hide basic-modal basic-modal--login">
+    <a class="basic-modal__dismiss" href="#"><img src="/assets_b/img/icon/close-modal.png" alt=""></a>
+    <div class="col-xs-12 col-sm-12">
+      <h6 class="basic-modal__title basic-modal__title--second">Для выкупа предмета оставьте заявку и мы с Вами свяжемся.</h6>
+        <?php $commentModel = new ContactForm([
+          'type' => ContactForm::TYPE_REQUEST,
+          'email' => Yii::$app->user->identity->email,
+          'name' => Yii::$app->user->identity->login,
+          'phone' => Yii::$app->user->identity->phone,
+          'body' => "Добрый день. Хочу выкупить лот '$model->name ($model->id)'",
+        ]);
+        echo $this->render('/site/_contacts_form', ['model' => $commentModel]); ?>
+    </div>
+    <div class="clearfix"></div>
+  </div>
