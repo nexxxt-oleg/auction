@@ -1,8 +1,8 @@
 <?php
 
 return [
-    'adminEmail' => 'auction@warstory.ru',
-    'supportEmail' => 'admin@warstory.ru',
+    'adminEmail' => 'auction@auction.warstory.ru',
+    'supportEmail' => 'admin@auction.warstory.ru',
     'samonovEmail' => 'and.samonov@gmail.com',
     'showIndexVideo' => true,
     'phone' => '8-800-222-1941',
