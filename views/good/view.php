@@ -108,7 +108,7 @@ $bc[] = $this->title;
                 <div class="lot-content__form clearfix <?php echo $class; ?>">
                     <div class="lot-content__price">
 
-                        <?php if ($model->auction->active == Auction::ACTIVE_FLAG):?>
+          <?php if ($model->auction->active == Auction::ACTIVE_FLAG):?>
 							<?php if ($model->max_bid):?>
 								<?php if ($model->max_bid->user_id == Yii::$app->user->id):?>
 								  <div class="max-price-info"><i class="fa fa-check-circle-o" aria-hidden="true"></i> Ваша ставка является максимальной</div>
@@ -279,18 +279,20 @@ $bc[] = $this->title;
     </div>
     <?php endif?>
 
-  <div id="request-modal" class="mfp-hide basic-modal basic-modal--login">
-    <a class="basic-modal__dismiss" href="#"><img src="/assets_b/img/icon/close-modal.png" alt=""></a>
-    <div class="col-xs-12 col-sm-12">
-      <h6 class="basic-modal__title basic-modal__title--second">Для выкупа предмета оставьте заявку и мы с Вами свяжемся.</h6>
-        <?php $commentModel = new ContactForm([
-          'type' => ContactForm::TYPE_REQUEST,
-          'email' => Yii::$app->user->identity->email,
-          'name' => Yii::$app->user->identity->login,
-          'phone' => Yii::$app->user->identity->phone,
-          'body' => "Добрый день. Хочу выкупить лот '$model->name ($model->id)'",
-        ]);
-        echo $this->render('/site/_contacts_form', ['model' => $commentModel]); ?>
+  <?php if (Yii::$app->user->identity && Yii::$app->user->identity->isActive()):?>
+    <div id="request-modal" class="mfp-hide basic-modal basic-modal--login">
+      <a class="basic-modal__dismiss" href="#"><img src="/assets_b/img/icon/close-modal.png" alt=""></a>
+      <div class="col-xs-12 col-sm-12">
+        <h6 class="basic-modal__title basic-modal__title--second">Для выкупа предмета оставьте заявку и мы с Вами свяжемся.</h6>
+          <?php $commentModel = new ContactForm([
+            'type' => ContactForm::TYPE_REQUEST,
+            'email' => Yii::$app->user->identity->email,
+            'name' => Yii::$app->user->identity->login,
+            'phone' => Yii::$app->user->identity->phone,
+            'body' => "Добрый день. Хочу выкупить лот '$model->name ($model->id)'",
+          ]);
+          echo $this->render('/site/_contacts_form', ['model' => $commentModel]); ?>
+      </div>
+      <div class="clearfix"></div>
     </div>
-    <div class="clearfix"></div>
-  </div>
+  <?php endif?>

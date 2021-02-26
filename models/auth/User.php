@@ -270,4 +270,9 @@ class User extends ActiveRecord implements IdentityInterface
         }
         return false;
     }
+
+    public function isActive()
+    {
+        return !Yii::$app->user->isGuest && Yii::$app->user->identity->active == User::STATUS_ACTIVE;
+    }
 }

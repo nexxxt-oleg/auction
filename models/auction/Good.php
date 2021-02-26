@@ -247,8 +247,7 @@ class Good extends \yii\db\ActiveRecord implements CartPositionInterface
     public function canDoBid()
     {
         return $this->auction && $this->auction->active == \app\models\auction\Auction::ACTIVE_FLAG
-            && !$this->win_bid_id &&
-            (!Yii::$app->user->isGuest && Yii::$app->user->identity->active == User::STATUS_ACTIVE);
+            && !$this->win_bid_id && (Yii::$app->user->identity && Yii::$app->user->identity->isActive());
     }
 
     public function getNextBidVal()
