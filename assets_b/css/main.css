@@ -1563,21 +1563,31 @@ button.mfp-arrow-right {
   content: '';
   position: absolute;
   right: -15px;
-  top: 3px;
-  width: 11px;
-  height: 11px;
+  top: 2px;
+  width: 14px;
+  height: 14px;
 }
 .auction-item__price .price--start {
   color: #909c8f;
 }
+.auction-item__price .dprice--start span:after {
+  background: url("../img/icon/green-dollar.png");
+  background-size: 13px;
+}
 .auction-item__price .price--start span:after {
-  background: url("../img/icon/rub1.png");
+	background: url("../img/icon/green-dollar.png");
+	background-size: 13px;
 }
 .auction-item__price .price--current {
   color: #1a4318;
 }
+.auction-item__price .dprice--current span:after {
+    background: url("../img/icon/green-dollar.png");
+	background-size: 14px;
+}
 .auction-item__price .price--current span:after {
-  background: url("../img/icon/rub2.png");
+	background: url("../img/icon/green-dollar.png");
+	background-size: 14px;
 }
 .auction-item__price .price--pre {
   width: 66.33%;
@@ -1595,7 +1605,9 @@ button.mfp-arrow-right {
 .auction-item__price .price--pre span:after {
   width: 14px;
   height: 15px;
-  background: url("../img/icon/rub3.png");
+  background: url("../img/icon/green-dollar.png");
+  background-size: 14px;
+
 }
 .auction-item__price .action {
   display: inline-block;
@@ -2074,7 +2086,7 @@ button.mfp-arrow-right {
   padding: 0 160px 0 20px;
   color: #518145;
 }
-.lot-content__form-button {
+.lot-content__form-button, .lot-content__form-span {
   /*position: absolute;*/
   height: 44px;
   top: 0;
@@ -2177,6 +2189,13 @@ button.mfp-arrow-right {
   flex-grow: 1;
   flex-basis: 200px;
   background: #558248;
+  height: 50px;
+  border-radius: 0;
+}
+.offer-price #show-price {
+  flex-grow: 1;
+  flex-basis: 200px;
+  background: #949494;
   height: 50px;
   border-radius: 0;
 }
@@ -2536,16 +2555,25 @@ margin-bottom
   font-weight: 700;
   color: #1a4318;
 }
+.cabinet__table tbody tr th .dprice:after {
+	content: '';
+	position: absolute;
+	right: -20px;
+	top: 7px;
+	width: 14px;
+	height: 15px;
+	background: url(../img/icon/green-dollar.png);
+	background-size: 15px;
+}
 .cabinet__table tbody tr th .price:after {
-  content: '';
-  position: absolute;
-  right: -20px;
-  top: 7px;
-  width: 11px;
-  height: 11px;
-  width: 14px;
-  height: 15px;
-  background: url("../img/icon/rub3.png");
+	content: '';
+	position: absolute;
+	right: -20px;
+	top: 7px;
+	width: 14px;
+	height: 15px;
+	background: url(../img/icon/green-dollar.png);
+	background-size: 15px;
 }
 .cabinet__table tbody tr th .delete {
   width: 26px;
@@ -2609,16 +2637,25 @@ margin-bottom
   color: #1a4318;
   margin-left: 10px;
 }
+.cabinet__table-mobile-item .dprice:after {
+  content: '';
+  position: absolute;
+  right: -20px;
+  top: 7px;
+  width: 14px;
+  height: 15px;
+  background: url(../img/icon/green-dollar.png);
+  background-size: 15px;
+}
 .cabinet__table-mobile-item .price:after {
   content: '';
   position: absolute;
   right: -20px;
   top: 7px;
-  width: 11px;
-  height: 11px;
   width: 14px;
   height: 15px;
-  background: url("../img/icon/rub3.png");
+  background: url(../img/icon/green-dollar.png);
+  background-size: 15px;
 }
 .cabinet__table-mobile-item .delete {
   margin-top: 15px;
@@ -2641,6 +2678,18 @@ margin-bottom
 .cabinet__result .price {
   margin-left: 10px;
   position: relative;
+}
+.cabinet__result .dprice:after {
+  content: '';
+  position: absolute;
+  right: -20px;
+  top: 7px;
+  width: 11px;
+  height: 11px;
+  width: 14px;
+  height: 15px;
+  background: url(../img/icon/green-dollar.png);
+  background-size: 15px;
 }
 .cabinet__result .price:after {
   content: '';
@@ -2687,4 +2736,7 @@ div.empty {
   line-height: 19px;
   padding-bottom: 12px;
   color: #232323;
+}
+.lot-content__timer__label .green-span-timer{
+	color: #62804A;
 }
