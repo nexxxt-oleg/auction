@@ -277,6 +277,10 @@
 		width: 230px;
 	}
 
+	.auction-item__img img {
+		height: auto;
+	}
+
 	/*section*/
 	.section--bg1 {
 		background-image: url("../img/main-bg/bg1-mobile.jpg");

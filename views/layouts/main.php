@@ -165,8 +165,7 @@ use \app\models\auction\GoodFavorite;
           </div>
         </div>
 
-          <?= \app\components\widgets\FooterCatsWidget::widget(['type' => 'main']); ?>
-
+        
         <div class="col-xs-12 col-sm-4 col-md-3">
           <h6 class="footer-content__title">Аукцион</h6>
           <ul class="catalog__list catalog__list--50 catalog__list--footer">
@@ -188,20 +187,7 @@ use \app\models\auction\GoodFavorite;
               <a href="<?= Yii::$app->urlManager->createUrl(['/site/contacts']) ?>">Контакты</a>
             </li>
           </ul>
-          <!--<ul class="catalog__list catalog__list--50 catalog__list--footer">
-                        <h6 class="catalog__title">
-                            статьи:
-                        </h6>
-                        <li class="catalog__item">
-                            <a href="<?= Yii::$app->urlManager->createUrl(['/site/faq#tab2']) ?>">Заголовок статьи</a>
-                        </li>
-                        <li class="catalog__item">
-                            <a href="<?= Yii::$app->urlManager->createUrl(['/site/faq#tab3']) ?>">Другая статья о оружие</a>
-                        </li>
-                        <li class="catalog__item">
-                            <a href="<?= Yii::$app->urlManager->createUrl(['/site/faq#tab4']) ?>">Еще одна статья</a>
-                        </li>
-                    </ul>-->
+
         </div>
       </div>
     </div>
@@ -215,7 +201,13 @@ use \app\models\auction\GoodFavorite;
       <div class="col-xs-12 col-md-4">
         <ul class="footer__social">
           <li class="footer__social-item">
-            <a href="https://vk.com/warstory"><img src="/assets_b/img/social/vk2.svg" alt=""></a>
+            <a href="https://vk.com/warstory"><img src="/assets_b/img/icon/footer/vk2 1.svg" alt=""></a>
+          </li>
+		   <li class="footer__social-item">
+            <a href="https://www.instagram.com/warstory_ru/"><img src="/assets_b/img/icon/footer/in2.1.svg" alt=""></a>
+          </li>
+		   <li class="footer__social-item">
+            <a href="https://t.me/warstory_ru"><img src="/assets_b/img/icon/footer/te2.1.svg" alt=""></a>
           </li>
           <!--<li class="footer__social-item">
               <a href="#"><img src="/assets_b/img/social/facebook2.svg" alt=""></a>
@@ -245,81 +237,7 @@ use \app\models\auction\GoodFavorite;
   </form>
 
   <div class="catalog catalog--search">
-    <div class="row">
-      <div class="col-xs-12 col-sm-6">
-        <h2 class="section__title2">Холодное оружие Германии:</h2>
 
-        <ul class="catalog__list catalog__list--66">
-          <h6 class="catalog__title">
-            Служба:
-          </h6>
-          <li class="catalog__item catalog__item--50">
-            <a href="#">Люфтваффе</a>
-          </li>
-          <li class="catalog__item catalog__item--50">
-            <a href="#">Пожарная служба</a>
-          </li>
-          <li class="catalog__item catalog__item--50">
-            <a href="#">РАД</a>
-          </li>
-          <li class="catalog__item catalog__item--50">
-            <a href="#">Штык</a>
-          </li>
-          <li class="catalog__item catalog__item--50">
-            <a href="#">СА</a>
-          </li>
-          <li class="catalog__item catalog__item--50">
-            <a href="#">СС</a>
-          </li>
-          <li class="catalog__item catalog__item--50">
-            <a href="#">НСКК</a>
-          </li>
-          <li class="catalog__item catalog__item--50">
-            <a href="#">Пехота</a>
-          </li>
-          <li class="catalog__item catalog__item--50">
-            <a href="#">Полиция</a>
-          </li>
-          <li class="catalog__item catalog__item--50">
-            <a href="#">Боевой нож</a>
-          </li>
-          <li class="catalog__item catalog__item--50">
-            <a href="#">Общества и союзы</a>
-          </li>
-        </ul>
-        <ul class="catalog__list catalog__list--33">
-          <h6 class="catalog__title">
-            период:
-          </h6>
-          <li class="catalog__item">
-            <a href="#">1933-1945 г.</a>
-          </li>
-          <li class="catalog__item">
-            <a href="#">1897-1933 г.</a>
-          </li>
-        </ul>
-      </div>
-      <div class="col-xs-12 col-sm-6">
-        <h2 class="section__title2">Холодное оружие других стран:</h2>
-        <ul class="catalog__list">
-          <h6 class="catalog__title">
-            страна:
-          </h6>
-          <li class="catalog__item">
-            <a href="#">Канада</a>
-          </li>
-          <li class="catalog__item">
-            <a href="#">Япония</a>
-          </li>
-          <li class="catalog__item">
-            <a href="#">Франция</a>
-          </li>
-          <li class="catalog__item">
-            <a href="#">Россия</a>
-          </li>
-        </ul>
-      </div>
-    </div>
   </div>
 </div>
 

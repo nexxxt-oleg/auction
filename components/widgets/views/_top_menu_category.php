@@ -44,16 +44,6 @@ use \app\models\auction\Auction;
         <a href="<?= Yii::$app->urlManager->createUrl(['/good/index', 'GoodSearch[top_menu]' => "all"])?>" class="navigation-desktop__link
         <?= ($clearUrl == Yii::$app->urlManager->createUrl(['/good/index', 'GoodSearch[top_menu]' => "all"])) ? 'navigation-desktop__link--active' : ''?>">Все лоты</a>
     </li>
-    <?php /* @var $category \app\models\auction\Category */
-    foreach($arCatModel as $category):?>
-        <li class="navigation-desktop__item">
-            <a href="<?= Yii::$app->urlManager->createUrl(['/good/index', 'GoodSearch[top_menu]' => "category$category->id"])?>" class="navigation-desktop__link
-            <?= ($clearUrl == Yii::$app->urlManager->createUrl(['/good/index', 'GoodSearch[top_menu]' => "category$category->id"])) ? 'navigation-desktop__link--active' : ''?>">
-                <?= $category->name?>
-            </a>
-        </li>
-
-    <?php endforeach?>
     <li class="navigation-desktop__item">
         <a href="<?= Yii::$app->urlManager->createUrl(['/site/faq'])?>" class="navigation-desktop__link
         <?= ($clearUrl == Yii::$app->urlManager->createUrl(['/site/faq'])) ? 'navigation-desktop__link--active' : ''?>">Узнайте подробнее</a>

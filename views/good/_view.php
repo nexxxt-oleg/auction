@@ -11,7 +11,7 @@ use \app\models\auction\GoodFavorite;
 
 <div class="auction-item">
     <h3 class="auction-item__title">
-        <a href="<?= Yii::$app->urlManager->createUrl(['/good', 'id' => $model->id]) ?>"><?= $model->name ?></a>
+        <a href="<?= Yii::$app->urlManager->createUrl(['/good', 'id' => $model->id]) ?>"><?= $model->name ?> (Лот №<?= $model->id ?>)</a>
     </h3>
 
     <div class="auction-item__img">
