@@ -240,12 +240,6 @@ class User extends ActiveRecord implements IdentityInterface
         if ($this->email) {
             $subject = \Yii::$app->name.': зарегистрирован новый пользователь ';
 
-            $message = \Yii::$app->mailer->compose('newUserWarstory', ['user' => $this, 'password' => $password])
-                ->setFrom([\Yii::$app->params['supportEmail'] => \Yii::$app->name . ' robot'])
-                ->setTo($this->email)
-                ->setSubject($subject )
-                ->send();
-
             $mailForm = new MailForm([
                 'mailType' => Mail::TYPE_NEW_USER,
                 'userId' => $this->getId(),
@@ -253,10 +247,14 @@ class User extends ActiveRecord implements IdentityInterface
                 'body' => \Yii::$app->mailer->render('newUserWarstory', ['user' => $this, 'password' => $password]),
             ]);
             if ($mailForm->validate()) {
-                return $mailForm->run();
+                $mailForm->run();
             }
 
-            return $message;
+            return \Yii::$app->mailer->compose('newUserWarstory', ['user' => $this, 'password' => $password])
+                ->setFrom([\Yii::$app->params['supportEmail'] => \Yii::$app->name . ' robot'])
+                ->setTo($this->email)
+                ->setSubject($subject )
+                ->send();
         }
         return false;
     }

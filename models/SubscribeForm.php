@@ -38,13 +38,6 @@ class SubscribeForm extends Subscribe
                 ->setTextBody($body)
                 ->send();
 
-            Yii::$app->mailer->compose()
-                ->setTo(Yii::$app->params['adminEmail'])
-                ->setFrom([Yii::$app->params['adminEmail'] => Yii::$app->name])
-                ->setSubject("Добавлена подписка")
-                ->setTextBody("Пользователь $this->email добавлен в список рассылки.")
-                ->send();
-
             $mailForm = new MailForm([
                 'mailType' => Mail::TYPE_SUBSCRIBE,
                 'userId' => Yii::$app->user->identity->getId(),
@@ -52,8 +45,15 @@ class SubscribeForm extends Subscribe
                 'body' => "Пользователь $this->email добавлен в список рассылки.",
             ]);
             if ($mailForm->validate()) {
-                return $mailForm->run();
+                $mailForm->run();
             }
+
+            return Yii::$app->mailer->compose()
+                ->setTo(Yii::$app->params['adminEmail'])
+                ->setFrom([Yii::$app->params['adminEmail'] => Yii::$app->name])
+                ->setSubject("Добавлена подписка")
+                ->setTextBody("Пользователь $this->email добавлен в список рассылки.")
+                ->send();
         }
         return false;
     }

@@ -24,13 +24,6 @@ class OutbidMailForm extends Model
         $subject = 'Ваша ставка перебита';
         $body = "Ваша ставка в размере {$bid->valueWithCurrency} на лот {$bid->good->name} перебита ставкой {$bid->good->max_bid->valueWithCurrency}.\n";
         $body .= "Дата окончания аукциона: {$bid->good->auction->end_date}";
-        Yii::$app->mailer->compose()
-            ->setTo($toUser->email)
-            ->setFrom([Yii::$app->params['adminEmail'] => Yii::$app->name])
-            ->setSubject($subject)
-            ->setTextBody($body)
-            ->send();
-
         $mailForm = new MailForm([
             'mailType' => Mail::TYPE_OUTBID,
             'userId' => $bid->user_id,
@@ -38,8 +31,14 @@ class OutbidMailForm extends Model
             'body' => $body,
         ]);
         if ($mailForm->validate()) {
-              return $mailForm->run();
+            return $mailForm->run();
         }
-        return false;
+
+        return Yii::$app->mailer->compose()
+            ->setTo($toUser->email)
+            ->setFrom([Yii::$app->params['adminEmail'] => Yii::$app->name])
+            ->setSubject($subject)
+            ->setTextBody($body)
+            ->send();
     }
 }

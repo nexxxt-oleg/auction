@@ -61,13 +61,6 @@ class DeliveryForm extends Model
                 ->setSubject($subject)
                 ->setTextBody("Оформлена доставка. Параметры:\n".$attributesStr)
                 ->send();
-            Yii::$app->mailer->compose()
-                ->setTo($this->email)
-                ->setFrom([Yii::$app->params['adminEmail'] => Yii::$app->name])
-                ->setSubject($subject)
-                ->setTextBody("Оформлена доставка. Параметры:\n".$attributesStr)
-                ->send();
-
             $mailForm = new MailForm([
                 'mailType' => Mail::TYPE_DELIVERY,
                 'userId' => Yii::$app->user->identity->getId(),
@@ -75,8 +68,15 @@ class DeliveryForm extends Model
                 'body' => $body,
             ]);
             if ($mailForm->validate()) {
-                return $mailForm->run();
+                $mailForm->run();
             }
+
+            return Yii::$app->mailer->compose()
+                ->setTo($this->email)
+                ->setFrom([Yii::$app->params['adminEmail'] => Yii::$app->name])
+                ->setSubject($subject)
+                ->setTextBody("Оформлена доставка. Параметры:\n".$attributesStr)
+                ->send();
 
         }
         return false;

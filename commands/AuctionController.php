@@ -95,13 +95,6 @@ class AuctionController extends Controller {
                             $body .= "Параметры лота: \n $goodAttr";
                             $body .= "Параметры пользователя: \n $userAttr";
 
-                            Yii::$app->mailer->compose()
-                                ->setTo(Yii::$app->params['samonovEmail'])
-                                ->setFrom([Yii::$app->params['adminEmail'] => Yii::$app->name])
-                                ->setSubject($subject)
-                                ->setTextBody($body)
-                                ->send();
-
                             $mailForm = new MailForm([
                                 'mailType' => Mail::TYPE_GOOD_SOLD,
                                 'userId' => 1,
@@ -111,6 +104,13 @@ class AuctionController extends Controller {
                             if ($mailForm->validate()) {
                                 $mailForm->run();
                             }
+
+                            Yii::$app->mailer->compose()
+                                ->setTo(Yii::$app->params['samonovEmail'])
+                                ->setFrom([Yii::$app->params['adminEmail'] => Yii::$app->name])
+                                ->setSubject($subject)
+                                ->setTextBody($body)
+                                ->send();
 
                             $winBidMailForm = new WinbidMailForm(['bidId' => $good->win_bid_id]);
                             if ($winBidMailForm->validate()) {

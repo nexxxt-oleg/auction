@@ -142,13 +142,6 @@ class ContactForm extends Model
             }
             $this->body = $body;
 
-            Yii::$app->mailer->compose()
-                ->setTo($this->email)
-                ->setFrom([$fromEmail => Yii::$app->name])
-                ->setSubject($this->subject)
-                ->setTextBody($this->body)
-                ->send();
-
             $mailForm = new MailForm([
                 'mailType' => Mail::TYPE_CONTACT_FORM,
                 'userId' => Yii::$app->user->identity->getId(),
@@ -156,8 +149,15 @@ class ContactForm extends Model
                 'body' => $this->body,
             ]);
             if ($mailForm->validate()) {
-                return $mailForm->run();
+                $mailForm->run();
             }
+
+            return Yii::$app->mailer->compose()
+                ->setTo($this->email)
+                ->setFrom([$fromEmail => Yii::$app->name])
+                ->setSubject($this->subject)
+                ->setTextBody($this->body)
+                ->send();
 
         }
 
