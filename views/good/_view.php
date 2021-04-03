@@ -39,35 +39,35 @@ use \app\models\auction\GoodFavorite;
         <?php endif?>
     </div>
     <div class="auction-item__price">
-        <? $this->registerCss(".auction-item__price .price span:after { content: '{$model->auction->currency}'; }"); ?>
+
         <?php if ($model->auction->active == \app\models\auction\Auction::ACTIVE_FLAG):?>
             <span class="price price--start">
             <p>Стартовая цена:</p>
-            <span><?= $model->start_price ?></span>
+            <span><?= $model->start_price ?> <?=$model->auction->currency?></span>
         </span>
             <span class="price price--current">
             <p><?= $model->win_bid_id ? 'Цена покупки' : 'Текущая цена:' ?></p>
-            <span><?= $model->win_bid_id ? Yii::$app->formatter->asDecimal($model->win_bid->value) : Yii::$app->formatter->asDecimal($model->curr_price) ?></span>
+            <span><?= $model->win_bid_id ? Yii::$app->formatter->asDecimal($model->win_bid->value) : Yii::$app->formatter->asDecimal($model->curr_price) ?> <?=$model->auction->currency?></span>
         </span>
         <?php elseif ($model->auction->active == \app\models\auction\Auction::NEAREST_FLAG):?>
             <span class="price price--start">
                 <p>Стартовая цена:</p>
-                <span><?= Yii::$app->formatter->asDecimal($model->start_price) ?></span>
+                <span><?= Yii::$app->formatter->asDecimal($model->start_price) ?> <?=$model->auction->currency?></span>
             </span>
         <?php else:?>
             <span class="price price--start">
                 <p>Стартовая цена:</p>
-                <span><?= Yii::$app->formatter->asDecimal($model->start_price) ?></span>
+                <span><?= Yii::$app->formatter->asDecimal($model->start_price) ?> <?=$model->auction->currency?></span>
             </span>
             <?php if ($model->win_bid_id):?>
                 <span class="price price--current">
                     <p>Цена продажи:</p>
-                    <span><?= Yii::$app->formatter->asDecimal($model->win_bid->value)?></span>
+                    <span><?= Yii::$app->formatter->asDecimal($model->win_bid->value)?> <?=$model->auction->currency?></span>
                 </span>
             <?php elseif ($model->max_bid):?>
             <span class="price price--current">
                 <p>Последняя ставка:</p>
-                <span><?= Yii::$app->formatter->asDecimal($model->max_bid->value)?></span>
+                <span><?= Yii::$app->formatter->asDecimal($model->max_bid->value)?> <?=$model->auction->currency?></span>
             </span>
             <?php endif?>
         <?php endif?>

@@ -1611,7 +1611,7 @@ button.mfp-arrow-right {
 .auction-item__price .price--pre span:after {
   width: 14px;
   height: 15px;
-  content: '$';
+  content: '';
   /*background: url("../img/icon/green-dollar.png");*/
   background-size: 14px;
 
@@ -2160,7 +2160,7 @@ button.mfp-arrow-right {
   color: #D7D7D7 !important;
 }
 .select2-selection__rendered::after {
-  content: "$";
+  content: "";
   font-size: 24px;
   color: #D7D7D7 !important;
   line-height: 48px !important;

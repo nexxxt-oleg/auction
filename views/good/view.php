@@ -16,6 +16,7 @@ $auLink = ['label' => 'Аукционы', 'url' => Url::previous()];
 $auLink['url'] = ($auLink['url'] == "/" ?  Url::to(['good/index']) : $auLink['url']);
 $bc[] = $auLink;
 $bc[] = $this->title;
+$this->registerCss(".select2-selection__rendered::after { content: '{$model->auction->currency}'; }");
 ?>
 <div class="container-fluid">
     <div class="row">
@@ -163,7 +164,6 @@ $bc[] = $this->title;
                         <?= Html::hiddenInput('step', $model->calculateStep(), ['id' => 'bid-step'])?>
                         <div class="offer-price">
                             <div class="offer-price__col-value">
-                              <? $this->registerCss(".select2-selection__rendered::after { content: '{$model->auction->currency}'; }"); ?>
                                 <?= Html::dropDownList('bid_value', $model->getNextBidVal(), $model->getAvaibleBidVals(), [
                                   'class' => '',
                                   'id' => 'bid-value',
