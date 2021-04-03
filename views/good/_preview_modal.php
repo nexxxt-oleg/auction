@@ -65,7 +65,7 @@ use \app\models\auction\Auction;
                     <div class="lot-content__price">
 
                          <p><?= $model->win_bid_id ? 'Цена покупки' : ($model->max_bid ? 'Последняя ставка' : 'Стартовая цена')?>:</p>
-                        <span id="curr_price"><?= $model->win_bid_id ? Yii::$app->formatter->asDecimal($model->win_bid->value) : Yii::$app->formatter->asDecimal($model->curr_price) ?></span>
+                        <span id="curr_price"><?= $model->win_bid_id ? Yii::$app->formatter->asDecimal($model->win_bid->value) : Yii::$app->formatter->asDecimal($model->curr_price) ?> <?= $model->auction->currency?></span>
                     </div>
                     <?php if($model->canDoBid() && false ): // todo: !!!!!!?>
                     <div class="form-group">

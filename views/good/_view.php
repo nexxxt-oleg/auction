@@ -39,6 +39,7 @@ use \app\models\auction\GoodFavorite;
         <?php endif?>
     </div>
     <div class="auction-item__price">
+        <? $this->registerCss(".auction-item__price .price span:after { content: '{$model->auction->currency}'; }"); ?>
         <?php if ($model->auction->active == \app\models\auction\Auction::ACTIVE_FLAG):?>
             <span class="price price--start">
             <p>Стартовая цена:</p>
