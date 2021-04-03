@@ -43,6 +43,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'start_date',
             'end_date',
             'active',
+            'currency',
         ],
     ]) ?>
 
