@@ -22,7 +22,7 @@ class OutbidMailForm extends Model
         $bid = Bid::findOne($this->bidId);
         $toUser = User::findOne($bid->user_id);
         $subject = 'Ваша ставка перебита';
-        $body = "Ваша ставка в размере {$bid->value} на лот {$bid->good->name} перебита ставкой {$bid->good->max_bid->value}.\n";
+        $body = "Ваша ставка в размере {$bid->valueWithCurrency} на лот {$bid->good->name} перебита ставкой {$bid->good->max_bid->valueWithCurrency}.\n";
         $body .= "Дата окончания аукциона: {$bid->good->auction->end_date}";
         Yii::$app->mailer->compose()
             ->setTo($toUser->email)

@@ -143,7 +143,7 @@ $positionsCont = $cart->getPositions();
                         <a href="<?= Yii::$app->urlManager->createUrl(['/good', 'id' => $goodItem->id])?>"><?= $goodItem->name?></a>
                         <div class="box-wrap">
                             <span>Наибольшая ставка</span>
-                            <span class="price"><?= Yii::$app->formatter->asDecimal($goodItem->max_bid->value)?></span>
+                            <span class="price"><?= Yii::$app->formatter->asDecimal($goodItem->max_bid->value)?> <?=$goodItem->auction->currency?></span>
                         </div>
                         <div class="box-wrap">
                             <span>Ваша ставка</span>

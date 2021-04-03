@@ -15,6 +15,7 @@ use yii\db\Expression;
  * @property integer $user_id
  * @property integer $good_id
  * @property string $date
+ * @property string $valueWithCurrency
  *
  * @property User $user
  * @property Good $good
@@ -41,6 +42,11 @@ class Bid extends \yii\db\ActiveRecord
     public function getGood()
     {
         return $this->hasOne(Good::className(), ['id' => 'good_id']);
+    }
+
+    public function getValueWithCurrency()
+    {
+        return "$this->value {$this->good->auction->currency}";
     }
 
     /**

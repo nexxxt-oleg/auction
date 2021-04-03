@@ -140,7 +140,7 @@ $bc[] = $this->title;
                         <?php endif;?>
 						<div class="lot-content__price__row <?= $model->win_bid_id ? 'start' : ($model->max_bid ? '' : 'start')?>">
 							<p id="price-name"><?= $model->win_bid_id ? 'Цена покупки' : ($model->max_bid ? 'Последняя ставка' : 'Стартовая цена')?>:</p>
-							<span id="curr_price">$ <?= $model->win_bid_id ? Yii::$app->formatter->asDecimal($model->win_bid->value) : Yii::$app->formatter->asDecimal($model->curr_price) ?></span>
+							<span id="curr_price"><?= $model->auction->currency?> <?= $model->win_bid_id ? Yii::$app->formatter->asDecimal($model->win_bid->value) : Yii::$app->formatter->asDecimal($model->curr_price) ?></span>
 						</div>
                         <?php if ($model->mpc_price):?>
 							<div style="margin-top: 10px;">
@@ -163,6 +163,7 @@ $bc[] = $this->title;
                         <?= Html::hiddenInput('step', $model->calculateStep(), ['id' => 'bid-step'])?>
                         <div class="offer-price">
                             <div class="offer-price__col-value">
+                              <? $this->registerCss(".select2-selection__rendered::after { content: '{$model->auction->currency}'; }"); ?>
                                 <?= Html::dropDownList('bid_value', $model->getNextBidVal(), $model->getAvaibleBidVals(), [
                                   'class' => '',
                                   'id' => 'bid-value',

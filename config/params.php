@@ -2,7 +2,7 @@
 
 return [
     'adminEmail' => 'auction@auction.warstory.ru',
-    'supportEmail' => 'admin@auction.warstory.ru',
+    'supportEmail' => 'auction@auction.warstory.ru', // из-за конфига по smtp адреса должны быть одинаковыми
     'samonovEmail' => 'and.samonov@gmail.com',
     'showIndexVideo' => true,
     'phone' => '8-800-222-1941',

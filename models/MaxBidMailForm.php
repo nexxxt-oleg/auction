@@ -20,7 +20,7 @@ class MaxBidMailForm extends Model
     {
         $bid = Bid::findOne($this->bidId);
         $subject = 'Ваша ставка является максимальной';
-        $body = "Ваша ставка в размере {$bid->value} на лот {$bid->good->name} является максимальной.\n";
+        $body = "Ваша ставка в размере {$bid->valueWithCurrency} на лот {$bid->good->name} является максимальной.\n";
         $body .= "Дата окончания аукциона: {$bid->good->auction->end_date}";
         Yii::$app->mailer->compose()
             ->setTo($bid->user->email)

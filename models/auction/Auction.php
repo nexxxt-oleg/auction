@@ -17,6 +17,7 @@ use Yii;
  * @property string $start_date
  * @property string $end_date
  * @property string $active
+ * @property string $currency
  *
  * @property Category[] $categories
  * @property Good[] $goods
@@ -104,8 +105,9 @@ class Auction extends \yii\db\ActiveRecord
         return [
             [['name', 'description', 'start_date', 'end_date', 'active'], 'required'],
             [['active_date', 'start_date', 'end_date'], 'safe'],
-            [['name', 'description', 'url'], 'string', 'max' => 255],
+            [['name', 'description', 'url', 'currency'], 'string', 'max' => 255],
             [['active'], 'string', 'max' => 1],
+            ['currency', 'default', 'value' => '$'],
         ];
     }
 
@@ -123,6 +125,7 @@ class Auction extends \yii\db\ActiveRecord
             'start_date' => 'Дата начала',
             'end_date' => 'Дата конца',
             'active' => 'Флаг активности',
+            'currency' => 'Валюта',
         ];
     }
 }

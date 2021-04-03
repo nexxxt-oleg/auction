@@ -20,7 +20,7 @@ class WinbidMailForm extends Model
     {
         $bid = Bid::findOne($this->bidId);
         $subject = 'Ваша ставка победила в аукционе';
-        $body = "Ваша ставка в размере {$bid->value} на лот {$bid->good->name} победила в аукционе.\n";
+        $body = "Ваша ставка в размере {$bid->valueWithCurrency} на лот {$bid->good->name} победила в аукционе.\n";
         Yii::$app->mailer->compose()
             ->setTo($bid->user->email)
             ->setFrom([Yii::$app->params['adminEmail'] => Yii::$app->name])
