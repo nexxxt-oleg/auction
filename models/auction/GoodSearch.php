@@ -22,6 +22,7 @@ class GoodSearch extends Good
     public $top_menu;
     public $next_flag;
     protected $minPrice = 0, $maxPrice = 0;
+    public $is_test = null;
 
     public $searchString;
 
@@ -34,6 +35,7 @@ class GoodSearch extends Good
             [['auction_id', 'start_price', 'accept_price', 'end_price', 'curr_bid_id', 'win_bid_id', 'status', ], 'integer'],
             [['name', 'description', 'searchString'], 'string', 'max' => 255],
             [['filter_id', 'category_id'], 'each', 'rule' => ['integer']],
+            [['is_test'], 'default', 'value' => false],
             [['price', 'top_menu', 'next_flag'], 'safe'],
         ];
     }
@@ -71,6 +73,7 @@ class GoodSearch extends Good
 
         // load the search form data and validate
         if (!($this->load($params) && $this->validate())) {
+            $query->andWhere('1=0');
             return $dataProvider;
         }
 
@@ -78,12 +81,12 @@ class GoodSearch extends Good
             if ($this->top_menu == 'all') {}
             elseif ($this->top_menu == 'next') {
                 /** @var Auction|null $auNearest */
-                if($auNearest = Auction::find()->where(['active' => $this->next_flag])->orderBy(['end_date' => SORT_DESC, 'start_date' => SORT_DESC])->one()) {
+                if($auNearest = Auction::find()->notTest()->andWhere(['active' => $this->next_flag])
+                    ->orderBy(['end_date' => SORT_DESC, 'start_date' => SORT_DESC])->one()) {
                     $query->andWhere([
                         "$auTable.id" => $auNearest->id
                     ]);
                 }
-
             }
             elseif (strpos($this->top_menu, 'category') !== false) {
                 $catId = substr($this->top_menu, 8);
@@ -120,6 +123,10 @@ class GoodSearch extends Good
             if (isset($arPrice[0]) && isset($arPrice[1])) {
                 $query->andFilterWhere(['between', 'start_price', $arPrice[0], $arPrice[1]]);
             }
+        }
+
+        if ($this->is_test !== null) {
+            $query->andWhere(['auction_id' => Auction::find()->select('id')->where(['is_test' => $this->is_test])]);
         }
 
         return $dataProvider;
@@ -159,7 +166,7 @@ class GoodSearch extends Good
             if ($this->top_menu == 'all') {}
             elseif ($this->top_menu == 'next') {
                 /** @var Auction|null $auNearest */
-                if($auNearest = Auction::find()->where(['active' => $this->next_flag])->orderBy(['end_date' => SORT_DESC, 'start_date' => SORT_DESC])->one()) {
+                if($auNearest = Auction::find()->notTest()->andWhere(['active' => $this->next_flag])->orderBy(['end_date' => SORT_DESC, 'start_date' => SORT_DESC])->one()) {
                     $catFinder->andWhere([
                         "$auTable.id" => $auNearest->id
                     ]);

@@ -18,6 +18,7 @@ use Yii;
  * @property string $end_date
  * @property string $active
  * @property string $currency
+ * @property boolean $is_test
  *
  * @property Category[] $categories
  * @property Good[] $goods
@@ -30,6 +31,11 @@ class Auction extends \yii\db\ActiveRecord
     const DISABLE_FLAG = 'N';
     const VISIBLE_FLAG = 'V';
     const PAST_FLAG = 'P';
+
+    public static function find()
+    {
+        return new AuctionQuery(get_called_class());
+    }
 
     public static function getArActive () {
         return [
@@ -108,6 +114,7 @@ class Auction extends \yii\db\ActiveRecord
             [['name', 'description', 'url', 'currency'], 'string', 'max' => 255],
             [['active'], 'string', 'max' => 1],
             ['currency', 'default', 'value' => '$'],
+            [['is_test'], 'boolean'],
         ];
     }
 
@@ -126,6 +133,7 @@ class Auction extends \yii\db\ActiveRecord
             'end_date' => 'Дата конца',
             'active' => 'Флаг активности',
             'currency' => 'Валюта',
+            'is_test' => 'Тестовый (невидимый)'
         ];
     }
 }

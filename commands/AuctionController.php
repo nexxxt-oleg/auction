@@ -14,10 +14,19 @@ use Yii;
 use yii\console\Controller;
 
 class AuctionController extends Controller {
+
+    /** @var bool  */
+    public $test = false;
+
+    public function options($actionID)
+    {
+        return ['test'];
+    }
+
     public function actionProcess() {
         $f = new \yii\i18n\Formatter();
         $f->timeZone = 'Europe/Moscow';
-        $arNearestAuction = Auction::find()->where(['active' => Auction::NEAREST_FLAG])->all();
+        $arNearestAuction = Auction::find()->where(['active' => Auction::NEAREST_FLAG, 'is_test' => $this->test])->all();
         /** @var Auction $nearestAuction */
         foreach ($arNearestAuction as $nearestAuction) {
             if (CommonHelper::getUnixEpoch() >= CommonHelper::getUnixEpoch($nearestAuction, 'start_date')) {
@@ -31,7 +40,7 @@ class AuctionController extends Controller {
             }
         }
 
-        $arActiveAuction = Auction::find()->where(['active' => Auction::ACTIVE_FLAG])->all();
+        $arActiveAuction = Auction::find()->where(['active' => Auction::ACTIVE_FLAG, 'is_test' => $this->test])->all();
         /** @var Auction $activeAuction */
         foreach ($arActiveAuction as $activeAuction) {
             if (CommonHelper::getUnixEpoch() >= CommonHelper::getUnixEpoch($activeAuction, 'end_date')) {

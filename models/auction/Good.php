@@ -114,10 +114,10 @@ class Good extends \yii\db\ActiveRecord implements CartPositionInterface
     {
         return [
             [
-                'class' => TimestampBehavior::className(),
+                'class'              => TimestampBehavior::className(),
                 'createdAtAttribute' => 'add_time',
                 'updatedAtAttribute' => false,
-                'value' => new Expression('NOW()'),
+                'value'              => new Expression('NOW()'),
             ],
         ];
     }
@@ -127,7 +127,7 @@ class Good extends \yii\db\ActiveRecord implements CartPositionInterface
         return [
             static::SELL_RULE_ANY => 'За любую цену',
             static::SELL_RULE_MIN => 'За минимальную цену',
-            static::SELL_RULE_NO => 'Не продается',
+            static::SELL_RULE_NO  => 'Не продается',
         ];
     }
 
@@ -141,7 +141,7 @@ class Good extends \yii\db\ActiveRecord implements CartPositionInterface
     {
         return [
             static::TYPE_COMMON => 'Обычный товар',
-            static::TYPE_INDEX => 'Товар показывается на главной',
+            static::TYPE_INDEX  => 'Товар показывается на главной',
         ];
     }
 
@@ -154,9 +154,9 @@ class Good extends \yii\db\ActiveRecord implements CartPositionInterface
     public static function arStatus()
     {
         return [
-            static::STATUS_INIT => 'Не учавствовал в аукционе',
-            static::STATUS_SOLD => 'Продано',
-            static::STATUS_NOT_SOLD => 'Не продано',
+            static::STATUS_INIT          => 'Не учавствовал в аукционе',
+            static::STATUS_SOLD          => 'Продано',
+            static::STATUS_NOT_SOLD      => 'Не продано',
             static::STATUS_SOLD_TO_ADMIN => 'Продано администратору',
         ];
     }
@@ -293,29 +293,30 @@ class Good extends \yii\db\ActiveRecord implements CartPositionInterface
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'name' => 'Наименование',
-            'description' => 'Описание',
-            'auction_id' => 'Аукцион',
-            'category_id' => 'Категория',
-            'start_price' => 'Начальная цена',
+            'id'           => 'ID',
+            'name'         => 'Наименование',
+            'description'  => 'Описание',
+            'auction_id'   => 'Аукцион',
+            'category_id'  => 'Категория',
+            'start_price'  => 'Начальная цена',
             'accept_price' => 'Минимальная цена',
-            'mpc_price' => 'МПЦ цена',
-            'blitz_price' => 'Блитц цена',
-            'end_price' => 'Конечная цена',
-            'curr_bid_id' => 'Curr Bid ID',
-            'win_bid_id' => 'Win Bid ID',
-            'status' => 'Статус',
-            'type' => 'Тип (для главной страницы)',
-            'sell_rule' => 'Правило продажи',
-            'bid_count' => 'Кол-во ставок',
-            'max_bid' => 'Максимальная ставка',
+            'mpc_price'    => 'МПЦ цена',
+            'blitz_price'  => 'Блитц цена',
+            'end_price'    => 'Конечная цена',
+            'curr_bid_id'  => 'Curr Bid ID',
+            'win_bid_id'   => 'Win Bid ID',
+            'status'       => 'Статус',
+            'type'         => 'Тип (для главной страницы)',
+            'sell_rule'    => 'Правило продажи',
+            'bid_count'    => 'Кол-во ставок',
+            'max_bid'      => 'Максимальная ставка',
             'max_bid_user' => 'Пользователь',
-            'bid_date' => 'Время ставки',
-            'mainImage' => 'Основное изображение',
-            'extraImages' => 'Дополнительные изображения',
-            'filters' => "Фильтр (категория) - фильтр-родитель",
-            'add_time' => 'Дата добавления'
+            'bid_date'     => 'Время ставки',
+            'mainImage'    => 'Основное изображение',
+            'extraImages'  => 'Дополнительные изображения',
+            'filters'      => "Фильтр (категория) - фильтр-родитель",
+            'add_time'     => 'Дата добавления',
+            'step'         => 'Шаг',
         ];
     }
 
@@ -334,5 +335,21 @@ class Good extends \yii\db\ActiveRecord implements CartPositionInterface
 
     }
 
-
+    /**
+     * @return string
+     */
+    public function resolveBidMsg()
+    {
+        return json_encode([
+            'maxBid'   => $this->max_bid,
+            'blitz'    => $this->blitz_price,
+            'currency' => $this->auction->currency
+        ]);
+//        if (!$this->max_bid) {
+//            $out['msg'] = 'Вы хотите сделать стартовую ставку raw_bid и начать торги по этому лоту. Итого: commission_bid, включая комиссию аукциона 15%';
+//        } elseif ($this->) {}
+//        else {
+//            $out['msg'] = 'Вы хотите сделать ставку raw_bid. Итого: commission_bid, включая комиссию аукциона 15%';
+//        }
+    }
 }

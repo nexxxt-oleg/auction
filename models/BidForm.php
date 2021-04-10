@@ -40,12 +40,15 @@ class BidForm extends Model
     {
         $this->goodModel = Good::findOne($this->goodId);
         $this->value = $this->value ?: $this->goodModel->getNextBidVal();
-        if ($this->value < ($this->goodModel->start_price + $this->goodModel->step)) {
-            $this->addError($attribute, 'Минимальная ставка должна быть равна ' . ($this->goodModel->start_price + $this->goodModel->step) . ' или больше');
+        if ($this->value < $this->goodModel->start_price) {
+            $this->addError($attribute, 'Минимальная ставка должна быть равна ' . $this->goodModel->start_price . ' или больше');
         }
-        $maxBid = $this->goodModel->curr_price;
-        if ($maxBid && !($this->value >= $maxBid + $this->goodModel->step)) {
-            $this->addError($attribute, 'Минимальная ставка должна быть равна ' . ($maxBid + $this->goodModel->step) . ' или больше');
+
+        if ($this->goodModel->max_bid) {
+            $maxBid = $this->goodModel->curr_price;
+            if ($maxBid && !($this->value >= $maxBid + $this->goodModel->step)) {
+                $this->addError($attribute, 'Минимальная ставка должна быть равна ' . ($maxBid + $this->goodModel->step) . ' или больше');
+            }
         }
     }
 
@@ -89,7 +92,7 @@ class BidForm extends Model
      */
     protected function handleOutbid($oldMaxBid)
     {
-        if ($oldMaxBid->user_id != $this->userId) {
+        if ($oldMaxBid && $oldMaxBid->user_id != $this->userId) {
             $outbidForm = new OutbidMailForm(['bidId' => $oldMaxBid]);
             if ($outbidForm->validate()) {
                 $outbidForm->run();

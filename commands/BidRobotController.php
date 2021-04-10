@@ -14,6 +14,9 @@ use app\modules\admin\models\GoodRobot;
 use yii\helpers\Html;
 
 class BidRobotController extends Controller {
+    /** @var bool  */
+    public $test = false;
+
     /** @@var \yii\i18n\Formatter */
     protected $f;
 
@@ -124,7 +127,7 @@ class BidRobotController extends Controller {
     }
 
     protected function initGoods() {
-        $arActiveAuction = Auction::find()->where(['active' => Auction::ACTIVE_FLAG])->all();
+        $arActiveAuction = Auction::find()->where(['active' => Auction::ACTIVE_FLAG, 'is_test' => $this->test])->all();
         /** @var Auction $activeAuction */
         foreach ($arActiveAuction as $activeAuction) {
             /** @var Good $good */

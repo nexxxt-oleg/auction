@@ -4,6 +4,7 @@
 $(function() {
     const step =  Number.parseInt($('#bid-step').val())
     const startBid = Number.parseInt($('#bid-value').val())
+    const bidMsg = JSON.parse($('#bid-msg').val())
     // $('#make-bid').click(function() {
     //     // var bidValue = $('.lot-content__form-input').val();
     //     var btn = $(this);
@@ -44,32 +45,47 @@ $(function() {
     });
 
     $('#offer-price').click(() => {
-        var btn = $(this);
-        $.ajax({
-            url: '/basket/offer',
-            type: 'post',
-            data: {
-                // bidValue: bidValue,
-                goodId: $('#good_id').val(),
-                price: $('#bid-value').val()
-            },
-            beforeSend: function() { btn.prop('disabled', true); },
-            success: function(outMsg) {
-                if (outMsg.status == true) {
-                    $('#curr_price').text(outMsg.bidVal);
-                    $('#price-name').text('Текущая цена:');
-                    $('.action-button__link--basket span').text(outMsg.data.countCart);
-                    toastr.success(outMsg.msg, null, { onHidden: () => { window.location.reload() }});
-                } else {
-                    toastr.error(outMsg.msgError);
-                }
+        const btn = $(this);
+        const bidVal = $('#bid-value').val()
+        const bidMsg = resolveBidMsg(bidVal)
+        Swal.fire({
+            title: 'Вы уверены?',
+            text: bidMsg.msg,
+            icon: 'warning',
+            cancelButtonText: 'Отмена',
+            showCancelButton: true,
+            confirmButtonColor: '#518145',
+            cancelButtonColor: '#9a9a9a',
+            confirmButtonText: bidMsg.confirm
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: '/basket/offer',
+                    type: 'post',
+                    data: {
+                        // bidValue: bidValue,
+                        goodId: $('#good_id').val(),
+                        price: bidVal
+                    },
+                    beforeSend: function() { btn.prop('disabled', true); },
+                    success: function(outMsg) {
+                        if (outMsg.status == true) {
+                            $('#curr_price').text(outMsg.bidVal);
+                            $('#price-name').text('Текущая цена:');
+                            $('.action-button__link--basket span').text(outMsg.data.countCart);
+                            toastr.success(outMsg.msg, null, { onHidden: () => { window.location.reload() }});
+                        } else {
+                            toastr.error(outMsg.msgError);
+                        }
 
-            },
-            error: function (xhr, textStatus, e) {
-                toastr.error(textStatus);
-            },
-            complete: function() {btn.prop('disabled', false);}
-        });
+                    },
+                    error: function (xhr, textStatus, e) {
+                        toastr.error(textStatus);
+                    },
+                    complete: function() {btn.prop('disabled', false);}
+                });
+            }
+        })
     })
 
     $('#bid-up').click(() => {
@@ -94,5 +110,21 @@ $(function() {
             const newOption = new Option(val, val, true, true);
             $('#bid-value').append(newOption).trigger('change');
         }
+    }
+
+    function resolveBidMsg(bidVal) {
+        const commissionBid = Math.round(bidVal * 1.15)
+        let out = {msg: '', confirm: 'Сделать ставку'};
+        if (!bidMsg.maxBid) {
+            out.msg = `Вы хотите сделать стартовую ставку ${bidVal} ${bidMsg.currency} и начать торги по этому лоту. Итого: ${commissionBid} ${bidMsg.currency}, включая комиссию аукциона 15%`
+        } else if (bidVal == bidMsg.blitz) {
+            out.msg = `Ваша ставка соответствует Блитц цене и будет победной на торгах по этому лоту.  Итого: ${commissionBid} ${bidMsg.currency}, включая комиссию аукциона 15%`
+            out.confirm = 'Купить'
+        } else if (bidVal == startBid + step || bidVal == startBid) {
+            out.msg = `Вы хотите сделать ставку ${bidVal} ${bidMsg.currency}. Итого: ${commissionBid} ${bidMsg.currency}, включая комиссию аукциона 15%`
+        } else {
+            out.msg = `Вы хотите установить предельную ставку ${bidVal} ${bidMsg.currency} по этому лоту. Все ставки не достигшие Вашего предела будут перебиты Вами автоматически. Итого, в случае достижения предельной ставки: ${commissionBid} ${bidMsg.currency}, включая комиссию аукциона 15%`
+        }
+        return out;
     }
 });

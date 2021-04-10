@@ -117,15 +117,15 @@ if (Yii::$app->session->getFlash('success')) {
             /** @var  $pastAuction Auction|null */
             $nearestActiveAuction = null;
             $nearestActiveFlag = null;
-            $pastAuction = Auction::find()->where([
+            $pastAuction = Auction::find()->notTest()->andWhere([
                 'active' => Auction::PAST_FLAG,
             ])->orderBy(['end_date' => SORT_DESC])->one();
-            $nextAuction = $nearestActiveAuction = Auction::find()->where([
+            $nextAuction = $nearestActiveAuction = Auction::find()->notTest()->andWhere([
                 'active' => Auction::ACTIVE_FLAG,
             ])->one();
             $auFlag = $nearestActiveFlag = Auction::ACTIVE_FLAG;
             if (!$nextAuction) {
-                $nextAuction = $nearestActiveAuction = Auction::find()->where([
+                $nextAuction = $nearestActiveAuction = Auction::find()->notTest()->andWhere([
                     'active' => Auction::NEAREST_FLAG,
                 ])->one();
                 $auFlag = $nearestActiveFlag = Auction::NEAREST_FLAG;

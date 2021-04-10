@@ -162,6 +162,7 @@ $this->registerCss(".select2-selection__rendered::after { content: '{$model->auc
                         <?php if(!$model->blitz_price || ($model->blitz_price && $model->curr_price < $model->blitz_price)):?>
                         <?= Html::hiddenInput('good_id', $model->id, ['id' => 'good_id'])?>
                         <?= Html::hiddenInput('step', $model->calculateStep(), ['id' => 'bid-step'])?>
+                        <?= Html::hiddenInput('bid-msg', $model->resolveBidMsg(), ['id' => 'bid-msg'])?>
                         <div class="offer-price">
                             <div class="offer-price__col-value">
                                 <?= Html::dropDownList('bid_value', $model->getNextBidVal(), $model->getAvaibleBidVals(), [

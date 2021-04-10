@@ -36,7 +36,8 @@
         "kartik-v/yii2-grid": "^3.3",
         "kartik-v/yii2-mpdf": "^1.0",
         "kartik-v/yii2-nav-x": "^1.2",
-        "kartik-v/yii2-widget-select2": "^2.2"
+        "kartik-v/yii2-widget-select2": "^2.2",
+      "ext-json": "*"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "*",

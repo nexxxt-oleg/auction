@@ -56,8 +56,8 @@ class OfferPriceForm extends Model
         }
         $out->setTrue("На лот {$this->goodModel->name} предложена максимальная цена выкупа $goodUserPrice->price. Ставки до этой цены будут делаться автоматически");
 
-        $winBidUserId = $this->goodModel->win_bid->user_id ?? null;
-        if ($winBidUserId !== $this->userId) {
+        $maxBidUserId = $this->goodModel->max_bid->user_id ?? null;
+        if ($maxBidUserId !== $this->userId) {
             $bidForm = new BidForm(['goodId' => $this->goodId, 'userId' => $this->userId, 'isOfferBid' => false]);
             if ($bidForm->validate()) {
                 $bidForm->run();

@@ -32,6 +32,7 @@ class AppAsset extends AssetBundle
         'css/media.css',
     ];
     public $js = [
+        'js/sweetalert2@10.js',
         'js/makeup/jquery.fullPage.min.js',
         'js/makeup/jquery.countdown.js',
         'js/makeup/jquery.inputmask.bundle.min.js',

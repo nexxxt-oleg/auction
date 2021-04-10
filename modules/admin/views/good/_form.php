@@ -29,6 +29,8 @@ use app\models\auction\Good;
 
     <?= $form->field($model, 'start_price')->textInput() ?>
 
+    <?= $form->field($model, 'step')->textInput() ?>
+
     <?= $form->field($model, 'accept_price')->textInput() ?>
 
     <?= $form->field($model, 'mpc_price')->textInput() ?>

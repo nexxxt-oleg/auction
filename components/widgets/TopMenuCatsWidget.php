@@ -25,17 +25,17 @@ class TopMenuCatsWidget extends Widget{
         if(isset($_REQUEST['GoodSearch']['next_flag'])) {$this->auFlag = $_REQUEST['GoodSearch']['next_flag'];}
         else {
             /** @var  $nextAuction Auction */
-            $nextAuction = Auction::find()->where([
+            $nextAuction = Auction::find()->notTest()->andWhere([
                 'active' => Auction::ACTIVE_FLAG,
             ])->one();
             $this->auFlag = Auction::ACTIVE_FLAG;
             if (!$nextAuction) {
-                $nextAuction = Auction::find()->where([
+                $nextAuction = Auction::find()->notTest()->andWhere([
                     'active' => Auction::NEAREST_FLAG,
                 ])->one();
                 $this->auFlag = Auction::NEAREST_FLAG;
                 if (!$nextAuction) {
-                    $nextAuction = Auction::find()->where([
+                    $nextAuction = Auction::find()->notTest()->andWhere([
                         'active' => Auction::PAST_FLAG,
                     ])->orderBy(['end_date' => SORT_DESC])->one();
                     $this->auFlag = Auction::PAST_FLAG;
