@@ -41,6 +41,7 @@ use \kartik\datecontrol\DateControl;
     ]) ?>
 
     <?= $form->field($model, 'currency')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'is_test')->dropDownList([false => 'Нормальный', true => 'Тестовый (невидимый)']) ?>
 
     <?php $model->active = $model->isNewRecord ? \app\models\auction\Auction::DISABLE_FLAG : $model->active;
     echo $form->field($model, 'active')->dropDownList(\app\models\auction\Auction::getArActive()) ?>

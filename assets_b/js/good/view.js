@@ -4,7 +4,6 @@
 $(function() {
     const step =  Number.parseInt($('#bid-step').val())
     const startBid = Number.parseInt($('#bid-value').val())
-    const bidMsg = JSON.parse($('#bid-msg').val())
     // $('#make-bid').click(function() {
     //     // var bidValue = $('.lot-content__form-input').val();
     //     var btn = $(this);
@@ -114,6 +113,7 @@ $(function() {
 
     function resolveBidMsg(bidVal) {
         const commissionBid = Math.round(bidVal * 1.15)
+        const bidMsg = JSON.parse($('#bid-msg').val())
         let out = {msg: '', confirm: 'Сделать ставку'};
         if (!bidMsg.maxBid) {
             out.msg = `Вы хотите сделать стартовую ставку ${bidVal} ${bidMsg.currency} и начать торги по этому лоту. Итого: ${commissionBid} ${bidMsg.currency}, включая комиссию аукциона 15%`
