@@ -179,6 +179,7 @@ $this->registerCss(".select2-selection__rendered::after { content: '{$model->auc
                                 </div>
                             </div>
                             <button id="offer-price" class="lot-content__form-button">СДЕЛАТЬ СТАВКУ</button>
+                            <div class="offer-price__commission text-right">Комиссия аукциона: 15%</div>
                         </div>
                         <?php endif?>
 					<?php elseif ($model->auction->active == Auction::NEAREST_FLAG):?>
@@ -201,7 +202,7 @@ $this->registerCss(".select2-selection__rendered::after { content: '{$model->auc
                                 </div>
                             </div>
 							<button id="show-price" class="lot-content__form-button">СДЕЛАТЬ СТАВКУ</button>
-                            
+                            <div class="offer-price__commission text-right">Комиссия аукциона: 15%</div>
                         </div>
                         <?php endif?>
                     <?php endif?>
