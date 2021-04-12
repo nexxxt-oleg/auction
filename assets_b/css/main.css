@@ -1455,24 +1455,51 @@ button.mfp-arrow-right {
 }
 .auction-item__img-mask {
   position: absolute;
-  z-index: 1;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  left: 0;
-  background-color: rgba(19,61,17,0.89);
+  z-index: 10;
+  top: 50%;
   opacity: 0;
+  width: 100%;
+  margin-top: -20px;
+  left: 0;
   -webkit-transition: opacity 0.4s;
   -moz-transition: opacity 0.4s;
   transition: opacity 0.4s;
 }
+.auction-item__img__link {
+  display: block;
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+}
+.auction-item__img__link::after {
+  content: "";
+  background-color: rgba(19,61,17,0.89);
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  -webkit-transition: opacity 0.4s;
+  -moz-transition: opacity 0.4s;
+  transition: opacity 0.4s;
+  opacity: 0;
+}
+.auction-item__img:hover .auction-item__img__link::after {
+  opacity: 1;
+}
+.auction-item__img img {
+  display: block;
+  position: relative;
+  z-index: 1;
+}
 .auction-item__img-mask span {
   position: absolute;
   width: 180px;
-  height: 95px;
-  top: 50%;
+  height: 40px;
+  top: 0;
   left: 50%;
-  margin: -47.5px 0 0 -90px;
+  margin: 0 0 0 -90px;
 }
 .auction-item__img-mask a {
   display: block;
@@ -2111,6 +2138,7 @@ button.mfp-arrow-right {
   /*justify-content:start;*/
   padding-top: 25px;
   border-top: 1px solid #DEDEDE;
+  flex-wrap: wrap;
 }
 .lot-content__form.max-price .offer-price {
   border-top-color: rgba(181,200,165,0.25);
@@ -2122,6 +2150,11 @@ button.mfp-arrow-right {
   color: #fff;
   width: 20px;
   height: 24px;
+}
+.offer-price__commission {
+  flex-basis: 100%;
+  padding-top: 10px;
+  color: #8E8B8B;
 }
 
 .offer-price .btn-group-vertical button {
