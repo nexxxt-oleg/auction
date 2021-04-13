@@ -90,5 +90,8 @@ use \app\models\auction\GoodFavorite;
                 <li><img src="/assets_b/img/icon/item-watch.svg" alt=""></li>
             <?php endif ?>
         </ul>
+        <div class="auction-item__footer">
+            Комиссия аукциона: 15%
+        </div>
     </div>
 </div>

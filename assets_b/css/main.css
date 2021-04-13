@@ -1501,6 +1501,13 @@ button.mfp-arrow-right {
   left: 50%;
   margin: 0 0 0 -90px;
 }
+.auction-item__footer {
+  clear: both;
+  text-align: center;
+  color: #909c8f;
+  font-size: 11px;
+
+}
 .auction-item__img-mask a {
   display: block;
   width: 180px;
@@ -1569,7 +1576,7 @@ button.mfp-arrow-right {
 }
 .auction-item__price {
   display: block;
-  height: 70px;
+  height: 75px;
 }
 .auction-item__price .price {
   display: inline-block;
