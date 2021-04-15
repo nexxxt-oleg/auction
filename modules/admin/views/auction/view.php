@@ -56,9 +56,9 @@ $this->params['breadcrumbs'][] = $this->title;
                 echo "$user->name($user->id)";
             }?>
         </p>
-        <h3>Лотов просмотрено/в избранном/сделано ставок: <?= "<a href='".Yii::$app->urlManager->createUrl(['/admingoodstat/viewed', CommonHelper::getShortClassName(GoodStat::className()) => ['auction_id' => $model->id]])."'>{$arViewFavorBid['viewedCount']}</a> /
-            <a href='".Yii::$app->urlManager->createUrl(['/admingoodstat/favorite', CommonHelper::getShortClassName(GoodStat::className()) => ['auction_id' => $model->id]])."'>{$arViewFavorBid['favoriteCount']}</a> /
-            <a href='".Yii::$app->urlManager->createUrl(['/adminbid/index', CommonHelper::getShortClassName(\app\modules\admin\models\search\GoodSearch::className()) => ['auction_id' => $model->id]])."'>{$arViewFavorBid['bidCount']}</a>"?>
+        <h3>Лотов просмотрено/в избранном/сделано ставок: <?= "<a href='".Yii::$app->urlManager->createUrl(['/admin/goodstat/viewed', CommonHelper::getShortClassName(GoodStat::className()) => ['auction_id' => $model->id]])."'>{$arViewFavorBid['viewedCount']}</a> /
+            <a href='".Yii::$app->urlManager->createUrl(['/admin/goodstat/favorite', CommonHelper::getShortClassName(GoodStat::className()) => ['auction_id' => $model->id]])."'>{$arViewFavorBid['favoriteCount']}</a> /
+            <a href='".Yii::$app->urlManager->createUrl(['/admin/bid/index', CommonHelper::getShortClassName(\app\modules\admin\models\search\GoodSearch::className()) => ['auction_id' => $model->id]])."'>{$arViewFavorBid['bidCount']}</a>"?>
         </h3>
     </div>
 

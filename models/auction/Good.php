@@ -30,6 +30,7 @@ use yz\shoppingcart\CartPositionInterface;
  * @property integer $sell_rule
  * @property integer $add_time
  * @property integer $step
+ * @property boolean $is_blitz_reached
  *
  * @property Bid[] $bids
  * @property Filter[] $filters
@@ -60,6 +61,7 @@ class Good extends \yii\db\ActiveRecord implements CartPositionInterface
     const STATUS_SOLD = 1;
     const STATUS_NOT_SOLD = 2;
     const STATUS_SOLD_TO_ADMIN = 3;
+    const STATUS_STOPPED = 4;
 
     public $filter;
 
@@ -97,6 +99,7 @@ class Good extends \yii\db\ActiveRecord implements CartPositionInterface
             [['mainImage'], 'file', 'extensions' => ['png', 'jpg', 'gif']],
             [['extraImages'], 'file', 'extensions' => ['png', 'jpg', 'gif'], 'maxFiles' => 0],
             ['sell_rule', 'default', 'value' => static::SELL_RULE_ANY],
+            ['is_blitz_reached', 'boolean'],
         ];
     }
 
@@ -158,6 +161,7 @@ class Good extends \yii\db\ActiveRecord implements CartPositionInterface
             static::STATUS_SOLD          => 'Продано',
             static::STATUS_NOT_SOLD      => 'Не продано',
             static::STATUS_SOLD_TO_ADMIN => 'Продано администратору',
+            static::STATUS_STOPPED       => 'Торги приостановлены',
         ];
     }
 
@@ -244,16 +248,19 @@ class Good extends \yii\db\ActiveRecord implements CartPositionInterface
         return $arFiles;
     }
 
-    public function canDoBid()
+    public function canDoBid($user = null)
     {
+        $user = $user ?: Yii::$app->user->identity;
         return $this->auction && $this->auction->active == \app\models\auction\Auction::ACTIVE_FLAG
-            && !$this->win_bid_id && (Yii::$app->user->identity && Yii::$app->user->identity->isActive());
+            && !$this->is_blitz_reached
+            && $this->status != Good::STATUS_STOPPED
+            && !$this->win_bid_id && ($user && $user->isActive());
     }
 
     public function getNextBidVal()
     {
         $goodPrice = $this->curr_price ?: $this->start_price;
-        return $this->max_bid ? round($goodPrice + $this->calculateStep() + 5, -1) : $goodPrice;
+        return $this->max_bid ? $goodPrice + $this->calculateStep() : $goodPrice;
     }
 
     public function calculateStep()
@@ -268,9 +275,9 @@ class Good extends \yii\db\ActiveRecord implements CartPositionInterface
 
         for ($i = 0; $i < $count; $i++) {
             if ($i == 0) {
-                $goodPrice = $this->max_bid ? round($goodPrice + $this->calculateStep() + 5, -1) : $goodPrice;
+                $goodPrice = $this->max_bid ? $goodPrice + $this->calculateStep() : $goodPrice;
             } else {
-                $goodPrice = round($goodPrice + $this->calculateStep() + 5, -1);
+                $goodPrice = $goodPrice + $this->calculateStep();
             }
             $out[$goodPrice] = $goodPrice;
         }
@@ -351,5 +358,14 @@ class Good extends \yii\db\ActiveRecord implements CartPositionInterface
 //        else {
 //            $out['msg'] = 'Вы хотите сделать ставку raw_bid. Итого: commission_bid, включая комиссию аукциона 15%';
 //        }
+    }
+
+    public function printAuctionName()
+    {
+        if ($this->auction) {
+            return "{$this->auction->name} ({$this->auction_id})";
+        } else {
+            return "$this->auction_id - Удалён";
+        }
     }
 }

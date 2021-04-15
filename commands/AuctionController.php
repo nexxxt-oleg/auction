@@ -51,6 +51,9 @@ class AuctionController extends Controller {
 
                 /** @var Good $good */
                 foreach ($activeAuction->goods as $good) {
+                    if ($good->status == Good::STATUS_STOPPED) {
+                        continue;
+                    }
                     $good->status = Good::STATUS_NOT_SOLD;
                     /** @var Bid $maxBid */
                     if($maxBid = $good->getBids()->orderBy(['value' => SORT_DESC])->one()) {

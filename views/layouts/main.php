@@ -451,6 +451,9 @@ use \app\models\auction\GoodFavorite;
     <p>Для предложения блитц-цены свяжитесь с нами по телефону <?= Yii::$app->params['phone'] ?> и скажите артикул
       лота</p>
   </div>
+  <div class="row">
+    <button class="center-block lot-content__form-button" id="offer-blitz">Предложить</button>
+  </div>
   <div class="clearfix"></div>
 </div>
 

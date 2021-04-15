@@ -37,6 +37,8 @@ use app\models\auction\Good;
 
     <?= $form->field($model, 'blitz_price')->textInput() ?>
 
+    <?= $form->field($model, 'is_blitz_reached')->dropDownList([false => 'Нет', true => 'Да']) ?>
+
     <?php //echo $form->field($model, 'end_price')->textInput() ?>
 
     <?php //echo $form->field($model, 'curr_bid_id')->textInput() ?>

@@ -1,5 +1,4 @@
 <?php
-
 namespace app\models;
 
 use app\components\CommonHelper;
@@ -11,6 +10,7 @@ use app\models\auction\GoodUserPrice;
 use app\models\auth\User;
 use app\modules\admin\models\GoodRobot;
 use app\modules\admin\models\RobotInterval;
+use app\validators\CanDoBidValidator;
 use Yii;
 use yii\base\Model;
 use yii\helpers\Html;
@@ -19,7 +19,7 @@ class BidForm extends Model
 {
     public $goodId;
     public $userId;
-    public $isOfferBid = false;
+    public $offerPrice = null;
     public $value;
 
     /** @var Good */
@@ -31,8 +31,9 @@ class BidForm extends Model
             [['goodId', 'userId'], 'required'],
             ['goodId', 'exist', 'targetClass' => Good::class, 'targetAttribute' => ['goodId' => 'id']],
             ['userId', 'exist', 'targetClass' => User::class, 'targetAttribute' => ['userId' => 'id']],
-            ['isOfferBid', 'boolean'],
+            ['offerPrice', 'integer'],
             ['value', 'validateValue', 'skipOnEmpty' => false],
+            ['goodId', CanDoBidValidator::class, 'userId' => $this->userId],
         ];
     }
 
@@ -49,6 +50,10 @@ class BidForm extends Model
             if ($maxBid && !($this->value >= $maxBid + $this->goodModel->step)) {
                 $this->addError($attribute, 'Минимальная ставка должна быть равна ' . ($maxBid + $this->goodModel->step) . ' или больше');
             }
+        }
+
+        if ($this->goodModel->is_blitz_reached) {
+            $this->addError($attribute, "На лот {$this->goodModel->name} предложена блитц цена. Торги по лоту приостановлены.");
         }
     }
 
@@ -69,7 +74,8 @@ class BidForm extends Model
             $this->handleRobots($bidModel);
             $this->handleOutbid($oldMaxBid);
             $this->handleMaxBid($bidModel->id);
-            $out->setTrue("На лот {$this->goodModel->name} сделана ставка $bidModel->value");
+            $this->handleBlitz($bidModel);
+            $out->setTrue("На лот {$this->goodModel->name} сделана ставка $bidModel->value {$this->goodModel->auction->currency}");
             $this->handleUserPrices();
         } else {
             $out->setFalse(Html::errorSummary($bidModel));
@@ -86,6 +92,19 @@ class BidForm extends Model
             $maxBidForm->run();
         }
     }
+
+    /**
+     * @param Bid $bidModel
+     */
+    protected function handleBlitz($bidModel)
+    {
+        if ($bidModel->value >= $bidModel->good->blitz_price) {
+            $bidModel->good->is_blitz_reached = true;
+            $bidModel->good->save();
+        }
+    }
+
+
 
     /**
      * @param Bid $oldMaxBid
@@ -121,18 +140,28 @@ class BidForm extends Model
         /** @var GoodUserPrice $goodUserPrice */
         $goodUserPrice = GoodUserPrice::find()
             ->where(['good_id' => $this->goodId])
-            ->andWhere(['>=', 'price', $this->goodModel->getNextBidVal()])
+            ->andWhere(['>', 'price', $this->goodModel->curr_price])
             ->andWhere(['<>', 'user_id', $this->userId])
             ->orderBy('id')->one();
         if ($goodUserPrice) {
             $bidForm = new BidForm([
                 'goodId' => $this->goodId,
                 'userId' => $goodUserPrice->user_id,
-                'value' => $this->calculateNextBid($goodUserPrice->price)]);
+                'value' => $this->calculateNextBid($this->offerPrice ?: $this->value)]);
             if ($bidForm->validate()) {
                 $bidForm->run();
             }
         }
+    }
+
+    /**
+     * Если цена следующего шага, больше чем предложенная цена, то использовать предложенную
+     * @param $goodUserPrice
+     * @return float|int
+     */
+    private function calculateNextUserPrice($goodUserPrice)
+    {
+        return $this->calculateNextBid($goodUserPrice->price) > $goodUserPrice->price ? $goodUserPrice->price : $this->calculateNextBid($goodUserPrice->price);
     }
 
     protected function calculateNextBid($levelPrice)
