@@ -230,6 +230,12 @@ $this->registerCss(".select2-selection__rendered::after { content: '{$model->auc
                 <?php endif;?>
 
                 <div class="lot-content__description">
+                    <br>
+                    <blockquote>
+                        <h4>Внимание: </h4>
+                        доставка данного лота осуществляется только по РФ. Если Вы находитесь за пределами РФ и у вас есть свой способ доставки,  мы обеспечим ответственное хранение оплаченного Вами заказа до Вашего приезда,  либо отправим лот на адрес Вашего представителя в РФ
+                    </blockquote>
+
                     <h5 class="lot-content__description-title">
                         Описание:
                     </h5>

@@ -48,7 +48,7 @@ $(function() {
         const bidVal = $('#bid-value').val()
         const bidMsg = resolveBidMsg(bidVal)
         Swal.fire({
-            title: 'Вы уверены?',
+            //title: 'Вы уверены?',
             text: bidMsg.msg,
             icon: 'warning',
             cancelButtonText: 'Отмена',
