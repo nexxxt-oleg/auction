@@ -16,6 +16,7 @@ class GoodSearch extends Good
 {
     public $max_bid_date;
     public $bid_count;
+    public $is_blitz_reached;
 
     /**
      * @inheritdoc
@@ -25,6 +26,7 @@ class GoodSearch extends Good
         return [
             [['id', 'auction_id', 'category_id', 'start_price', 'accept_price', 'end_price', 'curr_bid_id', 'win_bid_id', 'status', 'type', 'bid_count'], 'integer'],
             [['name', 'description', 'max_bid_date'], 'safe'],
+            ['is_blitz_reached', 'boolean'],
         ];
     }
 
@@ -76,6 +78,7 @@ class GoodSearch extends Good
             'g.win_bid_id' => $this->win_bid_id,
             'g.status' => $this->status,
             'g.sell_rule' => $this->sell_rule,
+            'g.is_blitz_reached' => $this->is_blitz_reached,
         ]);
 
         $query->andFilterWhere(['like', 'g.name', $this->name])

@@ -19,6 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
+        <?= Html::a('Просмотр', ['/good', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Delete', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
@@ -38,7 +39,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'description',
             [
                 'attribute' => 'auction_id',
-                'value' => "{$model->auction->name} ({$model->auction_id})",
+                'value' => $model->printAuctionName(),
             ],
             [
                 'attribute' => 'category_id',
@@ -47,6 +48,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'start_price',
             'accept_price',
             'end_price',
+            'blitz_price',
+            'is_blitz_reached',
             'curr_bid_id',
             'win_bid_id',
             [

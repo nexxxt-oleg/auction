@@ -32,7 +32,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 },
             ],
             'name',
-            'description',
             [
                 'attribute' => 'auction_id',
                 'format' => 'raw',
@@ -82,7 +81,11 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'win_bid_id',
             // 'status',
             // 'type',
-
+            [
+                'attribute' => 'is_blitz_reached',
+                'format' => 'raw',
+                'filter' => [false => 'Нет', true => 'Да']
+            ],
 
             [
                 'class' => 'yii\grid\ActionColumn',

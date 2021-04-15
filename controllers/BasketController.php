@@ -13,6 +13,7 @@ use app\components\CommonHelper;
 use app\components\MessageStatus;
 use app\components\shop\MyShoppingCart;
 use app\models\BidForm;
+use app\models\BlitzForm;
 use app\models\OfferPriceForm;
 use app\modules\admin\models\GoodRobot;
 use app\modules\admin\models\RobotInterval;
@@ -20,6 +21,7 @@ use app\models\auction\Bid;
 use app\models\auction\Good;
 use app\models\auction\GoodFavorite;
 use Yii;
+use yii\base\BaseObject;
 use yii\filters\AccessControl;
 use yii\helpers\Console;
 use yii\helpers\Html;
@@ -96,6 +98,19 @@ class BasketController extends Controller {
         $out = new MessageStatus();
         $out->setFalse(Console::errorSummary($form));
         return $out;
+    }
 
+    public function actionBlitz()
+    {
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        $form = new BlitzForm();
+        $form->load(Yii::$app->request->post(), '');
+        if ($form->validate()) {
+            $out = $form->run();
+            return $out;
+        }
+        $out = new MessageStatus();
+        $out->setFalse(Console::errorSummary($form));
+        return $out;
     }
 }

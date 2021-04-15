@@ -111,20 +111,24 @@ $(function() {
         }
     }
 
-    function resolveBidMsg(bidVal) {
-        const commissionBid = Math.round(bidVal * 1.15)
-        const bidMsg = JSON.parse($('#bid-msg').val())
-        let out = {msg: '', confirm: 'Сделать ставку'};
-        if (!bidMsg.maxBid) {
-            out.msg = `Вы хотите сделать стартовую ставку ${bidVal} ${bidMsg.currency} и начать торги по этому лоту. Итого: ${commissionBid} ${bidMsg.currency}, включая комиссию аукциона 15%`
-        } else if (bidVal == bidMsg.blitz) {
-            out.msg = `Ваша ставка соответствует Блитц цене и будет победной на торгах по этому лоту.  Итого: ${commissionBid} ${bidMsg.currency}, включая комиссию аукциона 15%`
-            out.confirm = 'Купить'
-        } else if (bidVal == startBid + step || bidVal == startBid) {
-            out.msg = `Вы хотите сделать ставку ${bidVal} ${bidMsg.currency}. Итого: ${commissionBid} ${bidMsg.currency}, включая комиссию аукциона 15%`
-        } else {
-            out.msg = `Вы хотите установить предельную ставку ${bidVal} ${bidMsg.currency} по этому лоту. Все ставки не достигшие Вашего предела будут перебиты Вами автоматически. Итого, в случае достижения предельной ставки: ${commissionBid} ${bidMsg.currency}, включая комиссию аукциона 15%`
-        }
-        return out;
+  function resolveBidMsg (bidVal) {
+    const commissionBid = Math.round(bidVal * 1.15)
+    const bidMsg = JSON.parse($('#bid-msg').val())
+    let out = { msg: '', confirm: 'Сделать ставку' }
+    if (!bidMsg.maxBid) {
+      out.msg = `Вы хотите сделать стартовую ставку ${bidVal} ${bidMsg.currency} и начать торги по этому лоту. Итого: ${commissionBid} ${bidMsg.currency}, включая комиссию аукциона 15%`
+    } else if (bidVal >= bidMsg.blitz) {
+      out.msg = `Ваша ставка соответствует Блитц цене и будет победной на торгах по этому лоту.  Итого: ${commissionBid} ${bidMsg.currency}, включая комиссию аукциона 15%`
+      out.confirm = 'Купить'
+    } else if (isItStepBid(bidVal)) {
+      out.msg = `Вы хотите сделать ставку ${bidVal} ${bidMsg.currency}. Итого: ${commissionBid} ${bidMsg.currency}, включая комиссию аукциона 15%`
+    } else {
+      out.msg = `Вы хотите установить предельную ставку ${bidVal} ${bidMsg.currency} по этому лоту. Все ставки не достигшие Вашего предела будут перебиты Вами автоматически. Итого, в случае достижения предельной ставки: ${commissionBid} ${bidMsg.currency}, включая комиссию аукциона 15%`
     }
-});
+    return out
+  }
+
+  function isItStepBid (bidVal) {
+    return bidVal == startBid + step || bidVal == startBid
+  }
+})
