@@ -444,12 +444,17 @@ use \app\models\auction\GoodFavorite;
 <div id="blitz-modal" class="mfp-hide basic-modal basic-modal--call">
   <a class="basic-modal__dismiss" href="#"><img src="/assets_b/img/icon/close-modal.png" alt=""></a>
   <div class="col-xs-12">
-    <h5 class="basic-modal__title">Предложить блитц-цену</h5>
-    <p class="basic-modal__text">Мы закроем аукцион после оплаты 10% от блитц-цены</p>
+    <h5 class="basic-modal__title">Предложить блиц-цену</h5>
+    <!--p class="basic-modal__text">Мы закроем аукцион после оплаты 10% от блитц-цены</p-->
   </div>
   <div class="col-xs-12">
-    <p>Для предложения блитц-цены свяжитесь с нами по телефону <?= Yii::$app->params['phone'] ?> и скажите артикул
-      лота</p>
+    <!--p>Для предложения блитц-цены свяжитесь с нами по телефону <?= Yii::$app->params['phone'] ?> и скажите артикул
+      лота</p-->
+      <p>Вы хотите купить лот по Блиц ставке 16500р, не дожидаясь окончания торгов.  <br>
+          Итого: 18975, включая комиссию аукциона 15%.  Свяжитесь с нами или оставьте запрос на звонок. <br>
+          Контакты: телефон 8-800-222-1941, <br>
+          телеграмм https://t.me/warstory_ru, <br>
+          почта auction@auction.warstory.ru</p>
   </div>
   <div class="row">
     <button class="center-block lot-content__form-button" id="offer-blitz">Предложить</button>
