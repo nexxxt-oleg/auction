@@ -41,7 +41,7 @@ class FilterForm extends Model
      */
     public function render($form) {
         $html = '<div class="auction-sort__slider">
-            <p>цена, руб.:</p>
+            <p>цена:</p>
             <input class="price-slider" type="text" name="name" value="" />
             </div>';
 

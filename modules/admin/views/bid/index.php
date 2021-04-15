@@ -79,7 +79,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'template' => '{view}',
                 'urlCreator' => function ($action, $model, $key, $index) {
                     if ($action === 'view') {
-                        $url = Yii::$app->urlManager->createUrl(['/admingood/view', 'id' => $model['ID']]);
+                        $url = Yii::$app->urlManager->createUrl(['/admin/good/view', 'id' => $model['ID']]);
                     } else {
                         $url = \yii\helpers\Url::toRoute([$action, 'id' => $model['ID']]);
                     }

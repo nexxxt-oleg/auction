@@ -149,7 +149,7 @@ class GoodSearch extends Good
 
         }
         $html = '<div class="auction-sort__slider">
-            <p>цена, руб.:</p>
+            <p>цена:</p>
             '.$form->field($this, 'price')->input('text', $arSliderParams)->label(false).'
 
             </div>';
