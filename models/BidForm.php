@@ -53,7 +53,7 @@ class BidForm extends Model
         }
 
         if ($this->goodModel->is_blitz_reached) {
-            $this->addError($attribute, "На лот {$this->goodModel->name} предложена блитц цена. Торги по лоту приостановлены.");
+            $this->addError($attribute, "На лот {$this->goodModel->name} предложена блиц цена. Торги по лоту приостановлены.");
         }
     }
 

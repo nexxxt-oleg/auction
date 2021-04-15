@@ -189,7 +189,7 @@ $this->registerCss(".select2-selection__rendered::after { content: '{$model->auc
                         <?php endif ?>
                         <?php if ($model->blitz_price): ?>
                             <div style="margin-top: 10px;">
-                                <p id="price-name">Блитц цена:</p>
+                                <p id="price-name">Блиц цена:</p>
                                 <span><?= Yii::$app->formatter->asDecimal($model->blitz_price) ?></span>
                             </div>
                         <?php endif ?>
@@ -254,12 +254,12 @@ $this->registerCss(".select2-selection__rendered::after { content: '{$model->auc
                 <?php if ($model->blitz_price && $model->auction->active == Auction::ACTIVE_FLAG): ?>
                     <?php if ($model->is_blitz_reached): ?>
                         <div class="feedback__call" style="margin-top: 20px;">
-                            <p>Предложена блитц цена</p>
+                            <p>Предложена блиц цена</p>
                         </div>
                     <?php else: ?>
                         <div class="feedback__call" style="margin-top: 20px;">
                             или предложите
-                            <button href="#blitz-modal" class="popup-modal">блитц-цену</button>
+                            <button href="#blitz-modal" class="popup-modal">блиц-цену</button>
                         </div>
                     <?php endif ?>
                 <?php endif ?>
