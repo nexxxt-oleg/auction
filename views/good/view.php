@@ -189,7 +189,7 @@ $this->registerCss(".select2-selection__rendered::after { content: '{$model->auc
               <?php endif ?>
               <?php if ($model->blitz_price): ?>
                 <div style="margin-top: 10px;">
-                  <p id="price-name">Блитц цена:</p>
+                  <p id="price-name">блиц цена:</p>
                   <span><?= Yii::$app->formatter->asDecimal($model->blitz_price) ?></span>
                 </div>
               <?php endif ?>
@@ -254,12 +254,12 @@ $this->registerCss(".select2-selection__rendered::after { content: '{$model->auc
           <?php if ($model->blitz_price && $model->auction->active == Auction::ACTIVE_FLAG): ?>
               <?php if ($model->is_blitz_reached): ?>
               <div class="feedback__call" style="margin-top: 20px;">
-                <p>Предложена блитц цена</p>
+                <p>Предложена блиц цена</p>
               </div>
               <?php else: ?>
               <div class="feedback__call" style="margin-top: 20px;">
                 или предложите
-                <button href="#blitz-modal" class="popup-modal">блитц-цену</button>
+                <button href="#blitz-modal" class="popup-modal">блиц-цену</button>
               </div>
               <?php endif ?>
           <?php endif ?>
@@ -391,10 +391,10 @@ $this->registerCss(".select2-selection__rendered::after { content: '{$model->auc
         <a class="basic-modal__dismiss" href="#"><img src="/assets_b/img/icon/close-modal.png" alt=""></a>
         <div class="col-xs-12">
           <h5 class="basic-modal__title">Предложить блиц-цену</h5>
-          <!--p class="basic-modal__text">Мы закроем аукцион после оплаты 10% от блитц-цены</p-->
+          <!--p class="basic-modal__text">Мы закроем аукцион после оплаты 10% от блиц-цены</p-->
         </div>
         <div class="col-xs-12">
-          <!--p>Для предложения блитц-цены свяжитесь с нами по телефону <?= Yii::$app->params['phone'] ?> и скажите артикул
+          <!--p>Для предложения блиц-цены свяжитесь с нами по телефону <?= Yii::$app->params['phone'] ?> и скажите артикул
       лота</p-->
           <p>Вы хотите купить лот по Блиц ставке <?="$model->blitz_price {$model->auction->currency}"?>, не дожидаясь окончания торгов. <br>
             Итого: <?="$model->blitzWithCommission {$model->auction->currency}"?>, включая комиссию аукциона 15%. Свяжитесь с нами или оставьте запрос на звонок. <br>

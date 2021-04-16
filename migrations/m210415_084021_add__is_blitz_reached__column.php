@@ -12,7 +12,7 @@ class m210415_084021_add__is_blitz_reached__column extends Migration
      */
     public function safeUp()
     {
-        $this->addColumn('au_good', 'is_blitz_reached', $this->boolean()->comment('Достигнута блитц-цена'));
+        $this->addColumn('au_good', 'is_blitz_reached', $this->boolean()->comment('Достигнута блиц-цена'));
     }
 
     /**

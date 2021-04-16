@@ -47,7 +47,7 @@ $(function() {
     const btn = $(this)
     Swal.fire({
       title: 'Вы уверены?',
-      text: 'Вы собираетесь предложить блитц цену!',
+      text: 'Вы собираетесь предложить блиц цену!',
       icon: 'warning',
       cancelButtonText: 'Отмена',
       showCancelButton: true,
@@ -157,7 +157,7 @@ $(function() {
     if (!bidMsg.maxBid) {
       out.msg = `Вы хотите сделать стартовую ставку ${bidVal} ${bidMsg.currency} и начать торги по этому лоту. Итого: ${commissionBid} ${bidMsg.currency}, включая комиссию аукциона 15%`
     } else if (bidVal >= bidMsg.blitz) {
-      out.msg = `Ваша ставка соответствует Блитц цене и будет победной на торгах по этому лоту.  Итого: ${commissionBid} ${bidMsg.currency}, включая комиссию аукциона 15%`
+      out.msg = `Ваша ставка соответствует блиц цене и будет победной на торгах по этому лоту.  Итого: ${commissionBid} ${bidMsg.currency}, включая комиссию аукциона 15%`
       out.confirm = 'Купить'
     } else if (isItStepBid(bidVal)) {
       out.msg = `Вы хотите сделать ставку ${bidVal} ${bidMsg.currency}. Итого: ${commissionBid} ${bidMsg.currency}, включая комиссию аукциона 15%`

@@ -309,7 +309,7 @@ class Good extends \yii\db\ActiveRecord implements CartPositionInterface
             'start_price'  => 'Начальная цена',
             'accept_price' => 'Минимальная цена',
             'mpc_price'    => 'МПЦ цена',
-            'blitz_price'  => 'Блитц цена',
+            'blitz_price'  => 'блиц цена',
             'end_price'    => 'Конечная цена',
             'curr_bid_id'  => 'Curr Bid ID',
             'win_bid_id'   => 'Win Bid ID',

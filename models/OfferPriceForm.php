@@ -41,7 +41,7 @@ class OfferPriceForm extends Model
             $this->addError($attribute, "Предложенная цена должна быть больше минимальной ставки - $bidVal {$this->goodModel->auction->currency}");
         }
         if ($this->goodModel->is_blitz_reached) {
-            $this->addError($attribute, "На лот {$this->goodModel->name} предложена блитц цена. Торги по лоту приостановлены.");
+            $this->addError($attribute, "На лот {$this->goodModel->name} предложена блиц цена. Торги по лоту приостановлены.");
         }
         if (GoodUserPrice::find()->where(['good_id' => $this->goodId, 'price' => $this->price])->one()) {
             $this->addError($attribute, "На лот {$this->goodModel->name} ранее была предложена подобная цена. Увеличьте ставку, чтобы победить в аукционе.");
