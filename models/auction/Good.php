@@ -46,6 +46,7 @@ use yz\shoppingcart\CartPositionInterface;
  * @property Category $category
  * @property GoodViewed[] $good_viewed
  * @property GoodFavorite[] $good_favorite
+ * @property int $blitzWithCommission
  *
  */
 class Good extends \yii\db\ActiveRecord implements CartPositionInterface
@@ -367,5 +368,10 @@ class Good extends \yii\db\ActiveRecord implements CartPositionInterface
         } else {
             return "$this->auction_id - Удалён";
         }
+    }
+
+    public function getBlitzWithCommission()
+    {
+        return round($this->blitz_price * 1.15);
     }
 }
