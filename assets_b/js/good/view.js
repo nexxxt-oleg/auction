@@ -43,6 +43,45 @@ $(function() {
         }
     });
 
+  $('#offer-blitz').click(() => {
+    const btn = $(this)
+    Swal.fire({
+      title: 'Вы уверены?',
+      text: 'Вы собираетесь предложить блитц цену!',
+      icon: 'warning',
+      cancelButtonText: 'Отмена',
+      showCancelButton: true,
+      confirmButtonColor: '#518145',
+      cancelButtonColor: '#9a9a9a',
+      confirmButtonText: 'Да'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        $.ajax({
+          url: '/basket/blitz',
+          type: 'post',
+          data: {
+            goodId: $('#good_id').val()
+          },
+          beforeSend: function () { btn.prop('disabled', true) },
+          success: function (outMsg) {
+            if (outMsg.status == true) {
+              $('#curr_price').text(outMsg.bidVal)
+              $('#price-name').text('Текущая цена:')
+              $('.action-button__link--basket span').text(outMsg.data.countCart)
+              toastr.success(outMsg.msg, null, { onHidden: () => { window.location.reload() } })
+            } else {
+              toastr.error(outMsg.msgError)
+            }
+          },
+          error: function (xhr, textStatus, e) {
+            toastr.error(textStatus)
+          },
+          complete: function () {btn.prop('disabled', false)}
+        })
+      }
+    })
+  });
+
     $('#offer-price').click(() => {
         const btn = $(this);
         const bidVal = $('#bid-value').val()
