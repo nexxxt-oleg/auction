@@ -156,7 +156,7 @@ $(function() {
     let out = { msg: '', confirm: 'Сделать ставку' }
     if (!bidMsg.maxBid) {
       out.msg = `Вы хотите сделать стартовую ставку ${bidVal} ${bidMsg.currency} и начать торги по этому лоту. Итого: ${commissionBid} ${bidMsg.currency}, включая комиссию аукциона 15%`
-    } else if (bidVal >= bidMsg.blitz) {
+    } else if (bidMsg.blitz && bidVal >= bidMsg.blitz) {
       out.msg = `Ваша ставка соответствует блиц цене и будет победной на торгах по этому лоту.  Итого: ${commissionBid} ${bidMsg.currency}, включая комиссию аукциона 15%`
       out.confirm = 'Купить'
     } else if (isItStepBid(bidVal)) {

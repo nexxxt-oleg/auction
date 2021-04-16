@@ -98,6 +98,9 @@ class BidForm extends Model
      */
     protected function handleBlitz($bidModel)
     {
+        if (!$bidModel->good->blitz_price) {
+            return;
+        }
         if ($bidModel->value >= $bidModel->good->blitz_price) {
             $bidModel->good->is_blitz_reached = true;
             $bidModel->good->save();
