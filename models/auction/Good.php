@@ -46,6 +46,7 @@ use yz\shoppingcart\CartPositionInterface;
  * @property Category $category
  * @property GoodViewed[] $good_viewed
  * @property GoodFavorite[] $good_favorite
+ * @property int $blitzWithCommission
  *
  */
 class Good extends \yii\db\ActiveRecord implements CartPositionInterface
@@ -308,7 +309,7 @@ class Good extends \yii\db\ActiveRecord implements CartPositionInterface
             'start_price'  => 'Начальная цена',
             'accept_price' => 'Минимальная цена',
             'mpc_price'    => 'МПЦ цена',
-            'blitz_price'  => 'Блиц цена',
+            'blitz_price'  => 'блиц цена',
             'end_price'    => 'Конечная цена',
             'curr_bid_id'  => 'Curr Bid ID',
             'win_bid_id'   => 'Win Bid ID',
@@ -367,5 +368,10 @@ class Good extends \yii\db\ActiveRecord implements CartPositionInterface
         } else {
             return "$this->auction_id - Удалён";
         }
+    }
+
+    public function getBlitzWithCommission()
+    {
+        return round($this->blitz_price * 1.15);
     }
 }
