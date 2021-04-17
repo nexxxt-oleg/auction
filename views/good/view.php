@@ -194,7 +194,52 @@ $this->registerCss(".select2-selection__rendered::after { content: '{$model->auc
                 </div>
               <?php endif ?>
 
-          </div>
+                                <?php else: ?>
+                                    <?php if ($model->win_bid->user_id == Yii::$app->user->id): ?>
+                                        <div class="min-price-info">
+                                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
+                                                 xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                        d="M3.051 3.051L12.949 12.949M15 8C15 11.866 11.866 15 8 15C4.13401 15 1 11.866 1 8C1 4.13401 4.13401 1 8 1C11.866 1 15 4.13401 15 8Z"
+                                                        stroke="#E63030" stroke-width="1.7" stroke-linecap="round"
+                                                        stroke-linejoin="round"/>
+                                            </svg>
+                                            Ваша ставка победила
+                                        </div>
+                                    <?php else: ?>
+                                        <div class="min-price-info">
+                                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
+                                                 xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                        d="M3.051 3.051L12.949 12.949M15 8C15 11.866 11.866 15 8 15C4.13401 15 1 11.866 1 8C1 4.13401 4.13401 1 8 1C11.866 1 15 4.13401 15 8Z"
+                                                        stroke="#E63030" stroke-width="1.7" stroke-linecap="round"
+                                                        stroke-linejoin="round"/>
+                                            </svg>
+                                            Вашу ставку перебили
+                                        </div>
+                                    <?php endif; ?>
+                                <?php endif; ?>
+                            <?php endif; ?>
+                        <?php endif; ?>
+                        <div class="lot-content__price__row <?= $model->win_bid_id ? 'start' : ($model->max_bid ? '' : 'start') ?>">
+                            <p
+                                    id="price-name"><?= $model->win_bid_id ? 'Цена покупки' : ($model->max_bid ? 'Последняя ставка' : 'Стартовая цена') ?>
+                                :</p>
+                            <span
+                                    id="curr_price"><?= $model->auction->currency ?> <?= $model->win_bid_id ? Yii::$app->formatter->asDecimal($model->win_bid->value) : Yii::$app->formatter->asDecimal($model->curr_price) ?></span>
+                        </div>
+                        <?php if ($model->mpc_price): ?>
+                            <div style="margin-top: 10px;">
+                                <p id="price-name">МПЦ цена:</p>
+                                <span><?= Yii::$app->formatter->asDecimal($model->mpc_price) ?></span>
+                            </div>
+                        <?php endif ?>
+                        <?php if ($model->blitz_price): ?>
+                            <div style="margin-top: 10px;">
+                                <p id="price-name">Блиц цена:</p>
+                                <span><?= Yii::$app->formatter->asDecimal($model->blitz_price) ?></span>
+                            </div>
+                        <?php endif ?>
 
             <?php if ($model->canDoBid()): ?>
                 <?php if (!$model->blitz_price || ($model->blitz_price && !$model->is_blitz_reached)): ?>
@@ -219,6 +264,19 @@ $this->registerCss(".select2-selection__rendered::after { content: '{$model->auc
                   <button id="offer-price" class="lot-content__form-button">СДЕЛАТЬ СТАВКУ</button>
                   <div class="offer-price__commission text-right">Комиссия аукциона: 15%</div>
                 </div>
+
+                <?php if ($model->blitz_price && $model->auction->active == Auction::ACTIVE_FLAG): ?>
+                    <?php if ($model->is_blitz_reached): ?>
+                        <div class="feedback__call" style="margin-top: 20px;">
+                            <p>Предложена блиц цена</p>
+                        </div>
+                    <?php else: ?>
+                        <div class="feedback__call" style="margin-top: 20px;">
+                            или предложите
+                            <button href="#blitz-modal" class="popup-modal">блиц-цену</button>
+                        </div>
+                    <?php endif ?>
+
                 <?php endif ?>
             <?php elseif ($model->auction->active == Auction::NEAREST_FLAG): ?>
                 <?php if (!$model->blitz_price || ($model->blitz_price && !$model->is_blitz_reached)): ?>
