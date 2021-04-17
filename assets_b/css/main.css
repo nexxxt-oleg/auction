@@ -2786,11 +2786,3 @@ div.empty {
 .lot-content__timer__label .green-span-timer{
 	color: #62804A;
 }
-.swal2-popup {
-  width: 600px !important;
-}
-.swal2-content,
-.swal2-styled.swal2-confirm,
-.swal2-styled.swal2-cancel {
-  font-size: 14px !important;
-}
