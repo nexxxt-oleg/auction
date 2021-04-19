@@ -18,9 +18,12 @@ class AuctionController extends Controller {
     /** @var bool  */
     public $test = false;
 
+    /** @var bool  */
+    public $needSendEmail = true;
+
     public function options($actionID)
     {
-        return ['test'];
+        return ['test', 'needSendEmail'];
     }
 
     public function actionProcess() {
@@ -91,7 +94,7 @@ class AuctionController extends Controller {
 
                         $good->save();
 
-                        if ($sendEmailFlag) {
+                        if ($sendEmailFlag && $this->needSendEmail) {
                             $subject = "Лот '$good->name' продан";
                             $body = "Лот '$good->name'($good->id) продан в соответствии с правилом: ";
                             $arSellRule = Good::arSellRule();
