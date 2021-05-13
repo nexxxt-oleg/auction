@@ -51,6 +51,8 @@ if (Yii::$app->session->getFlash('success')) {
 }
 ?>
 <header class="header header--fixed">
+
+    <?/*
     <div class="user-button wow fadeInDown" data-wow-duration="1s" data-wow-delay="1s">
         <?php if (Yii::$app->getUser()->isGuest):?>
             <button href="#login-modal" class="user-button__login popup-modal">
@@ -89,6 +91,7 @@ if (Yii::$app->session->getFlash('success')) {
             <?= Yii::$app->params['phone']?>
         </li>
     </ul>
+*/ ?>
 
     <?= \app\components\widgets\FavoriteGoodsWidget::widget(['type' => 'index']);?>
 
@@ -106,7 +109,34 @@ if (Yii::$app->session->getFlash('success')) {
     <?= \app\components\widgets\TopMenuCatsWidget::widget(['type' => 'index']);?>
 
     <?= \app\components\widgets\TopMenuCatsWidget::widget(['type' => 'index', 'mobile' => true]);?>
+    <div class="header__col-right">
+        <div class="d-flex">
+            <div class="header__phone">
+                <img src="/assets_b/img/icon/ico-phone2.svg" alt=""> <?= Yii::$app->params['phone']?>
+            </div>
+            <?php if (Yii::$app->getUser()->isGuest):?>
+                <button href="#login-modal" class="user-button__login popup-modal">
+                    <img src="/assets_b/img/icon/ico-user2.svg" alt="">
+                    <span>Вход</span>
+                </button>
+                <button href="#registration-modal" class="user-button__signup popup-modal">
+                    <img src="/assets_b/img/icon/ico-enter2.svg" alt="">
+                    <span>Регистрация</span>
+                </button>
+            <?php else:?>
+                <a href="<?= Yii::$app->urlManager->createUrl(['/cabinet#s-settings'])?>" class="user-button__login">
+                    <img src="/assets_b/img/icon/ico-user2.svg" alt="">
+                    <span><?= Yii::$app->user->identity->name?></span>
+                </a>
+                <a href="<?= Yii::$app->urlManager->createUrl(['/site/logout'])?>" class="user-button__signup">
+                    <img src="/assets_b/img/icon/ico-enter2.svg" alt="">
+                    <span>Выход</span>
+                </a>
 
+            <?php endif?>
+        </div>
+        <div class="header__col-right__faq-mail">По вопросам проведения аукционов: <a href="mailto:<?= Yii::$app->params['adminEmail']?>"><?= Yii::$app->params['adminEmail']?></a></div>
+    </div>
 </header>
 
 <main>
@@ -154,8 +184,26 @@ if (Yii::$app->session->getFlash('success')) {
             <?php endif?>
 
 
-            <h1 class="section__title section__title--small"><a href="<?= Yii::$app->urlManager->createUrl(['/site/faq'])?>">Узнайте подробнее</a></h1>
+            <!--h1 class="section__title section__title--small"><a href="<?= Yii::$app->urlManager->createUrl(['/site/faq'])?>">Узнайте подробнее</a></h1-->
             <div class="clearfix"></div>
+            <div class="d-flex section__btns">
+                <div class="section__btns__col">
+                    <button href="#question-modal" class="btn-silver popup-modal">Не могу зарегистрироваться</button>
+                </div>
+                <div class="section__btns__col">
+                    <button href="#question-modal" class="btn-silver popup-modal">Не могу сделать ставку</button>
+                </div>
+                <div class="section__btns__col">
+                    <button href="#question-modal" class="btn-red popup-modal">
+                        <svg width="25" height="26" viewBox="0 0 25 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M4.4364 17.785C3.27162 15.8215 2.86371 13.5002 3.28925 11.2572C3.7148 9.01421 4.94453 7.0037 6.74754 5.60321C8.55055 4.20271 10.8028 3.50859 13.0814 3.65118C15.3599 3.79377 17.5081 4.76325 19.1224 6.37759C20.7368 7.99193 21.7063 10.1401 21.8489 12.4186C21.9915 14.6972 21.2974 16.9495 19.8969 18.7525C18.4964 20.5555 16.4859 21.7852 14.2429 22.2108C11.9999 22.6363 9.67864 22.2284 7.71509 21.0637L7.71511 21.0636L4.47717 21.9887C4.3432 22.027 4.20144 22.0287 4.06657 21.9938C3.9317 21.9588 3.80863 21.8885 3.71011 21.7899C3.61159 21.6914 3.54121 21.5683 3.50626 21.4335C3.47131 21.2986 3.47307 21.1568 3.51135 21.0229L4.43647 17.7849L4.4364 17.785Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M9.375 11.4375H15.625" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M9.375 14.5625H15.625" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        Задать вопрос
+                    </button>
+                </div>
+            </div>
             <?php if(Yii::$app->params['showIndexVideo']):?>
             <div class="section__video">
                 <a class="popup-video" href="https://www.youtube.com/watch?v=DmJoi0XFw7Y">
@@ -444,6 +492,8 @@ if (Yii::$app->session->getFlash('success')) {
     </div>
     <div class="clearfix"></div>
 </div>
+
+
 
 <div id="comment-modal" class="mfp-hide basic-modal basic-modal--login">
     <a class="basic-modal__dismiss" href="#"><img src="/assets_b/img/icon/close-modal.png" alt=""></a>

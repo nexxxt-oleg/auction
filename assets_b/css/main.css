@@ -490,7 +490,7 @@ button.mfp-arrow-right {
 .navigation-desktop__item {
   display: inline-block;
   float: left;
-  margin-right: 90px;
+  margin-right: 20px;
 }
 .navigation-desktop__item:last-child {
   margin-right: 0;
@@ -2785,4 +2785,102 @@ div.empty {
 }
 .lot-content__timer__label .green-span-timer{
 	color: #62804A;
+}
+
+span.blitz_reached{
+	padding-top: 10px;
+    display: inline-block;
+    float: left;
+    margin: 15px 0 0;
+}
+.header__col-right {
+  float: right;
+  width: 475px;
+  padding-top: 30px;
+}
+.d-flex {
+  display: flex;
+  align-items: center;
+}
+.header__col-right .header__phone {
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 22px;
+  color: #fff;
+  margin-right: 30px;
+}
+.header__col-right .user-button__login {
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 22px;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  margin-right: 30px;
+}
+.header__col-right .user-button__login img,
+.header__col-right .user-button__signup img {
+  width: 32px;
+  height: auto;
+}
+.header__col-right .user-button__login::before {
+  display: none;
+}
+.header__col-right .user-button__signup {
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 22px;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  margin-left: 0;
+}
+.header__col-right__faq-mail {
+  font-size: 14px;
+  line-height: 22px;
+  color: rgba(255,255,255,.5);
+  padding-top: 10px;
+}
+.header__col-right__faq-mail a {
+  color: #EC1721;
+  font-weight: bold;
+  text-decoration: underline;
+}
+.section__btns {
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+.section__btns__col {
+  padding-right: 15px;
+}
+.btn-silver {
+  display: inline-flex;
+  padding: 10px 30px;
+  border: none;
+  background: #232323;
+  height: 60px;
+  text-align: center;
+  align-items: center;
+  color: #fff;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 26px;
+  font-family: "Constantia";
+}
+.btn-red {
+  display: inline-flex;
+  padding: 10px 30px;
+  border: none;
+  background: #CC0D16;
+  height: 60px;
+  text-align: center;
+  align-items: center;
+  color: #fff;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 26px;
+  font-family: "Constantia";
+}
+.btn-red svg {
+  margin-right: 10px;
 }
