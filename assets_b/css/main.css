@@ -2884,3 +2884,55 @@ span.blitz_reached{
 .btn-red svg {
   margin-right: 10px;
 }
+.lot-content__importantly {
+  max-width: 543px;
+  margin-bottom: 30px;
+  padding: 25px;
+  border: 2px solid #FF0000;
+}
+.lot-content__reg {
+  padding-bottom: 20px;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 22px;
+  color: #000000;
+}
+.lot-content__reg a {
+  color: #62804A;
+  text-decoration: underline;
+}
+.lot-content__question {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.lot-content__question span {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 22px;
+  color: #222222;
+}
+.btn-red:hover {
+  color: #fff;
+}
+.btn-red {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 30px;
+  height: 50px;
+  padding: 10px 25px;
+  text-align: center;
+  justify-content: center;
+  text-transform: uppercase;
+  background-color: #EA4646;
+}
+.lot-content__question .btn-red {
+  margin-left: auto;
+  flex-basis: 264px;
+}

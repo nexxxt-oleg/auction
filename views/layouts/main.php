@@ -441,6 +441,19 @@ use \app\models\auction\GoodFavorite;
   <div class="clearfix"></div>
 </div>
 
+<div id="question-modal" class="mfp-hide basic-modal basic-modal--call">
+    <a class="basic-modal__dismiss" href="#"><img src="/assets_b/img/icon/close-modal.png" alt=""></a>
+    <div class="col-xs-12">
+        <h5 class="basic-modal__title">Задать вопрос</h5>
+    </div>
+    <div class="col-xs-12">
+        <?php $callBackForm = new \app\models\CallBackForm();
+        $callBackForm->renderMain(); ?>
+    </div>
+    <div class="clearfix"></div>
+</div>
+
+
 <?php
 echo Html::tag('span', GoodFavorite::ACTION_ADD, ['id' => 'favorite-action-add', 'class' => 'hide']);
 echo Html::tag('span', GoodFavorite::ACTION_REMOVE, ['id' => 'favorite-action-remove', 'class' => 'hide']);
