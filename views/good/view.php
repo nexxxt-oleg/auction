@@ -253,11 +253,11 @@ $this->registerCss(".select2-selection__rendered::after { content: '{$model->auc
                 </div>
                 <?php if ($model->blitz_price && $model->auction->active == Auction::ACTIVE_FLAG): ?>
                     <?php if ($model->is_blitz_reached): ?>
-                        <div class="feedback__call" style="margin-top: 20px;">
+                        <div class="feedback__call" style="margin-top: 20px; margin-bottom: 20px">
                             <p>Предложена блиц цена</p>
                         </div>
                     <?php else: ?>
-                        <div class="feedback__call" style="margin-top: 20px;">
+                        <div class="feedback__call" style="margin-top: 20px; margin-bottom: 20px">
                             или предложите
                             <button href="#blitz-modal" class="popup-modal">блиц-цену</button>
                         </div>
@@ -276,7 +276,7 @@ $this->registerCss(".select2-selection__rendered::after { content: '{$model->auc
                     <?php endif ?>
                     <div class="lot-content__question">
                         <span>Остались вопросы?</span>
-                        <a href="#question-modal" class="popup-modal btn-red">Задать вопрос</a>
+                        <a href="#question-modal" class="popup-modal btn-red2">Задать вопрос</a>
                     </div>
                 </div>
 

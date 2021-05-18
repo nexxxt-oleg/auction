@@ -582,15 +582,18 @@ button.mfp-arrow-right {
   right: 0;
   z-index: 99;
   margin: 0;
-  padding: 0;
-  text-align: center;
+  text-align: left;
   list-style: none;
-  background-color: rgba(0,0,0,0.9);
+  background-color: #000;
   -webkit-transition: 0s;
   -moz-transition: 0s;
   transition: 0s;
-  padding-top: 110px;
+  padding: 130px 0 30px;
   overflow-y: scroll;
+}
+.navigation-mobile li:not(:first-child) {
+  padding-left: 15px;
+  padding-right: 15px;
 }
 .navigation-mobile__item {
   display: block;
@@ -600,16 +603,18 @@ button.mfp-arrow-right {
 }
 .navigation-mobile__link {
   color: #fff;
-  font-size: 15px;
-  text-transform: uppercase;
+  font-size: 22px;
   font-weight: 600;
-  line-height: 60px;
+  line-height: 46px;
+  font-family: 'Open Sans';
+  display: block;
 }
 .navigation-mobile__link:hover {
   color: #fff;
 }
 .navigation-mobile--open {
-  display: block;
+  display: flex;
+  flex-direction: column;
 }
 /*==============================
 	Section
@@ -2919,7 +2924,7 @@ span.blitz_reached{
 .btn-red:hover {
   color: #fff;
 }
-.btn-red {
+.btn-red2 {
   font-family: 'Open Sans';
   font-style: normal;
   font-weight: bold;

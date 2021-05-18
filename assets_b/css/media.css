@@ -108,6 +108,10 @@
 		display: block;
 		margin-bottom: 15px;
 	}
+	.offer-price {
+		display: block;
+		margin-bottom: 15px;
+	}
 	.lot-content__form .form-group {
 		display: block;
 		float: none;
@@ -407,7 +411,7 @@
 	}
 	.navigation-mobile-button {
 		right: 15px;
-		top: 60px;
+		top: 50px;
 	}
 	.navigation-mobile-button--green {
 		right: 15px;
@@ -427,7 +431,7 @@
 		margin-right: 10px;
 	}
 	.logo {
-		margin-top: 15px;
+		margin-top: 22px;
 	}
 	.logo--green {
 		margin-top: 30px;
@@ -471,10 +475,19 @@
 		margin: -70px 0 0;
 	}
 	.section__video {
-		margin-top: 30px;
+		margin: 10px auto 0;
+		width: 270px;
+	}
+	.section__video span {
+		color: #EC1721;
+	}
+	.section__view-item {
+		display: none;
 	}
 	.section__title {
 		font-size: 36px;
+		float: none;
+		text-align: center;
 	}
 	.section__video a {
 		width: 60px;
@@ -673,6 +686,86 @@
 	.cabinet__table-mobile {
 		display: block;
 	}
+	.header__col-right {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		padding: 10px 15px 0;
+		height: 40px;
+	}
+	.header__col-right__faq-mail {
+		display: none;
+	}
+	.header__col-right .d-flex {
+		justify-content: space-between;
+		align-items: center;
+	}
+	.header__col-right .header__phone,
+	.header__col-right .user-button__signup {
+		font-weight: 600;
+		font-size: 12px;
+		line-height: 22px;
+		opacity: 0.55;
+		margin-right: 0;
+	}
+	.header__col-right .header__phone img,
+	.header__col-right .user-button__login img,
+	.header__col-right .user-button__signup img {
+		height: 18px;
+		width: auto;
+	}
+	.header__col-right .user-button__login {
+		font-weight: 600;
+		font-size: 12px;
+		line-height: 22px;
+		opacity: 0.55;
+		margin-right: 0;
+		display: flex;
+		align-items: center;
+	}
+	.section__btns {
+		display: block !important;
+		padding-top: 25px;
+	}
+	.fp-tableCell {
+		padding-top: 100px;
+	}
+	.section__btns .btn-silver,
+	.section__btns .btn-red {
+		height: 50px;
+		width: 100%;
+		text-align: center;
+		max-width: 360px;
+		margin: 0 auto 8px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+	.section__video a::before {
+		display: none;
+	}
+	.navigation-mobile__logo {
+		padding-top: 14px;
+		overflow: hidden;
+	}
+	.navigation-mobile__email {
+		margin-top: auto;
+		font-family: 'Open Sans';
+		font-style: normal;
+		font-weight: normal;
+		font-size: 14px;
+		line-height: 18px;
+		color: rgba(255,255,255,0.5);
+	}
+	.navigation-mobile__email a {
+		display: block;
+		color: #EC1721;
+		font-weight: bold;
+		font-size: 20px;
+		line-height: 22px;
+		text-decoration-line: underline;
+	}
 }
 
 /*==============================
@@ -680,15 +773,13 @@
 ==============================*/
 @media only screen and (max-width: 639px) {
 	/*header*/
-	.navigation-mobile-button {
-		top: 88px;
-	}
+
 	.navigation-mobile-button--green {
 		top: -50px;
 	}
 	.navigation-mobile__link {
-		font-size: 14px;
-		line-height: 50px;
+		font-size: 20px;
+		line-height: 46px;
 	}
 	.contact-line {
 		display: block;
@@ -822,7 +913,7 @@
 	/*section*/
 	.section__title {
 		margin-top: 30px;
-		font-size: 28px;
+		font-size: 24px;
 	}
 	.section__video span,
 	.section__view-item span {
@@ -906,5 +997,9 @@
 
 	.cabinet .auction-item__price .action li:last-child {
 		margin-left: 2px;
+	}
+	.navigation-mobile__link {
+		font-size: 18px;
+		line-height: 40px;
 	}
 }

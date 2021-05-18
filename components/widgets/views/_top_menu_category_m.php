@@ -15,13 +15,50 @@ use \app\models\auction\Auction;
     .((isset($_REQUEST['GoodSearch']['next_flag'])) ? "&".urlencode("GoodSearch[next_flag]")."=".$_REQUEST['GoodSearch']['next_flag'] : '');?>
 <?= \yii\helpers\Html::tag('span', $clearUrl, ['id' => 'clearUrl', 'style' => ['display' => 'none']]);?>
 <div class="navigation-mobile-wrap <?= $type == 'index' ? 'wow fadeInRight' :''?>" <?= $type == 'index' ? 'data-wow-duration="1s"' :''?>>
+
     <button type="button" class="navigation-mobile-button <?= $type != 'index' ? 'navigation-mobile-button--green' :''?>">
         <img class="navigation-mobile-button__img navigation-mobile-button__img--burger" src="/assets_b/img/icon/burger<?= $type != 'index' ? '2' :''?>.svg" alt="">
-        <img class="navigation-mobile-button__img navigation-mobile-button__img--close" src="/assets_b/img/icon/close.svg" alt="">
+        <img class="navigation-mobile-button__img navigation-mobile-button__img--close" src="/assets_b/img/icon/close2.svg" alt="">
     </button>
+
 
     <?php $arNextParams = ['/good/index', 'GoodSearch[top_menu]' => "next", 'GoodSearch[next_flag]' => $auFlag];?>
     <ul class="navigation-mobile" id="navigation-mobile">
+
+        <li class="navigation-mobile__top header__col-right">
+            <div class="d-flex">
+                <div class="header__phone">
+                    <img src="/assets_b/img/icon/ico-phone2.svg" alt=""> <?= Yii::$app->params['phone']?>
+                </div>
+                <?php if (Yii::$app->getUser()->isGuest):?>
+                    <button href="#login-modal" class="user-button__login popup-modal">
+                        <img src="/assets_b/img/icon/ico-user2.svg" alt="">
+                        <span>Вход</span>
+                    </button>
+                    <button href="#registration-modal" class="user-button__signup popup-modal">
+                        <img src="/assets_b/img/icon/ico-enter2.svg" alt="">
+                        <span>Регистрация</span>
+                    </button>
+                <?php else:?>
+                    <a href="<?= Yii::$app->urlManager->createUrl(['/cabinet#s-settings'])?>" class="user-button__login">
+                        <img src="/assets_b/img/icon/ico-user2.svg" alt="">
+                        <span><?= Yii::$app->user->identity->name?></span>
+                    </a>
+                    <a href="<?= Yii::$app->urlManager->createUrl(['/site/logout'])?>" class="user-button__signup">
+                        <img src="/assets_b/img/icon/ico-enter2.svg" alt="">
+                        <span>Выход</span>
+                    </a>
+
+                <?php endif?>
+            </div>
+            <div class="navigation-mobile__logo">
+                <a class="logo__img" href="/">
+                    <img src="/assets_b/img/logo.svg" alt="">
+                </a>
+
+            </div>
+        </li>
+
         <li class="navigation-mobile__item <?= ($clearUrl == Yii::$app->urlManager->createUrl($arNextParams)) ? 'navigation-mobile__item--active' : ''?>">
             <a href="<?= Yii::$app->urlManager->createUrl($arNextParams)?>" class="navigation-mobile__link">
                 <?php
@@ -60,6 +97,11 @@ use \app\models\auction\Auction;
                 Контакты
             </a>
         </li>
+        <li class="navigation-mobile__email">
+            <a href="mailto:<?= Yii::$app->params['adminEmail']?>"><?= Yii::$app->params['adminEmail']?></a>
+            По вопросам проведения аукционов:
+        </li>
+        <? /*
         <li class="user-button user-button--mobile">
             <?php if (Yii::$app->getUser()->isGuest): ?>
                 <button href="#login-modal" class="user-button__login popup-modal">
@@ -80,5 +122,6 @@ use \app\models\auction\Auction;
                 <img src="/assets_b/img/icon/search.svg" alt="">
             </button>
         </li>
+ */ ?>
     </ul>
 </div>
