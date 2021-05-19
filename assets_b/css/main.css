@@ -2936,8 +2936,9 @@ span.blitz_reached{
   justify-content: center;
   text-transform: uppercase;
   background-color: #EA4646;
+  color: #fff;
 }
-.lot-content__question .btn-red {
+.lot-content__question .btn-red2 {
   margin-left: auto;
   flex-basis: 264px;
 }
